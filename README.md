@@ -1,1 +1,1 @@
-# event-jam
+# Event Jam
