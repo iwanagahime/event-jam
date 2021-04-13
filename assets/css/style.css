@@ -1,0 +1,13 @@
+.hero {
+  background-image: linear-gradient(
+      to left,
+      rgb(0, 0, 0, 0.05),
+      rgb(0, 0, 0, 0.5)
+    ),
+    url("../images/hero6.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border: 1px solid black;
+  height: 100vh;
+}
