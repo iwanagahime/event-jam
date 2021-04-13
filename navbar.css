@@ -11,3 +11,8 @@
   border: 1px solid black;
   height: 100vh;
 }
+
+.column-vertical-center-override {
+  margin: auto 0;
+  flex-grow: 0;
+}

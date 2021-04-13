@@ -11,67 +11,33 @@
     <link rel="stylesheet" href="./reset.css" />
     <link rel="stylesheet" href="./navbar.css" />
   </head>
-  <body>
-    
-     <div class="hero">
-      <header class="header is-flex flex-wrap mt-2 has-text-right">
-        <nav class="breadcrumb is-right" aria-label="breadcrumbs">
-         
-          <img src="./images/logo.PNG"/> 
-        
-          <ul>
-            <li><a href="#">My events</a></li>
-          </ul>
-        </nav> 
-      </header>
-      <main>
-        <div class="control">
-          <form><input class="input is-medium" type="text" placeholder="Enter city name"><div class="dropdown is-active">
-            <div class="dropdown-trigger">
-              <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                <span>Genre</span>
-                <span class="icon is-small">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
-                </span>
-              </button>
-            </div >
-            <div class="dropdown-menu is-right" id="dropdown-menu" role="menu">
-              <div class="dropdown-content is-right">
-                <a href="#" class="dropdown-item">
-                  Dropdown item
-                </a>
-                <a class="dropdown-item">
-                  Other dropdown item
-                </a>
-                <a href="#" class="dropdown-item is-active">
-                  Active dropdown item
-                </a>
-                <a href="#" class="dropdown-item">
-                  Other dropdown item
-                </a>
-                <hr class="dropdown-divider">
-                <a href="#" class="dropdown-item">
-                  With a divider
-                </a>
+  <body class="hero">
+    <header class="header mt-2 has-text-right">
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+          <div class="navbar-brand">
+            <a class="navbar-item" href="#">
+              <img src="images/logo.PNG">
+            </a>
+          </div>
+            <div class="navbar-end">
+              <div class="navbar-item">
+                <div class="buttons">
+                  <a class="button is-dark">
+                    My Events
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-          <div class="buttons">
-            <button class="button is-primary is-light">Primary</button>
-            <button class="button is-link is-light">Link</button>
-          </div>
-          
-          <div >
-            
-        
-            <button class="button is-#FFDD40">Warning</button>
-            
-          </div>
-        </form>
-          
+        </nav>
+    </header>
+    <span class="column is-dark column-vertical-center-override">
+        <input class="input" type="text" placeholder="Find a repository">
+        <div class="control">
+          <a class="button is-info">
+            Search
+          </a>
         </div>
-      </main>
-    </div>
-  </div>
+    </span>
   </body>
 </html>
