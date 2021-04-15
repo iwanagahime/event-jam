@@ -28,7 +28,7 @@
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="buttons">
-                <a class="button is-light has-text-warning-dark has-background-warning has-text-weight-bold">
+                <a class="button is-light has-text-warning-dark has-background-warning has-text-weight-bold is-rounded">
                   My Events
                 </a>
               </div>
@@ -36,19 +36,15 @@
           </div>
         </div>
       </nav>
-    <div class="container">
-        <div class="field has-addons has-addons-left">
+    <div class="container" >
+        <div class="field has-addons has-addons-left mb-5">
             <div class="control">
-              <input class="input" type="text" placeholder="Enter city name">
+              <input class="input is-warning" type="text" placeholder="Enter city name" id="city-input">
             </div>
-            <div class="control">
-              <a class="button is-warning has-text-warning-dark has-text-weight-bold">
-                <i class="fas fa-search"></i>
-              </a>
-            </div>
-            <div class="control mx-4">
+            
+             <div class="control mx-4">
                 <div class="select ">
-                  <select>
+                  <select >
                     <option >Event type</option>
                     <option>Music</option>
                     <option>Sport</option>
@@ -58,8 +54,13 @@
                   </select>
                 </div>
               </div>
+              <div class="control">
+                <a class="button is-warning has-text-warning-dark has-text-weight-bold"id="search-button">
+                  <i class="fas fa-search"></i>
+                </a>
+              </div>
           </div>
-          <article class="message is-warning">
+          <article class="message is-warning mb-6">
             <div class="message-header has-text-warning-dark" id="covid-info">
              <img src="./assets/images/covid.jpg"  class=" image is-64x64" id="covid-image">
               <span class="px-4 is-size-4">COVID info</span>
@@ -72,7 +73,7 @@
           <div class="field has-addons has-addons-left "><h2 class=" is-size-3">Events in Birmingham</h2>
             <div class="control mx-4">
               <div class="select ">
-                <select>
+                <select >
                   <option >Event type</option>
                   <option>Music</option>
                     <option>Sport</option>
@@ -83,7 +84,7 @@
               </div>
             </div>
             <div class="control">
-              <a class="button is-warning has-text-warning-dark has-text-weight-bold">
+              <a class="button is-warning has-text-warning-dark has-text-weight-bold" id="search-button">
                 <i class="fas fa-search"></i>
               </a>
             </div>

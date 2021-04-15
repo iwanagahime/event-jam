@@ -18,3 +18,20 @@
 #covid-image {
   border-radius: 50%;
 }
+#city-input {
+  width: 450px;
+  border-radius: 25px;
+  border: 2px;
+  padding: 20px;
+}
+
+#search-button {
+  border-radius: 20%;
+}
+
+/* #select {
+  width:200px
+  border-radius: 25px;
+  border: 2px;
+  padding: 20px;
+} */
