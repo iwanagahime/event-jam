@@ -30,10 +30,41 @@ const displayNoEventsScreen = () => {
   //this is a placeholder
 };
 
-const displaySavedEvents = () => {
-  //this is a placeholder
-  //build card and store object values as data attributes against card container
-  console.log("display function")
+const displayEventCard = (item) => {
+  console.log(item.name)
+  $("#card-container").append(
+  `<div class="tile is-parent cardcontent-container" data-city="${item.city}" data-url="${item.eventUrl}">
+    <div class="card">
+      <div class="card-image">
+          <figure class="image is-4by3">
+            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+          </figure>
+      </div>
+      <div class="card-content">
+        <div class="content">
+          <div><h2 class="has-text-centered ">Craig David Life</h2> </div>
+          <div class="py-1 has-text-weight-medium">Date: 09/05/2021</div>
+          <div class="py-1 has-text-weight-medium">Time:19:00</div> 
+          <div class="py-1 has-text-weight-medium">Venue:O2 Academy</div>
+          <div style="text-align:center">
+            <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded">Add to Favs</a><a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded">More Info</a>
+          </div>
+        </div>
+        <div id="covid-info-container">
+          <button>
+            See COVID 19 info
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  `)
+}
+
+const displaySavedEvents = (sampleArray) => {
+  //create container
+  $("body").append(`<div class="tile is-ancestor" id="card-container"><div>`)
+  sampleArray.forEach(displayEventCard);
 };
 
 function onLoad () {
@@ -43,16 +74,26 @@ function onLoad () {
     eventsInAddedOrder = orderFavEvents();
     console.log(eventsInAddedOrder)
     // for each saved event, render a card
-    $(eventsInAddedOrder).each(displaySavedEvents); 
+    displaySavedEvents(sampleArray)
+    //$(eventsInAddedOrder).each(displaySavedEvents); 
   } else {
     displayNoEventsScreen();
     console.log("no events")
   }
 };
 
-const displayCovidInfo = () => {
-  console.log("here")
+const displayCovidInfo = (event) => {
+  // get region/city name 
+
+  //call covid info function
+  const covidInfo = "informaiton about covid"
+  // display covid info onto page
+  const parent = $(event.currentTarget).parent()
+  $(parent).empty()
+  $(parent).parent().append(`<div class="py-1 has-text-weight-medium"> This is more info ${covidInfo} lorem impsum </div>
+  `)
 }
+
 
 $(document).ready(onLoad);
 $("#covid-info-container").on("click", "button", displayCovidInfo);
