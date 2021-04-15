@@ -29,9 +29,6 @@
   border-radius: 20%;
 }
 
-/* #select {
-  width:200px
-  border-radius: 25px;
-  border: 2px;
-  padding: 20px;
-} */
+.card {
+  border-radius: 15px;
+}
