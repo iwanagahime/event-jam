@@ -16,7 +16,7 @@ const sampleArray = [
     venue: "Leicester Square Theatre",
     eventUrl: "https://www.ticketmaster.co.uk/gabys-talking-pictures-with-alistair-mcgowan-london-04-25-2021/event/370057919EC99232",
     city: "Birmingham",
-},
+  }
 ]
 
 const orderFavEvents = () => {
@@ -31,9 +31,8 @@ const displayNoEventsScreen = () => {
 };
 
 const displayEventCard = (item) => {
-  console.log(item.name)
   $("#card-container").append(
-  `<div class="tile is-parent cardcontent-container" data-city="${item.city}" data-url="${item.eventUrl}">
+  `<div class="tile is-parent cardcontent-container" data-url="${item.eventUrl}">
     <div class="card">
       <div class="card-image">
           <figure class="image is-4by3">
@@ -50,7 +49,7 @@ const displayEventCard = (item) => {
             <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded">Add to Favs</a><a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded">More Info</a>
           </div>
         </div>
-        <div id="covid-info-container">
+        <div class="covid-info-container" data-city="${item.city}">
           <button>
             See COVID 19 info
           </button>
@@ -65,6 +64,7 @@ const displaySavedEvents = (sampleArray) => {
   //create container
   $("body").append(`<div class="tile is-ancestor" id="card-container"><div>`)
   sampleArray.forEach(displayEventCard);
+  $(".covid-info-container").on("click", "button", displayCovidInfo);
 };
 
 function onLoad () {
@@ -83,12 +83,12 @@ function onLoad () {
 };
 
 const displayCovidInfo = (event) => {
-  // get region/city name 
-
+  const parent = $(event.currentTarget).parent()
+  //get region/city name 
+  let cityName = $(parent).attr("data-city")
   //call covid info function
   const covidInfo = "informaiton about covid"
   // display covid info onto page
-  const parent = $(event.currentTarget).parent()
   $(parent).empty()
   $(parent).parent().append(`<div class="py-1 has-text-weight-medium"> This is more info ${covidInfo} lorem impsum </div>
   `)
@@ -96,4 +96,3 @@ const displayCovidInfo = (event) => {
 
 
 $(document).ready(onLoad);
-$("#covid-info-container").on("click", "button", displayCovidInfo);
