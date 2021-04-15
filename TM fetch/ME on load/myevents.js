@@ -9,12 +9,12 @@ const sampleArray = [
       city: "London",
   },
   {
-    name: "Gaby's Talking Pictures with Alistair McGowan and Ronni Ancona",
+    name: "Second event",
     date: "2021-04-25",
     time: "19:30:00",
     image: "https://s1.ticketm.net/dam/c/50a/fa9caa1f-73a1-411e-b507-ec56fa59650a_106061_RETINA_PORTRAIT_16_9.jpg",
     venue: "Leicester Square Theatre",
-    eventUrl: "https://www.ticketmaster.co.uk/gabys-talking-pictures-with-alistair-mcgowan-london-04-25-2021/event/370057919EC99232",
+    eventUrl: "https://www.ticketmaster.co.uk/gabys-talking-pictures-with-alistair-mcgowan-london-04-25-2021/event/370057919EC992326666",
     city: "Birmingham",
   }
 ]
@@ -30,9 +30,38 @@ const displayNoEventsScreen = () => {
   //this is a placeholder
 };
 
+const removeEventObject = (event) => {
+  // retrieve array from local storage
+
+  // get url of object to remove
+  let urlForObjectToRemove = $(event.currentTarget).parent().attr("data-url")
+
+  const removeEvent = (item) => {
+      if (item.eventUrl !== urlForObjectToRemove) {
+        return true
+      } else {
+        return false;
+      }
+  }
+  // go through the retrieved array and remove the object
+  newSavedEventsArray = sampleArray.filter(removeEvent);
+  // empty container
+  $("#card-container").empty();
+  // render cards
+  displaySavedEvents(newSavedEventsArray)
+  // save new array in local storage
+  localStorage.setItem("favouriteEvents",(JSON.stringify(newSavedEventsArray)));
+}
+
+const goToTMEventPage = (event) => {
+  let urlForTMEventPage = $(event.currentTarget).parent().attr("data-url")
+  console.log(urlForTMEventPage)
+  window.open(`${urlForTMEventPage}`, '_blank')
+}
+
 const displayEventCard = (item) => {
   $("#card-container").append(
-  `<div class="tile is-parent cardcontent-container" data-url="${item.eventUrl}">
+  `<div class="tile is-parent cardcontent-container">
     <div class="card">
       <div class="card-image">
           <figure class="image is-4by3">
@@ -45,8 +74,9 @@ const displayEventCard = (item) => {
           <div class="py-1 has-text-weight-medium">Date: 09/05/2021</div>
           <div class="py-1 has-text-weight-medium">Time:19:00</div> 
           <div class="py-1 has-text-weight-medium">Venue:O2 Academy</div>
-          <div style="text-align:center">
-            <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded">Add to Favs</a><a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded">More Info</a>
+          <div style="text-align:center" data-url="${item.eventUrl}">
+            <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded event-tm-info">More info</a>
+            <a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded remove">Remove from My Events</a>
           </div>
         </div>
         <div class="covid-info-container" data-city="${item.city}">
@@ -65,6 +95,8 @@ const displaySavedEvents = (sampleArray) => {
   $("body").append(`<div class="tile is-ancestor" id="card-container"><div>`)
   sampleArray.forEach(displayEventCard);
   $(".covid-info-container").on("click", "button", displayCovidInfo);
+  $(".remove").click(removeEventObject);
+  $(".event-tm-info").click(goToTMEventPage);
 };
 
 function onLoad () {
