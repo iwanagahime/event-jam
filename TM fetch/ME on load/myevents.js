@@ -50,4 +50,9 @@ function onLoad () {
   }
 };
 
+const displayCovidInfo = () => {
+  console.log("here")
+}
+
 $(document).ready(onLoad);
+$("#covid-info-container").on("click", "button", displayCovidInfo);
