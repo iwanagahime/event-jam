@@ -8,6 +8,12 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css"
     />
+    <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+    crossorigin="anonymous"
+  />
     <link rel="stylesheet" href="./reset.css" />
     <link rel="stylesheet" href="./navbar.css" />
   </head>
@@ -30,31 +36,46 @@
             </div>
           </div>
         </nav>
+        
     </header>
-    <span class="column column-vertical-center-override">
-      <div class="container ">
-        <div class="has-addons has-addons-left">
-          <div class="control">
-            <input class="input is-warning" type="text" placeholder="Enter city name" id="city-input">
-          </div>
-            <div class="control mx-4">
-              <div class="select ">
-                <select >
-                  <option >Event type</option>
-                  <option>Music</option>
-                  <option>Sport</option>
-                  <option>Family</option>
-                  <option>Theatre</option>
-                  <option>Comedy</option>
-                </select>
-              </div>
-            </div>
-            <div class="control">
-              <a class="button is-warning has-text-warning-dark has-text-weight-bold"id="search-button">
-                <i class="fas fa-search"></i>
-              </a>
-            </div>
+    <div class="column column-vertical-center-override">
+      <div class="is-size-1 has-text-centered has-text-weight-bold has-text-warning">Where would you like me to take you today?</div>
+      <div class="field input-container">
+        <div class="control is-expanded">
+          <input class="input is-warning is-medium" type="text" placeholder="Enter city name" id="city-input">
         </div>
-    </span>
+
+        
+         <div class="control">
+            <div class="select is-medium">
+              <select >
+                <option >Event type</option>
+                <option>Music</option>
+                <option>Sport</option>
+                <option>Family</option>
+                <option>Theatre</option>
+                <option>Comedy</option>
+              </select>
+            </div>
+          </div>
+          <div class="control">
+            <a class="button is-warning has-text-warning-dark has-text-weight-bold is-medium" id="search-button">
+              <i class="fas fa-search"></i>
+            </a>
+          </div>
+      </div>
+    </div>
+    <div class="is-size-2 has-text-centered has-text-weight-bold has-text-warning my-6">How it works</div>
+    <div class="columns is-centered">
+      <div class="column is-one-third is-2 has-text-warning">
+        Select your City and Event type
+      </div>
+      <div class="column is-one-third is-2 has-text-warning">
+        Get the latest Covid-19 Info
+      </div>
+      <div class="column is-one-third is-2 has-text-warning">
+        Have a blast at your Event!
+      </div>
+    </div>
   </body>
 </html>
