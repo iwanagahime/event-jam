@@ -1,0 +1,34 @@
+.hero {
+  background-image: linear-gradient(
+      to left,
+      rgb(0, 0, 0, 0.05),
+      rgb(0, 0, 0, 0.5)
+    ),
+    url("./images/hero.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border: 1px solid black;
+  height: 100vh;
+}
+#covid-info {
+  justify-content: flex-start;
+}
+
+#covid-image {
+  border-radius: 50%;
+}
+#city-input {
+  width: 450px;
+  border-radius: 25px;
+  border: 2px;
+  padding: 20px;
+}
+
+#search-button {
+  border-radius: 20%;
+}
+
+.card {
+  border-radius: 15px;
+}
