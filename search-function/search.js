@@ -1,18 +1,30 @@
+const validateEventType = () => {
+  let eventType = $("#eventType-dropdown").val();
+  if (eventType === "Event type") {
+    eventType = null;
+  }
+  return eventType;
+};
+
 const constructUrl = (cityName, eventType) => {
   if (cityName && eventType) {
-    return `file:///C:/Users/soume/coding_bootcamp/projects/results.html?cityName=${cityName}&eventType=${eventType}`;
+    return `file:///C:/Users/soume/coding_bootcamp/projects/event-jam/search-function/results.html?cityName=${cityName}&eventType=${eventType}`;
   } else {
-    return `file:///C:/Users/soume/coding_bootcamp/projects/results.html?cityName=${cityName}`;
+    return `file:///C:/Users/soume/coding_bootcamp/projects/event-jam/search-function/results.html?cityName=${cityName}`;
   }
 };
 
-const callback = () => {
+const goToResults = (url) => {
+  window.location.href = url;
+};
+
+const onSearch = () => {
   // get form input
   //navigate to url
 
   // Get searched value and trim and get option if chosen
   const searchInput = $("#city-input").val().trim();
-  const eventType = $("#eventType-dropdown").val();
+  const eventType = validateEventType();
 
   if (searchInput === "") {
     // append error alert
@@ -25,10 +37,11 @@ const callback = () => {
 
     const url = constructUrl(cityName, eventType);
     console.log(url);
+    goToResults(url);
   }
 };
 
-$("#search-container").on("click", "a", callback);
+$("#search-container").on("click", "a", onSearch);
 
 // const getUrlParams = () => {
 //   const urlParams = new URLSearchParams(window.location.search);
