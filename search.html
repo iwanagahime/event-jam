@@ -14,11 +14,20 @@
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
     crossorigin="anonymous"
   />
-    <link rel="stylesheet" href="./reset.css" />
-    <link rel="stylesheet" href="./navbar.css" />
+    <link rel="stylesheet" href="./resetnoevents.css" />
+    <link rel="stylesheet" href="./style.css"/>
   </head>
+
+
+
   <body class="hero">
+
+
+
     <header class="header mt-2 has-text-right">
+
+
+
         <nav class="navbar" role="navigation" aria-label="main navigation">
           <div class="navbar-brand">
             <a class="navbar-item" href="#">
@@ -38,16 +47,21 @@
         </nav>
         
     </header>
-    <div class="column column-vertical-center-override">
-      <div class="is-size-1 has-text-centered has-text-weight-bold has-text-warning">Where would you like me to take you today?</div>
-      <div class="field input-container">
-        <div class="control is-expanded">
-          <input class="input is-warning is-medium" type="text" placeholder="Enter city name" id="city-input">
+
+
+
+    <div class="search-bar-container ">
+      <div class="is-size-3 has-text-centered has-text-weight-bold has-text-warning">Where would you like me to take you today?</div>
+
+
+      <div class="field has-addons has-addons-left mb-5">
+        <div class="control">
+          <input class="input is-warning" type="text" placeholder="Enter city name" id="city-input">
         </div>
 
         
-         <div class="control">
-            <div class="select is-medium">
+         <div class="control mx-4">
+            <div class="select ">
               <select >
                 <option >Event type</option>
                 <option>Music</option>
@@ -59,23 +73,85 @@
             </div>
           </div>
           <div class="control">
-            <a class="button is-warning has-text-warning-dark has-text-weight-bold is-medium" id="search-button">
+            <a class="button is-warning has-text-warning-dark has-text-weight-bold"id="search-button">
               <i class="fas fa-search"></i>
             </a>
           </div>
       </div>
-    </div>
-    <div class="is-size-2 has-text-centered has-text-weight-bold has-text-warning my-6">How it works</div>
-    <div class="columns is-centered">
-      <div class="column is-one-third is-2 has-text-warning">
-        Select your City and Event type
+
+
+
+
+      <div class="how-it-works-section py-6">
+        <h1 class="is-size-3 has-text-centered has-text-weight-bold has-text-warning pt-8">How it works </h1>
+
+
+
+        <div class="numbers-section-container py-6">
+        
+          <div class="how-it-works-number-container pt-8 pb-5">
+            <div class="how-it-works-number has-background-warning-light">
+              <h1 class="has-text-weight-bold has-text-centered is-size-2 has-text-warning-dark">1</h1>
+            </div>
+          </div>
+
+
+          
+
+
+          <div class="how-it-works-number-container pt-8 pb-5">
+            <div class="how-it-works-number has-background-warning-light">
+              <h1 class="has-text-weight-bold has-text-centered is-size-2 has-text-warning-dark">1</h1>
+            </div>
+          </div>
+
+
+          
+
+
+          <div class="how-it-works-number-container pt-8 pb-5">
+            <div class="how-it-works-number has-background-warning-light">
+              <h1 class="has-text-weight-bold has-text-centered is-size-2 has-text-warning-dark">1</h1>
+            </div>
+          </div>
+
+
+          
+        </div>
+
+
+
+        <div class="message-section-container">
+
+          <div class="how-it-works-message-container">
+            <div class="how-it-works-message">
+              <p class ="has-text-weight-semibold has-text-centered has-text-warning is-size-5">Select your city and event type</p>
+            </div>
+          </div>
+
+
+          <div class="how-it-works-message-container">
+            <div class="how-it-works-message">
+              <p class ="has-text-weight-semibold has-text-centered has-text-warning is-size-5">Get the latest COVID-19 info</p>
+            </div>
+          </div>
+
+
+          <div class="how-it-works-message-container">
+            <div class="how-it-works-message ">
+              <p class ="has-text-weight-semibold has-text-centered has-text-warning is-size-5">Have a blast at your event!</p>
+            </div>
+          </div>
+
+
+
+        </div>
+       
+
+
       </div>
-      <div class="column is-one-third is-2 has-text-warning">
-        Get the latest Covid-19 Info
-      </div>
-      <div class="column is-one-third is-2 has-text-warning">
-        Have a blast at your Event!
-      </div>
-    </div>
+
+
+
   </body>
 </html>
