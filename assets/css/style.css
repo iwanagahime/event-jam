@@ -1,15 +1,9 @@
-.hero {
-  background-image: linear-gradient(
-      to left,
-      rgb(0, 0, 0, 0.05),
-      rgb(0, 0, 0, 0.5)
-    ),
-    url("../images/hero6.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
+html {
+  background: url("../images/hero6.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
-  border: 1px solid black;
-  height: 100vh;
 }
 #covid-info {
   justify-content: flex-start;
