@@ -34,20 +34,21 @@ const fetchTicketmasterData = async (tmUrl) => {
   }
 };
 
-const createEventInfoObject = (item) => {
-  eventInfoObject = {
-    name: item.name,
-    date: item.dates.start.localDate,
-    time: item.dates.start.localTime,
-    image: item.images[1].url,
-    venue: item._embedded.venues[0].name,
-    eventUrl: item.url,
-  };
-  return eventInfoObject;
-};
-
-const getTicketmasterData = async (tmUrl) => {
+const getTicketmasterData = async (tmUrl, urlParams) => {
   let allData = await fetchTicketmasterData(tmUrl);
+  const createEventInfoObject = (item) => {
+    eventInfoObject = {
+      name: item.name,
+      date: item.dates.start.localDate,
+      time: item.dates.start.localTime,
+      image: item.images[1].url,
+      venue: item._embedded.venues[0].name,
+      eventUrl: item.url,
+      city: urlParams.cityName,
+    };
+    console.log(eventInfoObject);
+    return eventInfoObject;
+  };
   let eventsInfoArray = allData.map(createEventInfoObject);
   return eventsInfoArray;
 };
@@ -56,7 +57,7 @@ const buildCovidUrl = (urlParams) => {
   if (urlParams.cityName === "London") {
     return `https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=region;areaName=London&structure={%22date%22:%22date%22,%22name%22:%22areaName%22,%22cases%22:{%22daily%22:%22newCasesByPublishDate%22}}`;
   } else {
-    return "https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=ltla;areaName=Birmingham&structure={%22date%22:%22date%22,%22name%22:%22areaName%22,%22cases%22:{%22daily%22:%22newCasesByPublishDate%22}}";
+    return `https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=ltla;areaName=${urlParams.cityName}&structure={%22date%22:%22date%22,%22name%22:%22areaName%22,%22cases%22:{%22daily%22:%22newCasesByPublishDate%22}}`;
   }
 };
 
@@ -82,6 +83,57 @@ const getCovidData = async (covidUrl) => {
   return sumLast30DaysCovidData;
 };
 
+const displayEventCard = (tmData) => {
+  $("#card-container").append(
+    `<div class="tile is-parent cardcontent-container" data-city="${tmData.city}">
+    <div class="card">
+      <div class="card-image">
+          <figure class="image is-4by3">
+            <img src="${tmData.image}" alt="${tmData.name} event image">
+          </figure>
+      </div>
+      <div class="card-content">
+        <div class="content">
+          <div><h2 class="has-text-centered ">${tmData.name}</h2> </div>
+          <div class="py-1 has-text-weight-medium">${tmData.date}</div>
+          <div class="py-1 has-text-weight-medium">${tmData.time}</div> 
+          <div class="py-1 has-text-weight-medium">${tmData.venue}</div>
+          <div style="text-align:center" data-url="${tmData.eventUrl}">
+            <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded event-tm-info">More info</a>
+            <a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded remove">Remove from My Events</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  `
+  );
+};
+
+const renderResults = (tmData, covidData) => {
+  console.log(tmData);
+
+  // create container and render for covid data
+  $("body").append(`
+  <article class="message is-warning mb-6">
+  <div class="message-header has-text-warning-dark" id="covid-info">
+   <img src="./assets/images/covid.jpg"  class=" image is-64x64" id="covid-image">
+    <span class="px-4 is-size-4">COVID info</span>
+    
+  </div>
+  <div class="message-body ">
+   In ${tmData[0].city} there have been ${covidData} Covid cases in the last 30 days.
+  </div>
+</article>`);
+
+  //create container cards
+  $("body").append(`<div class="tile is-ancestor" id="card-container"><div>`);
+  tmData.forEach(displayEventCard);
+  $(".covid-info-container").on("click", "button", displayCovidInfo);
+  $(".remove").click(removeEventObject);
+  $(".event-tm-info").click(goToTMEventPage);
+};
+
 const showResults = async () => {
   // get parameters
   const urlParams = getUrlParams();
@@ -93,12 +145,14 @@ const showResults = async () => {
   console.log(covidUrl);
 
   // call ticketmaster api
-  const tmData = await getTicketmasterData(tmUrl);
+  const tmData = await getTicketmasterData(tmUrl, urlParams);
   // call covid api
 
   const covidData = await getCovidData(covidUrl);
-  console.log(covidData);
+
   // separate functions to build info
+
+  renderResults(tmData, covidData);
 };
 
 $(document).ready(showResults);
