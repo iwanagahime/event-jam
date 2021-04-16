@@ -19,7 +19,7 @@
   border-radius: 50%;
 }
 #city-input {
-  width: 450px;
+  width: 800px;
   border-radius: 25px;
   border: 2px;
   padding: 20px;
@@ -31,4 +31,34 @@
 
 .card {
   border-radius: 15px;
+}
+
+.numbers-section-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+.message-section-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  text-align: center;
+}
+.how-it-works-number-container {
+  display: inline;
+}
+
+.how-it-works-number {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.how-it-works-message-container {
+  width: 200px;
+  display: inline;
 }
