@@ -1,28 +1,6 @@
-const sampleArray = [
-  {
-      name: "Gaby's Talking Pictures with Alistair McGowan and Ronni Ancona",
-      date: "2021-04-25",
-      time: "19:30:00",
-      image: "https://s1.ticketm.net/dam/c/50a/fa9caa1f-73a1-411e-b507-ec56fa59650a_106061_RETINA_PORTRAIT_16_9.jpg",
-      venue: "Leicester Square Theatre",
-      eventUrl: "https://www.ticketmaster.co.uk/gabys-talking-pictures-with-alistair-mcgowan-london-04-25-2021/event/370057919EC99232",
-      city: "London",
-  },
-  {
-    name: "Second event",
-    date: "2021-04-25",
-    time: "19:30:00",
-    image: "https://s1.ticketm.net/dam/c/50a/fa9caa1f-73a1-411e-b507-ec56fa59650a_106061_RETINA_PORTRAIT_16_9.jpg",
-    venue: "Leicester Square Theatre",
-    eventUrl: "https://www.ticketmaster.co.uk/gabys-talking-pictures-with-alistair-mcgowan-london-04-25-2021/event/370057919EC992326666",
-    city: "Birmingham",
-  }
-]
+const orderFavEvents = (savedEvents) => {
 
-const orderFavEvents = () => {
-  eventSearchesArray = JSON.parse(localStorage.getItem("favouriteEvents"))
-  // reverse the array so that the most recent search is first
-  orderedEventSearchesArray = eventSearchesArray.reverse()
+  orderedEventSearchesArray = savedEvents.reverse()
   return orderedEventSearchesArray;
 };
 
@@ -32,6 +10,7 @@ const displayNoEventsScreen = () => {
 
 const removeEventObject = (event) => {
   // retrieve array from local storage
+  let savedEvents = JSON.parse(localStorage.getItem("favouriteEvents"))
 
   // get url of object to remove
   let urlForObjectToRemove = $(event.currentTarget).parent().attr("data-url")
@@ -44,7 +23,7 @@ const removeEventObject = (event) => {
       }
   }
   // go through the retrieved array and remove the object
-  newSavedEventsArray = sampleArray.filter(removeEvent);
+  newSavedEventsArray = savedEvents.filter(removeEvent);
   // empty container
   $("#card-container").empty();
   // render cards
@@ -70,11 +49,11 @@ const displayEventCard = (item) => {
       </div>
       <div class="card-content">
         <div class="content">
-          <div><h2 class="has-text-centered ">Craig David Life</h2> </div>
-          <div class="py-1 has-text-weight-medium">Date: 09/05/2021</div>
-          <div class="py-1 has-text-weight-medium">Time:19:00</div> 
-          <div class="py-1 has-text-weight-medium">Venue:O2 Academy</div>
-          <div style="text-align:center" data-url="${item.eventUrl}">
+          <div><h2 class="has-text-centered ">${item.name}</h2> </div>
+          <div class="py-1 has-text-weight-medium">${item.date}</div>
+          <div class="py-1 has-text-weight-medium">${item.time}</div> 
+          <div class="py-1 has-text-weight-medium">${item.venue}</div>
+          <div style="text-align:center" data-url=">${item.eventUrl}">
             <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded event-tm-info">More info</a>
             <a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded remove">Remove from My Events</a>
           </div>
@@ -90,23 +69,26 @@ const displayEventCard = (item) => {
   `)
 }
 
-const displaySavedEvents = (sampleArray) => {
+const displaySavedEvents = () => {
+  let savedEvents = JSON.parse(localStorage.getItem("favouriteEvents"))
   //create container
   $("body").append(`<div class="tile is-ancestor" id="card-container"><div>`)
-  sampleArray.forEach(displayEventCard);
+  savedEvents.forEach(displayEventCard);
   $(".covid-info-container").on("click", "button", displayCovidInfo);
   $(".remove").click(removeEventObject);
   $(".event-tm-info").click(goToTMEventPage);
 };
 
 function onLoad () {
+  let savedEvents = JSON.parse(localStorage.getItem("favouriteEvents"))
+  console.log(savedEvents)
   // check if there are any saved events in local storage
-  if (localStorage.getItem("favouriteEvents") !== null) {
+  if (savedEvents !== null) {
     // order local storage objects in order of search recency
-    eventsInAddedOrder = orderFavEvents();
+    eventsInAddedOrder = orderFavEvents(savedEvents);
     console.log(eventsInAddedOrder)
     // for each saved event, render a card
-    displaySavedEvents(sampleArray)
+    displaySavedEvents(savedEvents)
     //$(eventsInAddedOrder).each(displaySavedEvents); 
   } else {
     displayNoEventsScreen();

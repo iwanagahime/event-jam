@@ -127,7 +127,7 @@ const saveToMyEvents = (event) => {
     let filteredSavedEvents = previouslySavedEvents.filter(removeEventIfSavedBefore);
 
     let newEvent = {
-      name: buttonContainerDiv.attr("name"),
+      name: buttonContainerDiv.attr("date-name"),
       date: buttonContainerDiv.attr("data-date"),
       time: buttonContainerDiv.attr("data-time"),
       venue: buttonContainerDiv.attr("data-venue"),
@@ -143,7 +143,7 @@ const saveToMyEvents = (event) => {
     savedEvents=[]
 
     let newEvent = {
-      name: buttonContainerDiv.attr("name"),
+      name: buttonContainerDiv.attr("date-name"),
       date: buttonContainerDiv.attr("data-date"),
       time: buttonContainerDiv.attr("data-time"),
       venue: buttonContainerDiv.attr("data-venue"),
@@ -164,10 +164,10 @@ const goToTMEventPage = (event) => {
 
 const renderResults = (tmData, covidData) => {
   // create container and render for covid data
-  $("body").append(`
+  $("main").append(`
     <article class="message is-warning mb-6">
       <div class="message-header has-text-warning-dark" id="covid-info">
-      <img src="./assets/images/covid.jpg"  class=" image is-64x64" id="covid-image">
+      <img src="./assets/images/covid-icon.jpg"  class=" image is-64x64" id="covid-image">
         <span class="px-4 is-size-4">COVID info</span>
       </div>
       <div class="message-body ">
@@ -175,8 +175,30 @@ const renderResults = (tmData, covidData) => {
       </div>
     </article>`); 
 
+  // Display event heading  
+    $("main").append(`<div class="field has-addons has-addons-left mb-6 "><h2 class=" is-size-3 has-text-warning has-text-weight-bold">Events in ${tmData[0].city}</h2>
+  <div class="control mx-4 my-2">
+    <div class="select ">
+      <select >
+        <option >Event type</option>
+        <option>Music</option>
+          <option>Sport</option>
+          <option>Family</option>
+          <option>Theatre</option>
+          <option>Comedy</option>
+      </select>
+    </div>
+  </div>
+  <div class="control my-2">
+    <a class="button is-warning has-text-warning-dark has-text-weight-bold" id="search-button">
+      <i class="fas fa-search"></i>
+    </a>
+  </div>
+</div>
+  `)
+
   //create container cards
-  $("body").append(`<div class="tile is-ancestor" id="card-container"><div>`);
+  $("main").append(`<div class="tile is-ancestor" id="card-container"><div>`);
   tmData.forEach(displayEventCard);
   $(".save").click(saveToMyEvents);
   $(".event-tm-info").click(goToTMEventPage);
