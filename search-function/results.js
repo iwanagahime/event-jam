@@ -110,27 +110,28 @@ const displayEventCard = (tmData) => {
   );
 };
 
-const renderResults = (tmData, covidData) => {
-  console.log(tmData);
+const goToTMEventPage = (event) => {
+  let urlForTMEventPage = $(event.currentTarget).parent().attr("data-url")
+  window.open(`${urlForTMEventPage}`, '_blank')
+}
 
+const renderResults = (tmData, covidData) => {
   // create container and render for covid data
   $("body").append(`
   <article class="message is-warning mb-6">
-  <div class="message-header has-text-warning-dark" id="covid-info">
-   <img src="./assets/images/covid.jpg"  class=" image is-64x64" id="covid-image">
-    <span class="px-4 is-size-4">COVID info</span>
-    
-  </div>
-  <div class="message-body ">
-   In ${tmData[0].city} there have been ${covidData} Covid cases in the last 30 days.
-  </div>
-</article>`);
+    <div class="message-header has-text-warning-dark" id="covid-info">
+    <img src="./assets/images/covid.jpg"  class=" image is-64x64" id="covid-image">
+      <span class="px-4 is-size-4">COVID info</span>
+    </div>
+    <div class="message-body ">
+    In ${tmData[0].city} there have been ${covidData} Covid cases in the last 30 days.
+    </div>
+  </article>`); 
 
   //create container cards
   $("body").append(`<div class="tile is-ancestor" id="card-container"><div>`);
   tmData.forEach(displayEventCard);
-  $(".covid-info-container").on("click", "button", displayCovidInfo);
-  $(".remove").click(removeEventObject);
+  ///$(".save").click(saveToMyEvents);
   $(".event-tm-info").click(goToTMEventPage);
 };
 
