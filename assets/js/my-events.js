@@ -49,11 +49,11 @@ const displayEventCard = (item) => {
       </div>
       <div class="card-content">
         <div class="content">
-          <div><h2 class="has-text-centered ">Craig David Life</h2> </div>
-          <div class="py-1 has-text-weight-medium">Date: 09/05/2021</div>
-          <div class="py-1 has-text-weight-medium">Time:19:00</div> 
-          <div class="py-1 has-text-weight-medium">Venue:O2 Academy</div>
-          <div style="text-align:center" data-url="${item.eventUrl}">
+          <div><h2 class="has-text-centered ">${item.name}</h2> </div>
+          <div class="py-1 has-text-weight-medium">${item.date}</div>
+          <div class="py-1 has-text-weight-medium">${item.time}</div> 
+          <div class="py-1 has-text-weight-medium">${item.venue}</div>
+          <div style="text-align:center" data-url=">${item.eventUrl}">
             <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded event-tm-info">More info</a>
             <a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded remove">Remove from My Events</a>
           </div>
@@ -81,6 +81,7 @@ const displaySavedEvents = () => {
 
 function onLoad () {
   let savedEvents = JSON.parse(localStorage.getItem("favouriteEvents"))
+  console.log(savedEvents)
   // check if there are any saved events in local storage
   if (savedEvents !== null) {
     // order local storage objects in order of search recency

@@ -127,7 +127,7 @@ const saveToMyEvents = (event) => {
     let filteredSavedEvents = previouslySavedEvents.filter(removeEventIfSavedBefore);
 
     let newEvent = {
-      name: buttonContainerDiv.attr("name"),
+      name: buttonContainerDiv.attr("date-name"),
       date: buttonContainerDiv.attr("data-date"),
       time: buttonContainerDiv.attr("data-time"),
       venue: buttonContainerDiv.attr("data-venue"),
@@ -143,7 +143,7 @@ const saveToMyEvents = (event) => {
     savedEvents=[]
 
     let newEvent = {
-      name: buttonContainerDiv.attr("name"),
+      name: buttonContainerDiv.attr("date-name"),
       date: buttonContainerDiv.attr("data-date"),
       time: buttonContainerDiv.attr("data-time"),
       venue: buttonContainerDiv.attr("data-venue"),
