@@ -1,10 +1,16 @@
 html {
-  background: url("../images/hero6.jpg") no-repeat center center fixed;
+  background: url("../images/hero.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background: linear-gradient(to left rgb(0, 0, 0, 0.05), rgb(0, 0, 0, 0.5));
 }
+
+.navbar-background-colour-override {
+  background-color: transparent;
+}
+
 #covid-info {
   justify-content: flex-start;
 }
@@ -13,7 +19,7 @@ html {
   border-radius: 50%;
 }
 #city-input {
-  width: 450px;
+  width: 800px;
   border-radius: 25px;
   border: 2px;
   padding: 20px;
@@ -25,4 +31,34 @@ html {
 
 .card {
   border-radius: 15px;
+}
+
+.numbers-section-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+.message-section-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  text-align: center;
+}
+.how-it-works-number-container {
+  display: inline;
+}
+
+.how-it-works-number {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.how-it-works-message-container {
+  width: 200px;
+  display: inline;
 }
