@@ -1,4 +1,28 @@
-/* select option:disabled {
-  color: #000;
-  font-weight: bold;
-} */
+html {
+  background: url("../images/hero6.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+#covid-info {
+  justify-content: flex-start;
+}
+
+#covid-image {
+  border-radius: 50%;
+}
+#city-input {
+  width: 450px;
+  border-radius: 25px;
+  border: 2px;
+  padding: 20px;
+}
+
+#search-button {
+  border-radius: 20%;
+}
+
+.card {
+  border-radius: 15px;
+}
