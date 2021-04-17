@@ -85,7 +85,7 @@ const getCovidData = async (covidUrl) => {
 
 const displayEventCard = (tmData) => {
   $("#card-container").append(
-    `<div class="tile is-parent cardcontent-container" data-city="${tmData.city}">
+    `<div class="tile is-parent cardcontent-container" data-city="${tmData.city} data-name="${tmData.name}" data-date="${tmData.date}" data-time="${tmData.time}" data-venue="${tmData.venue}" data-eventUrl="${tmData.eventUrl}">
     <div class="card">
       <div class="card-image">
           <figure class="image is-4by3">
@@ -100,7 +100,7 @@ const displayEventCard = (tmData) => {
           <div class="py-1 has-text-weight-medium">${tmData.venue}</div>
           <div style="text-align:center" data-url="${tmData.eventUrl}">
             <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded event-tm-info">More info</a>
-            <a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded remove">Remove from My Events</a>
+            <a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded save">Save Event</a>
           </div>
         </div>
       </div>
