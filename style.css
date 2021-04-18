@@ -1,10 +1,14 @@
 html {
-  background: url("./images/hero.jpg") no-repeat center center fixed;
+  background: url("../images/hero.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   background: linear-gradient(to left rgb(0, 0, 0, 0.05), rgb(0, 0, 0, 0.5));
+}
+
+.navbar-background-colour-override {
+  background-color: transparent;
 }
 
 #covid-info {
@@ -57,4 +61,89 @@ html {
 .how-it-works-message-container {
   width: 200px;
   display: inline;
+}
+
+/* Media queries */
+
+/* Tablet */
+@media screen and (max-width: 925px) {
+  .search-bar-container {
+    flex-direction: column;
+  }
+  .how-it-works-number-container {
+    flex-direction: column;
+  }
+  .how-it-works-message-container {
+    flex-direction: column;
+  }
+
+  #city-input {
+    font-size: 25px;
+    text-align: center;
+    width: 600px;
+    line-height: 1.5;
+    height: 2.5em;
+    display: block;
+  }
+}
+/* Mobile phones */
+@media screen and (max-width: 576px) {
+  .search-bar-container {
+    flex-direction: column;
+  }
+  .how-it-works-number-container {
+    flex-direction: column;
+  }
+
+  #city-input {
+    font-size: 25px;
+    text-align: center;
+    width: 400px;
+    line-height: 1.5;
+    height: 2.5em;
+    display: block;
+  }
+  .how-it-works-message-container {
+    height: 20rem;
+    width: 20rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .container {
+    flex-direction: column;
+  }
+  .navbar {
+    padding: 0.5rem;
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 15px;
+    font-family: cursive;
+  }
+
+  .about-me-image-container {
+    height: 10rem;
+    width: 15rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+    text-align: center;
+  }
+  .about-me-image {
+    text-align: center;
+    height: 100%;
+    border-radius: 100%;
+    box-shadow: 10px 10px 10px goldenrod;
+  }
 }
