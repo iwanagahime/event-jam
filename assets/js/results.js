@@ -11,7 +11,6 @@ const getUrlParams = () => {
 };
 
 const buildTicketmasterUrl = (urlParams) => {
-  console.log(urlParams);
   const baseURL =
     "https://app.ticketmaster.com/discovery/v2/events.json?&countryCode=GB&city=";
   const apiKey = "RTmsu653zlIq0O4v4JzO14tOOeKbVAMK";
@@ -37,6 +36,7 @@ const fetchTicketmasterData = async (tmUrl) => {
 
 const getTicketmasterData = async (tmUrl, urlParams) => {
   let allData = await fetchTicketmasterData(tmUrl);
+  console.log(allData);
   const createEventInfoObject = (item) => {
     eventInfoObject = {
       name: item.name,

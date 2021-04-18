@@ -1,6 +1,5 @@
 const orderFavEvents = (savedEvents) => {
-
-  orderedEventSearchesArray = savedEvents.reverse()
+  orderedEventSearchesArray = savedEvents.reverse();
   return orderedEventSearchesArray;
 };
 
@@ -10,37 +9,37 @@ const displayNoEventsScreen = () => {
 
 const removeEventObject = (event) => {
   // retrieve array from local storage
-  let savedEvents = JSON.parse(localStorage.getItem("favouriteEvents"))
+  let savedEvents = JSON.parse(localStorage.getItem("favouriteEvents"));
 
   // get url of object to remove
-  let urlForObjectToRemove = $(event.currentTarget).parent().attr("data-url")
+  let urlForObjectToRemove = $(event.currentTarget).parent().attr("data-url");
 
   const removeEvent = (item) => {
-      if (item.eventUrl !== urlForObjectToRemove) {
-        return true
-      } else {
-        return false;
-      }
-  }
+    if (item.eventUrl !== urlForObjectToRemove) {
+      return true;
+    } else {
+      return false;
+    }
+  };
   // go through the retrieved array and remove the object
   newSavedEventsArray = savedEvents.filter(removeEvent);
   // empty container
   $("#card-container").empty();
   // render cards
-  displaySavedEvents(newSavedEventsArray)
+  displaySavedEvents(newSavedEventsArray);
   // save new array in local storage
-  localStorage.setItem("favouriteEvents",(JSON.stringify(newSavedEventsArray)));
-}
+  localStorage.setItem("favouriteEvents", JSON.stringify(newSavedEventsArray));
+};
 
-const goToTMEventPage = (event) => {
-  let urlForTMEventPage = $(event.currentTarget).parent().attr("data-url")
-  console.log(urlForTMEventPage)
-  window.open(`${urlForTMEventPage}`, '_blank')
-}
+const goToTMEventPage2 = (event) => {
+  let urlForTMEventPage = $(event.currentTarget).parent().attr("data-url");
+  console.log(urlForTMEventPage);
+  window.open(`${urlForTMEventPage}`, "_blank");
+};
 
-const displayEventCard = (item) => {
+const displayEventCard2 = (item) => {
   $("#card-container").append(
-  `<div class="tile is-parent cardcontent-container">
+    `<div class="tile is-parent cardcontent-container">
     <div class="card">
       <div class="card-image">
           <figure class="image is-4by3">
@@ -66,47 +65,47 @@ const displayEventCard = (item) => {
       </div>
     </div>
   </div>
-  `)
-}
-
-const displaySavedEvents = () => {
-  let savedEvents = JSON.parse(localStorage.getItem("favouriteEvents"))
-  //create container
-  $("body").append(`<div class="tile is-ancestor" id="card-container"><div>`)
-  savedEvents.forEach(displayEventCard);
-  $(".covid-info-container").on("click", "button", displayCovidInfo);
-  $(".remove").click(removeEventObject);
-  $(".event-tm-info").click(goToTMEventPage);
+  `
+  );
 };
 
-function onLoad () {
-  let savedEvents = JSON.parse(localStorage.getItem("favouriteEvents"))
-  console.log(savedEvents)
+const displaySavedEvents = () => {
+  let savedEvents = JSON.parse(localStorage.getItem("favouriteEvents"));
+  //create container
+  $("body").append(`<div class="tile is-ancestor" id="card-container"><div>`);
+  savedEvents.forEach(displayEventCard2);
+  $(".covid-info-container").on("click", "button", displayCovidInfo);
+  $(".remove").click(removeEventObject);
+  $(".event-tm-info").click(goToTMEventPage2);
+};
+
+const displayCovidInfo = (event, covidData) => {
+  const parent = $(event.currentTarget).parent();
+  //get region/city name
+  let cityName = $(parent).attr("data-city");
+  //call covid info function
+  const covidInfo = "informaiton about covid";
+  // display covid info onto page
+  $(parent).empty();
+  $(parent).parent()
+    .append(`<div class="py-1 has-text-weight-medium"> This is more info ${covidData} lorem impsum </div>
+  `);
+};
+function onLoad() {
+  let savedEvents = JSON.parse(localStorage.getItem("favouriteEvents"));
+  console.log(savedEvents);
   // check if there are any saved events in local storage
   if (savedEvents !== null) {
     // order local storage objects in order of search recency
     eventsInAddedOrder = orderFavEvents(savedEvents);
-    console.log(eventsInAddedOrder)
+    console.log(eventsInAddedOrder);
     // for each saved event, render a card
-    displaySavedEvents(savedEvents)
-    //$(eventsInAddedOrder).each(displaySavedEvents); 
+    displaySavedEvents(savedEvents);
+    //$(eventsInAddedOrder).each(displaySavedEvents);
   } else {
     displayNoEventsScreen();
-    console.log("no events")
+    console.log("no events");
   }
-};
-
-const displayCovidInfo = (event) => {
-  const parent = $(event.currentTarget).parent()
-  //get region/city name 
-  let cityName = $(parent).attr("data-city")
-  //call covid info function
-  const covidInfo = "informaiton about covid"
-  // display covid info onto page
-  $(parent).empty()
-  $(parent).parent().append(`<div class="py-1 has-text-weight-medium"> This is more info ${covidInfo} lorem impsum </div>
-  `)
 }
-
 
 $(document).ready(onLoad);
