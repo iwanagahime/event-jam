@@ -78,11 +78,10 @@ html {
   }
 
   #city-input {
-    font-size: 25px;
+    font-size: 1rem;
     text-align: center;
     width: 600px;
-    line-height: 1.5;
-    height: 2.5em;
+    margin-bottom: 1rem;
     display: block;
   }
 }
@@ -96,11 +95,10 @@ html {
   }
 
   #city-input {
-    font-size: 25px;
+    font-size: 1rem;
     text-align: center;
     width: 400px;
-    line-height: 1.5;
-    height: 2.5em;
+    margin-bottom: 1rem;
     display: block;
   }
   .how-it-works-message-container {
@@ -117,33 +115,35 @@ html {
 }
 
 @media screen and (max-width: 425px) {
-  .container {
+  .search-bar-container {
     flex-direction: column;
   }
-  .navbar {
-    padding: 0.5rem;
-    margin-top: 2rem;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 15px;
-    font-family: cursive;
+  #city-input {
+    font-size: 1rem;
+    text-align: center;
+    width: 250px;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    display: block;
   }
 
-  .about-me-image-container {
+  .how-it-works-number-container {
     height: 10rem;
     width: 15rem;
-    margin-bottom: 1rem;
-    padding: 1rem;
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 20%;
     text-align: center;
   }
-  .about-me-image {
+
+  .how-it-works-message-container {
+    height: 10rem;
+    width: 15rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
     text-align: center;
-    height: 100%;
-    border-radius: 100%;
-    box-shadow: 10px 10px 10px goldenrod;
   }
 }
