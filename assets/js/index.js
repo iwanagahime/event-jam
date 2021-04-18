@@ -8,9 +8,10 @@ const validateEventType = () => {
 
 const constructUrl = (cityName, eventType) => {
   if (cityName && eventType) {
-    return `https://iwanagahime.github.io/event-jam/results.html?cityName=${cityName}&eventType=${eventType}`;
+    return `file:///C:/Users/soume/coding_bootcamp/projects/event-jam/results.html?cityName=${cityName}&eventType=${eventType}`;
   } else {
-    return `https://iwanagahime.github.io/event-jam/results.html?cityName=${cityName}`;
+    console.log("hello");
+    return `file:///C:/Users/soume/coding_bootcamp/projects/event-jam/results.html?cityName=${cityName}`;
   }
 };
 
@@ -36,7 +37,6 @@ const onSearch = () => {
       lowerCaseSearchInput.slice(1);
 
     const url = constructUrl(cityName, eventType);
-    console.log(url);
     goToResults(url);
   }
 };

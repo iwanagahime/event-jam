@@ -11,6 +11,7 @@ const getUrlParams = () => {
 };
 
 const buildTicketmasterUrl = (urlParams) => {
+  console.log(urlParams);
   const baseURL =
     "https://app.ticketmaster.com/discovery/v2/events.json?&countryCode=GB&city=";
   const apiKey = "RTmsu653zlIq0O4v4JzO14tOOeKbVAMK";
@@ -53,10 +54,14 @@ const getTicketmasterData = async (tmUrl, urlParams) => {
 };
 
 const buildCovidUrl = (urlParams) => {
+  const baseURL = "https://api.coronavirus.data.gov.uk/v1/data?filters=";
+  const data =
+    "&structure={%22date%22:%22date%22,%22name%22:%22areaName%22,%22cases%22:{%22daily%22:%22newCasesByPublishDate%22}}";
+
   if (urlParams.cityName === "London") {
-    return `https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=region;areaName=London&structure={%22date%22:%22date%22,%22name%22:%22areaName%22,%22cases%22:{%22daily%22:%22newCasesByPublishDate%22}}`;
+    return `${baseURL}areaType=region;areaName=London${data}`;
   } else {
-    return `https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=ltla;areaName=${urlParams.cityName}&structure={%22date%22:%22date%22,%22name%22:%22areaName%22,%22cases%22:{%22daily%22:%22newCasesByPublishDate%22}}`;
+    return `${baseURL}areaType=ltla;areaName=${urlParams.cityName}${data}`;
   }
 };
 
@@ -111,20 +116,22 @@ const displayEventCard = (tmData) => {
 
 const saveToMyEvents = (event) => {
   // identify
-  buttonContainerDiv = $(event.currentTarget).parent()
+  buttonContainerDiv = $(event.currentTarget).parent();
 
   if (localStorage.getItem("favouriteEvents") !== null) {
     previouslySavedEvents = JSON.parse(localStorage.getItem("favouriteEvents"));
 
     // remove object with event info previously saved
-    function removeEventIfSavedBefore (item) {
+    function removeEventIfSavedBefore(item) {
       if (item.eventUrl !== buttonContainerDiv.attr("data-eventUrl")) {
-        return true
+        return true;
       }
       return false;
     }
 
-    let filteredSavedEvents = previouslySavedEvents.filter(removeEventIfSavedBefore);
+    let filteredSavedEvents = previouslySavedEvents.filter(
+      removeEventIfSavedBefore
+    );
 
     let newEvent = {
       name: buttonContainerDiv.attr("date-name"),
@@ -133,14 +140,13 @@ const saveToMyEvents = (event) => {
       venue: buttonContainerDiv.attr("data-venue"),
       eventUrl: buttonContainerDiv.attr("data-eventUrl"),
       city: buttonContainerDiv.attr("data-city"),
-    }
+    };
 
     filteredSavedEvents.push(newEvent);
     let savedEventsString = JSON.stringify(filteredSavedEvents);
     localStorage.setItem("favouriteEvents", savedEventsString);
-
   } else {
-    savedEvents=[]
+    savedEvents = [];
 
     let newEvent = {
       name: buttonContainerDiv.attr("date-name"),
@@ -149,18 +155,18 @@ const saveToMyEvents = (event) => {
       venue: buttonContainerDiv.attr("data-venue"),
       eventUrl: buttonContainerDiv.attr("data-eventUrl"),
       city: buttonContainerDiv.attr("data-city"),
-    }
+    };
 
     savedEvents.push(newEvent);
     let savedEventsString = JSON.stringify(savedEvents);
     localStorage.setItem("favouriteEvents", savedEventsString);
   }
-}
+};
 
 const goToTMEventPage = (event) => {
-  let urlForTMEventPage = $(event.currentTarget).parent().attr("data-url")
-  window.open(`${urlForTMEventPage}`, '_blank')
-}
+  let urlForTMEventPage = $(event.currentTarget).parent().attr("data-url");
+  window.open(`${urlForTMEventPage}`, "_blank");
+};
 
 const renderResults = (tmData, covidData) => {
   // create container and render for covid data
@@ -173,10 +179,11 @@ const renderResults = (tmData, covidData) => {
       <div class="message-body ">
         In ${tmData[0].city} there have been ${covidData} Covid cases in the last 30 days.
       </div>
-    </article>`); 
+    </article>`);
 
-  // Display event heading  
-    $("main").append(`<div class="field has-addons has-addons-left mb-6 "><h2 class=" is-size-3 has-text-warning has-text-weight-bold">Events in ${tmData[0].city}</h2>
+  // Display event heading
+  $("main")
+    .append(`<div class="field has-addons has-addons-left mb-6 "><h2 class=" is-size-3 has-text-warning has-text-weight-bold">Events in ${tmData[0].city}</h2>
   <div class="control mx-4 my-2">
     <div class="select ">
       <select >
@@ -195,7 +202,7 @@ const renderResults = (tmData, covidData) => {
     </a>
   </div>
 </div>
-  `)
+  `);
 
   //create container cards
   $("main").append(`<div class="tile is-ancestor" id="card-container"><div>`);
