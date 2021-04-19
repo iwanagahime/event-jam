@@ -82,7 +82,46 @@ const getCovidData = async (covidUrl) => {
   return sumLast30DaysCovidData;
 };
 
+const checkIfEventPreviouslySaved = (tmData) => {
+  if (localStorage.getItem("favouriteEvents") !== null) {
+    previouslySavedEvents = JSON.parse(localStorage.getItem("favouriteEvents"));
+    previouslySavedEventsUrls = previouslySavedEvents.map(function getUrl(item) {return item.eventUrl})
+
+    //   const checkIfItemIsSaved = (item) => {
+    //     if (item.eventUrl !== tmData.eventUrl) {
+    //       saveAnchor = ["save", "Save Event",]
+    //       console.log(saveAnchor)
+    //       return saveAnchor
+
+    //     } else {
+    //      saveAnchor = ["", "Save Event",]
+    //      console.log(saveAnchor)
+    //     return saveAnchor;
+    //     }
+    //   }
+    //   // something is wrong here
+    // saveAnchor = previouslySavedEvents.forEach(checkIfItemIsSaved)
+    // console.log(saveAnchor)
+    // return saveAnchor;
+
+    isItemSaved = $.inArray( tmData.eventUrl, previouslySavedEventsUrls)
+    console.log(isItemSaved)
+    if (isItemSaved == -1) {
+      saveAnchor = ["save", "Save Event",]
+      return saveAnchor
+    } else {
+      saveAnchor = ["", "Saved"]
+      return saveAnchor
+    }
+  } else {
+    saveAnchor = ["save", "Save Event",]
+    return saveAnchor;
+  }
+}
+
 const displayEventCard = (tmData) => {
+  let saveAnchor = checkIfEventPreviouslySaved(tmData);
+  console.log(saveAnchor)
   $("#card-container").append(
     `<div class="tile is-parent cardcontent-container">
     <div class="card">
@@ -99,7 +138,7 @@ const displayEventCard = (tmData) => {
           <div class="py-1 has-text-weight-medium">${tmData.venue}</div>
           <div style="text-align:center" data-name="${tmData.name}" data-date="${tmData.date}" data-time="${tmData.time}" data-venue="${tmData.venue}" data-eventUrl="${tmData.eventUrl}" data-city="${tmData.city}" >
             <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded event-tm-info">More info</a>
-            <a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded save">Save Event</a>
+            <a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded ${saveAnchor[0]}">${saveAnchor[1]}</a>
           </div>
         </div>
       </div>
@@ -110,40 +149,16 @@ const displayEventCard = (tmData) => {
 };
 
 const saveToMyEvents = (event) => {
-  // identify
+  // identify button container div
   buttonContainerDiv = $(event.currentTarget).parent()
+  savedEvents=[]
 
   if (localStorage.getItem("favouriteEvents") !== null) {
-    previouslySavedEvents = JSON.parse(localStorage.getItem("favouriteEvents"));
-
-    // remove object with event info previously saved
-    function removeEventIfSavedBefore (item) {
-      if (item.eventUrl !== buttonContainerDiv.attr("data-eventUrl")) {
-        return true
-      }
-      return false;
-    }
-
-    let filteredSavedEvents = previouslySavedEvents.filter(removeEventIfSavedBefore);
+    savedEvents = JSON.parse(localStorage.getItem("favouriteEvents"));
+  }
 
     let newEvent = {
-      name: buttonContainerDiv.attr("date-name"),
-      date: buttonContainerDiv.attr("data-date"),
-      time: buttonContainerDiv.attr("data-time"),
-      venue: buttonContainerDiv.attr("data-venue"),
-      eventUrl: buttonContainerDiv.attr("data-eventUrl"),
-      city: buttonContainerDiv.attr("data-city"),
-    }
-
-    filteredSavedEvents.push(newEvent);
-    let savedEventsString = JSON.stringify(filteredSavedEvents);
-    localStorage.setItem("favouriteEvents", savedEventsString);
-
-  } else {
-    savedEvents=[]
-
-    let newEvent = {
-      name: buttonContainerDiv.attr("date-name"),
+      name: buttonContainerDiv.attr("data-name"),
       date: buttonContainerDiv.attr("data-date"),
       time: buttonContainerDiv.attr("data-time"),
       venue: buttonContainerDiv.attr("data-venue"),
@@ -154,11 +169,13 @@ const saveToMyEvents = (event) => {
     savedEvents.push(newEvent);
     let savedEventsString = JSON.stringify(savedEvents);
     localStorage.setItem("favouriteEvents", savedEventsString);
-  }
+
+    $(event.currentTarget).text("Saved")
+    $(event.currentTarget).removeClass("save")
 }
 
 const goToTMEventPage = (event) => {
-  let urlForTMEventPage = $(event.currentTarget).parent().attr("data-url")
+  let urlForTMEventPage = $(event.currentTarget).parent().attr("data-eventUrl")
   window.open(`${urlForTMEventPage}`, '_blank')
 }
 
