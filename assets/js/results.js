@@ -87,25 +87,7 @@ const checkIfEventPreviouslySaved = (tmData) => {
     previouslySavedEvents = JSON.parse(localStorage.getItem("favouriteEvents"));
     previouslySavedEventsUrls = previouslySavedEvents.map(function getUrl(item) {return item.eventUrl})
 
-    //   const checkIfItemIsSaved = (item) => {
-    //     if (item.eventUrl !== tmData.eventUrl) {
-    //       saveAnchor = ["save", "Save Event",]
-    //       console.log(saveAnchor)
-    //       return saveAnchor
-
-    //     } else {
-    //      saveAnchor = ["", "Save Event",]
-    //      console.log(saveAnchor)
-    //     return saveAnchor;
-    //     }
-    //   }
-    //   // something is wrong here
-    // saveAnchor = previouslySavedEvents.forEach(checkIfItemIsSaved)
-    // console.log(saveAnchor)
-    // return saveAnchor;
-
     isItemSaved = $.inArray( tmData.eventUrl, previouslySavedEventsUrls)
-    console.log(isItemSaved)
     if (isItemSaved == -1) {
       saveAnchor = ["save", "Save Event",]
       return saveAnchor
@@ -121,7 +103,6 @@ const checkIfEventPreviouslySaved = (tmData) => {
 
 const displayEventCard = (tmData) => {
   let saveAnchor = checkIfEventPreviouslySaved(tmData);
-  console.log(saveAnchor)
   $("#card-container").append(
     `<div class="tile is-parent cardcontent-container">
     <div class="card">
