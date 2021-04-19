@@ -22,6 +22,12 @@ const buildTicketmasterUrl = (urlParams) => {
   }
 };
 
+const handleError = () => {
+  $("main").append(
+    `<h1 class="has-text-white h1-error-text"> Sorry, we couldn’t find any events in your city, please search again. </h1>`
+  )
+}
+
 const fetchTicketmasterData = async (tmUrl) => {
   try {
     const response = await fetch(tmUrl);
@@ -30,7 +36,7 @@ const fetchTicketmasterData = async (tmUrl) => {
 
     return eventsData;
   } catch (error) {
-    //function to handle error
+    handleError();
   }
 };
 
@@ -66,7 +72,7 @@ const fetchCovidData = async (covidUrl) => {
     const allData = await response.json();
     return allData;
   } catch (error) {
-    console.log(error);
+    handleError();
   }
 };
 
