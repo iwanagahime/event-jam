@@ -5,7 +5,35 @@ const orderFavEvents = (savedEvents) => {
 };
 
 const displayNoEventsScreen = () => {
-  //this is a placeholder
+  $("main").append(`
+  <div class="search-bar-container mt-6 py-5" id="search-bar-container">
+  <div class="is-size-3 has-text-centered has-text-weight-bold has-text-warning pb-6">You have no saved events. Search to find your next event!</div>
+
+
+  <div class="field has-addons has-addons-left mb-5 columns is-mobile is-centered pt-6">
+    <div class="control ">
+      <input class="input is-warning" type="text" placeholder="Enter city name" id="city-input">
+    </div>
+
+    
+     <div class="control mx-4">
+        <div class="select ">
+          <select >
+            <option >Event type</option>
+            <option>Music</option>
+            <option>Sport</option>
+            <option>Family</option>
+            <option>Theatre</option>
+            <option>Comedy</option>
+          </select>
+        </div>
+      </div>
+      <div class="control">
+        <a class="button is-warning has-text-warning-dark has-text-weight-bold"id="search-button">
+          <i class="fas fa-search"></i>
+        </a>
+      </div>
+  </div>`)
 };
 
 const removeEventObject = (event) => {
@@ -69,10 +97,38 @@ const displayEventCard = (item) => {
   `)
 }
 
+const displaySearchBar = () => {
+  $("main").append(`
+  <div class="container ">
+  <div class="field has-addons has-addons-left mb-5">
+    <div class="control">
+      <input class="input is-warning" type="text" placeholder="Enter city name" id="city-input">
+    </div>
+     <div class="control mx-4">
+        <div class="select ">
+          <select >
+            <option >Event type</option>
+            <option>Music</option>
+            <option>Sport</option>
+            <option>Family</option>
+            <option>Theatre</option>
+            <option>Comedy</option>
+          </select>
+        </div>
+      </div>
+      <div class="control">
+        <a class="button is-warning has-text-warning-dark has-text-weight-bold"id="search-button">
+          <i class="fas fa-search"></i>
+        </a>
+      </div>
+  </div>
+</div>`)
+}
+
 const displaySavedEvents = () => {
   let savedEvents = JSON.parse(localStorage.getItem("favouriteEvents"))
   //create container
-  $("body").append(`<div class="tile is-ancestor" id="card-container"><div>`)
+  $("main").append(`<div class="tile is-ancestor" id="card-container"><div>`)
   savedEvents.forEach(displayEventCard);
   $(".covid-info-container").on("click", "button", displayCovidInfo);
   $(".remove").click(removeEventObject);
@@ -81,18 +137,18 @@ const displaySavedEvents = () => {
 
 function onLoad () {
   let savedEvents = JSON.parse(localStorage.getItem("favouriteEvents"))
-  console.log(savedEvents)
   // check if there are any saved events in local storage
   if (savedEvents !== null) {
     // order local storage objects in order of search recency
     eventsInAddedOrder = orderFavEvents(savedEvents);
     console.log(eventsInAddedOrder)
+    // display search bar
+    displaySearchBar()
     // for each saved event, render a card
     displaySavedEvents(savedEvents)
     //$(eventsInAddedOrder).each(displaySavedEvents); 
   } else {
     displayNoEventsScreen();
-    console.log("no events")
   }
 };
 
