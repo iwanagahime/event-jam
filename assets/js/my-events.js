@@ -69,6 +69,54 @@ const displayEventCard2 = (item) => {
   );
 };
 
+const buildCovidUrl = (urlParams) => {
+  const baseURL = "https://api.coronavirus.data.gov.uk/v1/data?filters=";
+  const data =
+    "&structure={%22date%22:%22date%22,%22name%22:%22areaName%22,%22cases%22:{%22daily%22:%22newCasesByPublishDate%22}}";
+
+  if (urlParams.cityName === "London") {
+    return `${baseURL}areaType=region;areaName=London${data}`;
+  } else {
+    return `${baseURL}areaType=ltla;areaName=${urlParams.cityName}${data}`;
+  }
+};
+
+const fetchCovidData = async (covidUrl) => {
+  try {
+    const response = await fetch(covidUrl);
+    const allData = await response.json();
+    console.log(allData);
+    return allData;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const sumDailyCases = (acc, currentValue) => acc + currentValue.cases.daily;
+
+const getCovidData = async (covidUrl) => {
+  // fetch covid data
+  const covidData = await fetchCovidData(covidUrl);
+  // filter covid data
+  const last30DaysCovidData = covidData.data.slice(0, 30);
+  const sumLast30DaysCovidData = last30DaysCovidData.reduce(sumDailyCases, 0);
+  // store what we want to render and return
+  return sumLast30DaysCovidData;
+};
+const displayCovidInfo = async (event) => {
+  const parent = $(event.currentTarget).parent();
+  //get region/city name
+  let cityName = $(parent).attr("data-city");
+  //call covid info function
+  const covidInfo = await getCovidData();
+  console.log("covidInfo", covidInfo);
+  // display covid info onto page
+  $(parent).empty();
+  $(parent).parent()
+    .append(`<div class="py-1 has-text-weight-medium"> This is more info ${covidData} lorem impsum </div>
+  `);
+};
+
 const displaySavedEvents = () => {
   let savedEvents = JSON.parse(localStorage.getItem("favouriteEvents"));
   //create container
@@ -79,32 +127,19 @@ const displaySavedEvents = () => {
   $(".event-tm-info").click(goToTMEventPage2);
 };
 
-const displayCovidInfo = (event, covidData) => {
-  const parent = $(event.currentTarget).parent();
-  //get region/city name
-  let cityName = $(parent).attr("data-city");
-  //call covid info function
-  const covidInfo = "informaiton about covid";
-  // display covid info onto page
-  $(parent).empty();
-  $(parent).parent()
-    .append(`<div class="py-1 has-text-weight-medium"> This is more info ${covidData} lorem impsum </div>
-  `);
-};
 function onLoad() {
   let savedEvents = JSON.parse(localStorage.getItem("favouriteEvents"));
-  console.log(savedEvents);
+
   // check if there are any saved events in local storage
   if (savedEvents !== null) {
     // order local storage objects in order of search recency
     eventsInAddedOrder = orderFavEvents(savedEvents);
-    console.log(eventsInAddedOrder);
+
     // for each saved event, render a card
     displaySavedEvents(savedEvents);
     //$(eventsInAddedOrder).each(displaySavedEvents);
   } else {
     displayNoEventsScreen();
-    console.log("no events");
   }
 }
 
