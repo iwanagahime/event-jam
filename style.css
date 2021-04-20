@@ -79,6 +79,7 @@ html {
   #covid-section {
     flex-direction: column;
     width: 90%;
+    font-size: 20px;
   }
   #city-input {
     font-size: 1rem;
@@ -86,6 +87,10 @@ html {
     width: 600px;
     margin-bottom: 1rem;
     display: block;
+  }
+
+  .card {
+    font-size: 20px;
   }
 }
 
