@@ -29,8 +29,9 @@ const handleInternalError = () => {
 }
 
 const handleError = () => {
+  $("main").empty()
   $("main").append(
-    `<h1 class="has-text-white"> Sorry, we couldn’t find any events in your city, please search again. </h1>`
+    `<h1 class="has-text-white"> Sorry, we couldn’t find any events or COVID-19 data in your city, please search again. </h1>`
   )
 }
 
@@ -48,7 +49,6 @@ const fetchTicketmasterData = async (tmUrl) => {
       return eventsData;
     }
   } catch (error) {
-    console.log(error)
     if (error == "internal") {
       handleInternalError();
     } else {
@@ -203,6 +203,7 @@ const goToTMEventPage = (event) => {
 }
 
 const renderResults = (tmData, covidData) => {
+  $("main").empty()
   // create container and render for covid data
   $("main").append(`
     <article class="message is-warning mb-6">
