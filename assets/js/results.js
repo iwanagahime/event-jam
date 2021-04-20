@@ -24,17 +24,21 @@ const buildTicketmasterUrl = (urlParams) => {
 
 const handleError = () => {
   $("main").append(
-    `<h1 class="has-text-white h1-error-text"> Sorry, we couldn’t find any events in your city, please search again. </h1>`
+    `<h1 class="has-text-white"> Sorry, we couldn’t find any events in your city, please search again. </h1>`
   )
 }
 
 const fetchTicketmasterData = async (tmUrl) => {
   try {
     const response = await fetch(tmUrl);
-    const data = await response.json();
-    const eventsData = data._embedded.events;
-
-    return eventsData;
+    if (response.status  <200 || response.status >299) {
+      throw new Error ("error")
+    } else {
+      const data = await response.json();
+      const eventsData = data._embedded.events;
+  
+      return eventsData;
+    }
   } catch (error) {
     handleError();
   }
@@ -42,6 +46,9 @@ const fetchTicketmasterData = async (tmUrl) => {
 
 const getTicketmasterData = async (tmUrl, urlParams) => {
   let allData = await fetchTicketmasterData(tmUrl);
+  if (allData === undefined) {
+    return
+  } else {
   const createEventInfoObject = (item) => {
     eventInfoObject = {
       name: item.name,
@@ -56,6 +63,7 @@ const getTicketmasterData = async (tmUrl, urlParams) => {
   };
   let eventsInfoArray = allData.map(createEventInfoObject);
   return eventsInfoArray;
+  }
 };
 
 const buildCovidUrl = (urlParams) => {
@@ -69,8 +77,12 @@ const buildCovidUrl = (urlParams) => {
 const fetchCovidData = async (covidUrl) => {
   try {
     const response = await fetch(covidUrl);
+    if (response.status  <200 || response.status >299) {
+      throw new Error ("error")
+    } else {
     const allData = await response.json();
     return allData;
+    }
   } catch (error) {
     handleError();
   }
@@ -81,11 +93,15 @@ const sumDailyCases = (acc, currentValue) => acc + currentValue.cases.daily;
 const getCovidData = async (covidUrl) => {
   // fetch covid data
   const covidData = await fetchCovidData(covidUrl);
+  if (covidData === undefined) {
+    return
+  } else {
   // filter covid data
   const last30DaysCovidData = covidData.data.slice(0, 30);
   const sumLast30DaysCovidData = last30DaysCovidData.reduce(sumDailyCases, 0);
   // store what we want to render and return
   return sumLast30DaysCovidData;
+  }
 };
 
 const checkIfEventPreviouslySaved = (tmData) => {
@@ -222,8 +238,11 @@ const showResults = async () => {
   // call covid api
   const covidData = await getCovidData(covidUrl);
 
-  // separate functions to build info
-  renderResults(tmData, covidData);
+  if (covidData === undefined || tmData === undefined) {
+    return
+  } else {
+    renderResults(tmData, covidData);
+  }
 };
 
 $(document).ready(showResults);

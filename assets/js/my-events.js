@@ -141,7 +141,6 @@ function onLoad () {
   if (savedEvents !== null) {
     // order local storage objects in order of search recency
     eventsInAddedOrder = orderFavEvents(savedEvents);
-    console.log(eventsInAddedOrder)
     // display search bar
     displaySearchBar()
     // for each saved event, render a card
