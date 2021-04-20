@@ -28,7 +28,7 @@ const removeEventObject = (event) => {
   // render cards
   displaySavedEvents(newSavedEventsArray);
   // save new array in local storage
-  localStorage.setItem("favouriteEvents", JSON.stringify(newSavedEventsArray));
+  localStorage.setItem("favoriteEvents", JSON.stringify(newSavedEventsArray));
 };
 
 const goToTMEventPage = (event) => {
