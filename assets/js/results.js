@@ -211,20 +211,18 @@ const renderResults = (tmData, covidData) => {
 const showResults = async () => {
   // get parameters
   const urlParams = getUrlParams();
+
   // build ticketmaster url
   const tmUrl = buildTicketmasterUrl(urlParams);
-
   // build covid url
   const covidUrl = buildCovidUrl(urlParams);
 
   // call ticketmaster api
   const tmData = await getTicketmasterData(tmUrl, urlParams);
   // call covid api
-
   const covidData = await getCovidData(covidUrl);
 
   // separate functions to build info
-
   renderResults(tmData, covidData);
 };
 
