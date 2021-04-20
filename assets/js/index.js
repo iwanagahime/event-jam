@@ -7,7 +7,8 @@ const validateEventType = () => {
 };
 
 const constructUrl = (cityName, eventType) => {
-  const baseUrl = "https://iwanagahime.github.io/event-jam/results.html?";
+  const baseUrl =
+    "file:///C:/Users/soume/coding_bootcamp/projects/event-jam/results.html?";
   if (cityName && eventType) {
     return `${baseUrl}cityName=${cityName}&eventType=${eventType}`;
   } else {
