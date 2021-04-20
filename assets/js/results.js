@@ -22,6 +22,12 @@ const buildTicketmasterUrl = (urlParams) => {
   }
 };
 
+const handleInternalError = () => {
+  $("main").append(
+    `<h1 class="has-text-white"> Sorry, we're having internal issues. Please come back and search later. </h1>`
+  )
+}
+
 const handleError = () => {
   $("main").append(
     `<h1 class="has-text-white"> Sorry, we couldn’t find any events in your city, please search again. </h1>`
@@ -31,7 +37,9 @@ const handleError = () => {
 const fetchTicketmasterData = async (tmUrl) => {
   try {
     const response = await fetch(tmUrl);
-    if (response.status  <200 || response.status >299) {
+    if (response.status > 499 && response.status < 600) {
+      throw new Error ("internal")
+    } else if (response.status  <200 || response.status >299) {
       throw new Error ("error")
     } else {
       const data = await response.json();
@@ -40,7 +48,12 @@ const fetchTicketmasterData = async (tmUrl) => {
       return eventsData;
     }
   } catch (error) {
+    console.log(error)
+    if (error == "internal") {
+      handleInternalError();
+    } else {
     handleError();
+    }
   }
 };
 
@@ -68,27 +81,34 @@ const getTicketmasterData = async (tmUrl, urlParams) => {
 
 const buildCovidUrl = (urlParams) => {
   if (urlParams.cityName === "London") {
-    return `https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=region;areaName=London&structure={%22date%22:%22date%22,%22name%22:%22areaName%22,%22cases%22:{%22daily%22:%22newCasesByPublishDate%22}}`;
+    return `https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=region;areaName=London&structure={%22date%22:%22date%22,%22newCases%22:%22newCasesByPublishDate%22}`;
   } else {
-    return `https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=ltla;areaName=${urlParams.cityName}&structure={%22date%22:%22date%22,%22name%22:%22areaName%22,%22cases%22:{%22daily%22:%22newCasesByPublishDate%22}}`;
+    return `https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=ltla;areaName=${urlParams.cityName}&structure={%22date%22:%22date%22,%22newCases%22:%22newCasesByPublishDate%22}`
   }
 };
 
 const fetchCovidData = async (covidUrl) => {
   try {
     const response = await fetch(covidUrl);
-    if (response.status  <200 || response.status >299) {
+    if (response.status >499 && response.status <600) {
+      throw new Error ("internal")
+    } else if (response.status  <200 || response.status >299) {
       throw new Error ("error")
     } else {
     const allData = await response.json();
     return allData;
     }
   } catch (error) {
+    console.log(error)
+    if (error == "internal") {
+      handleInternalError();
+    } else {
     handleError();
+    }
   }
 };
 
-const sumDailyCases = (acc, currentValue) => acc + currentValue.cases.daily;
+const sumDailyCases = (acc, currentValue) => acc + currentValue.newCases;
 
 const getCovidData = async (covidUrl) => {
   // fetch covid data
@@ -230,6 +250,7 @@ const showResults = async () => {
 
   // build ticketmaster url
   const tmUrl = buildTicketmasterUrl(urlParams);
+  console.log(tmUrl)
   // build covid url
   const covidUrl = buildCovidUrl(urlParams);
 
@@ -237,6 +258,8 @@ const showResults = async () => {
   const tmData = await getTicketmasterData(tmUrl, urlParams);
   // call covid api
   const covidData = await getCovidData(covidUrl);
+  console.log(tmData)
+  console.log(covidData)
 
   if (covidData === undefined || tmData === undefined) {
     return
