@@ -66,7 +66,7 @@ html {
 /* Media queries */
 
 /* Tablet */
-@media screen and (max-width: 925px) {
+@media screen and (max-width: 1024px) {
   .search-bar-container {
     flex-direction: column;
   }
@@ -76,7 +76,10 @@ html {
   .how-it-works-message-container {
     flex-direction: column;
   }
-
+  #covid-section {
+    flex-direction: column;
+    width: 90%;
+  }
   #city-input {
     font-size: 1rem;
     text-align: center;
@@ -84,7 +87,11 @@ html {
     margin-bottom: 1rem;
     display: block;
   }
+   .tile {
+    text-align: center;
+  } */
 }
+*/
 /* Mobile phones */
 @media screen and (max-width: 576px) {
   .search-bar-container {
@@ -109,6 +116,15 @@ html {
     margin-bottom: auto;
     margin-top: auto;
     width: 30%;
+    text-align: center;
+  }
+  #covid-section {
+    flex-direction: column;
+    /* margin: auto; */
+    width: 90%;
+    text-align: center;
+  }
+  .tile {
     text-align: center;
   }
 }
@@ -140,6 +156,14 @@ html {
     margin-bottom: auto;
     margin-top: auto;
     width: 20%;
+    text-align: center;
+  }
+  #covid-section {
+    flex-direction: column;
+    width: 90%;
+    text-align: center;
+  }
+  .tile {
     text-align: center;
   }
 }
