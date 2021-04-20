@@ -58,7 +58,7 @@ const displayEventCard = (item) => {
           </div>
         </div>
         <div class="covid-info-container" data-city="${item.city}">
-          <button>
+          <button class="button is-light has-text-black has-background-warning has-text-weight-bold is-rounded">
             See COVID 19 info
           </button>
         </div>
