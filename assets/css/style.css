@@ -1,16 +1,16 @@
+/* Background image */
 html {
   background: url("../images/hero.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  background: linear-gradient(to left rgb(0, 0, 0, 0.05), rgb(0, 0, 0, 0.5));
 }
 
 .navbar-background-colour-override {
   background-color: transparent;
 }
-
+/* COVID section */
 #covid-info {
   justify-content: flex-start;
 }
@@ -18,6 +18,8 @@ html {
 #covid-image {
   border-radius: 50%;
 }
+
+/* Search bar */
 #city-input {
   width: 800px;
   border-radius: 25px;
@@ -29,10 +31,12 @@ html {
   border-radius: 20%;
 }
 
+/* Cards */
 .card {
   border-radius: 15px;
 }
 
+/* How it works section */
 .numbers-section-container {
   display: flex;
   flex-wrap: wrap;
@@ -76,7 +80,11 @@ html {
   .how-it-works-message-container {
     flex-direction: column;
   }
-
+  #covid-section {
+    flex-direction: column;
+    width: 90%;
+    font-size: 20px;
+  }
   #city-input {
     font-size: 1rem;
     text-align: center;
@@ -84,7 +92,12 @@ html {
     margin-bottom: 1rem;
     display: block;
   }
+
+  .card {
+    font-size: 20px;
+  }
 }
+
 /* Mobile phones */
 @media screen and (max-width: 576px) {
   .search-bar-container {
@@ -102,14 +115,19 @@ html {
     display: block;
   }
   .how-it-works-message-container {
-    height: 20rem;
-    width: 20rem;
-    margin-bottom: 1rem;
     padding: 1rem;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: auto;
+    margin-top: auto;
     width: 30%;
+    text-align: center;
+  }
+  #covid-section {
+    flex-direction: column;
+
+    width: 90%;
     text-align: center;
   }
 }
@@ -122,28 +140,30 @@ html {
     font-size: 1rem;
     text-align: center;
     width: 250px;
-    margin-bottom: 1rem;
-    margin-right: 1rem;
     display: block;
   }
 
   .how-it-works-number-container {
-    height: 10rem;
-    width: 15rem;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: auto;
+    margin-top: auto;
     width: 20%;
-    text-align: center;
   }
 
   .how-it-works-message-container {
-    height: 10rem;
-    width: 15rem;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: auto;
+    margin-top: auto;
     width: 20%;
+    text-align: center;
+  }
+  #covid-section {
+    flex-direction: column;
+    width: 90%;
     text-align: center;
   }
 }
