@@ -1,16 +1,16 @@
+/* Background image */
 html {
   background: url("../images/hero.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  background: linear-gradient(to left rgb(0, 0, 0, 0.05), rgb(0, 0, 0, 0.5));
 }
 
 .navbar-background-colour-override {
   background-color: transparent;
 }
-
+/* COVID section */
 #covid-info {
   justify-content: flex-start;
 }
@@ -87,11 +87,8 @@ html {
     margin-bottom: 1rem;
     display: block;
   }
-   .tile {
-    text-align: center;
-  } */
 }
-*/
+
 /* Mobile phones */
 @media screen and (max-width: 576px) {
   .search-bar-container {
@@ -120,11 +117,8 @@ html {
   }
   #covid-section {
     flex-direction: column;
-    /* margin: auto; */
+
     width: 90%;
-    text-align: center;
-  }
-  .tile {
     text-align: center;
   }
 }
@@ -161,9 +155,6 @@ html {
   #covid-section {
     flex-direction: column;
     width: 90%;
-    text-align: center;
-  }
-  .tile {
     text-align: center;
   }
 }
