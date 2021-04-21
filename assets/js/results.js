@@ -99,7 +99,6 @@ const fetchCovidData = async (covidUrl) => {
     return allData;
     }
   } catch (error) {
-    console.log(error)
     if (error == "internal") {
       handleInternalError();
     } else {
@@ -273,7 +272,6 @@ const showResults = async () => {
 
   // build ticketmaster url
   const tmUrl = buildTicketmasterUrl(urlParams);
-  console.log(tmUrl)
   // build covid url
   const covidUrl = buildCovidUrl(urlParams);
 
