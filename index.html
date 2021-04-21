@@ -3,7 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Event Jam Navbar</title>
+
+    <title>Event Jam Home Page</title>
+
   
     <!-- Viewport, Title and Description -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,9 +24,10 @@
     />
 
     <!-- Favicon  -->
+    <link rel="icon" type="image/jpg" href="assets/images/favicon/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/favicon/favicon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="to do" />
-    <link rel="icon" type="image/png" sizes="16x16" href="to do" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon.png" />
 
     <!-- Linking Stylesheets -->
     <link
@@ -37,7 +40,11 @@
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
     crossorigin="anonymous"
   />
+
+    <link rel="stylesheet" href="./style.css"/>
+
     <link rel="stylesheet" href="./assets/css/style.css"/>
+
   </head>
 
 
@@ -49,7 +56,7 @@
     <header class="header mt-2 has-text-right pb-6">
 
 
-
+        <!-- Navbar with  Logo and Link to My Events Page -->
         <nav class="navbar navbar-background-colour-override" role="navigation" aria-label="main navigation">
           <div class="navbar-brand">
             <a class="navbar-item" href="./index.html">
@@ -59,7 +66,7 @@
             <div class="navbar-end">
               <div class="navbar-item">
                 <div class="buttons">
-                  <a class="button is-light has-text-warning-dark has-background-warning has-text-weight-bold is-rounded" href="my-events.html">
+                  <a class="button is-light has-background-warning has-text-weight-bold is-rounded" href="my-events.html">
                     My Events
                   </a>
                 </div>
@@ -72,11 +79,13 @@
 
 
 
-    <div class="search-bar-container mt-6 py-5" id="search-bar-container">
-      <div class="is-size-3 has-text-centered has-text-weight-bold has-text-warning pb-6">Where would you like me to take you today?</div>
+    <!-- Search Form -->
+    <div class="search-bar-container mt-6 py-5 " id="search-bar-container">
+      <div class="is-size-3 has-text-centered has-text-weight-bold has-text-warning pb-6 is-flex-wrap-wrap is-align-items-center ">Where would you like me to take you today?</div>
 
 
-      <div class="field has-addons has-addons-left mb-5 columns is-mobile is-centered pt-6">
+
+      <div class="field has-addons has-addons-left mb-5 columns is-mobile is-centered pt-6  is-flex-wrap-wrap is-align-items-center">
         <div class="control ">
           <input class="input is-warning" type="text" placeholder="Enter city name" id="city-input">
         </div>
@@ -95,7 +104,7 @@
             </div>
           </div>
           <div class="control">
-            <a class="button is-warning has-text-warning-dark has-text-weight-bold"id="search-button">
+            <a class="button is-warning has-text-weight-bold"id="search-button">
               <i class="fas fa-search"></i>
             </a>
           </div>
@@ -103,8 +112,8 @@
 
 
 
-
-      <div class="how-it-works-section py-6 mt-6">
+      <!-- How It Works Section -->
+      <div class="how-it-works-section py-6 mt-6 ">
         <h1 class="is-size-3 has-text-centered has-text-weight-bold has-text-warning pt-8">How it works </h1>
 
 
@@ -112,8 +121,8 @@
         <div class="numbers-section-container py-6">
         
           <div class="how-it-works-number-container pt-8 pb-5">
-            <div class="how-it-works-number has-background-warning-light">
-              <h1 class="has-text-weight-bold has-text-centered is-size-2 has-text-warning-dark">1</h1>
+            <div class="how-it-works-number has-background-warning">
+              <h1 class="has-text-weight-bold has-text-centered is-size-2">1</h1>
             </div>
           </div>
 
@@ -122,8 +131,8 @@
 
 
           <div class="how-it-works-number-container pt-8 pb-5">
-            <div class="how-it-works-number has-background-warning-light">
-              <h1 class="has-text-weight-bold has-text-centered is-size-2 has-text-warning-dark">2</h1>
+            <div class="how-it-works-number has-background-warning">
+              <h1 class="has-text-weight-bold has-text-centered is-size-2">2</h1>
             </div>
           </div>
 
@@ -132,8 +141,8 @@
 
 
           <div class="how-it-works-number-container pt-8 pb-5">
-            <div class="how-it-works-number has-background-warning-light">
-              <h1 class="has-text-weight-bold has-text-centered is-size-2 has-text-warning-dark">3</h1>
+            <div class="how-it-works-number has-background-warning">
+              <h1 class="has-text-weight-bold has-text-centered is-size-2">3</h1>
             </div>
           </div>
 
@@ -173,6 +182,7 @@
 
       </div>
     
+      <!-- Linking JavaScript and JQuery -->
       <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
       integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
