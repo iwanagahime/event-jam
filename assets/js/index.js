@@ -27,7 +27,9 @@ const onSearch = () => {
   const eventType = validateEventType();
 
   if (searchInput === "") {
-    // append error alert
+    $("#error-container").empty()
+    $("#error-container").append(
+      `<h1 class="has-text-white is-centered mt4" style="size:40px">Please enter a city name to search</h1>`)
   } else {
     lowerCaseSearchInput = searchInput.toLowerCase();
     // capitalise first letter of city name

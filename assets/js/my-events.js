@@ -38,9 +38,10 @@ const displayNoEventsScreen = () => {
 const removeEventObject = (event) => {
   // retrieve array from local storage
   let savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
+  console.log(savedEvents)
 
   // get url of object to remove
-  let urlForObjectToRemove = $(event.currentTarget).parent().attr("data-url");
+  let urlForObjectToRemove = $(event.currentTarget).parent().attr("data-eventUrl");
 
   const removeEvent = (item) => {
     if (item.eventUrl !== urlForObjectToRemove) {
@@ -66,21 +67,22 @@ const goToTMEventPage = (event) => {
 };
 
 const displayEventCard = (item) => {
+  console.log(item.image)
   $("#card-container").append(
-    `<div class="tile is-parent card-content-container">
-    <div class="card">
+    `<div class="tile is-parent">
+    <div class="card has-text-centered">
       <div class="card-image">
           <figure class="image is-4by3">
-            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+            <img src="${item.image}" alt="${item.name} event image">
           </figure>
       </div>
       <div class="card-content">
         <div class="content">
           <div><h2 class="has-text-centered ">${item.name}</h2> </div>
-          <div class="py-1 has-text-weight-medium">Date:${item.date}</div>
-          <div class="py-1 has-text-weight-medium">Time:${item.time}</div> 
-          <div class="py-1 has-text-weight-medium">Venue:${item.venue}</div>
-          <div style="text-align:center" data-url=">${item.eventUrl}">
+          <div class="py-1 has-text-weight-medium">Date: ${item.date}</div>
+          <div class="py-1 has-text-weight-medium">Time: ${item.time}</div> 
+          <div class="py-1 has-text-weight-medium">Venue: ${item.venue}</div>
+          <div style="text-align:center" data-name="${item.name}" data-date="${item.date}" data-time="${item.time}" data-venue="${item.venue}" data-eventUrl="${item.eventUrl}" data-city="${item.city}" >
             <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded event-tm-info">More info</a>
             <a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded remove">Remove from My Events</a>
           </div>
@@ -125,18 +127,17 @@ const displaySearchBar = () => {
 </div>`)
 }
 
-const displaySavedEvents = () => {
-  let savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
+const displaySavedEvents = (eventsInAddedOrder) => {
   //create container
-  $("main").append(`<div class="tile is-ancestor" id="card-container"><div>`)
-  savedEvents.forEach(displayEventCard);
+  $("main").append(`<div class="tile is-ancestor mx-4 is-flex-wrap-wrap is-align-items-center" id="card-container">`);
+  eventsInAddedOrder.forEach(displayEventCard);
   $(".covid-info-container").on("click", "button", displayCovidInfo);
   $(".remove").click(removeEventObject);
   $(".event-tm-info").click(goToTMEventPage);
 };
 
 function onLoad () {
-  let savedEvents = JSON.parse(localStorage.getItem("favouriteEvents"))
+  let savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"))
   // check if there are any saved events in local storage
   if (savedEvents !== null) {
     // order local storage objects in order of search recency
@@ -144,7 +145,7 @@ function onLoad () {
     // display search bar
     displaySearchBar()
     // for each saved event, render a card
-    displaySavedEvents(savedEvents);
+    displaySavedEvents(eventsInAddedOrder);
     //$(eventsInAddedOrder).each(displaySavedEvents);
   } else {
     displayNoEventsScreen();
