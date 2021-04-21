@@ -83,28 +83,6 @@ const buildCovidUrl = (urlParams) => {
   }
 };
 
-const fetchCovidData = async (covidUrl) => {
-  try {
-    const response = await fetch(covidUrl);
-    const allData = await response.json();
-    console.log(allData);
-    return allData;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const sumDailyCases = (acc, currentValue) => acc + currentValue.cases.daily;
-
-const getCovidData = async (covidUrl) => {
-  // fetch covid data
-  const covidData = await fetchCovidData(covidUrl);
-  // filter covid data
-  const last30DaysCovidData = covidData.data.slice(0, 30);
-  const sumLast30DaysCovidData = last30DaysCovidData.reduce(sumDailyCases, 0);
-  // store what we want to render and return
-  return sumLast30DaysCovidData;
-};
 const displayCovidInfo = async (event) => {
   const parent = $(event.currentTarget).parent();
   //get region/city name
