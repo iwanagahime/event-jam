@@ -123,3 +123,4 @@ const renderResults = (tmData, covidData) => {
 };
 
 $(document).ready(showResults);
+$("#search-bar-container").on("click", "a", onSearch);
