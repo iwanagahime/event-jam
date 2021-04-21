@@ -108,7 +108,7 @@ const renderResults = (tmData, covidData) => {
     </div>
   </div>
   <div class="control my-2">
-    <a class="button is-warning has-text-warning-dark has-text-weight-bold" id="search-button">
+    <a class="button is-warning has-text-warning-dark has-text-weight-bold" id="filter-search-button">
       <i class="fas fa-search"></i>
     </a>
   </div>
@@ -122,5 +122,11 @@ const renderResults = (tmData, covidData) => {
   $(".event-tm-info").click(goToTMEventPage);
 };
 
+const doSomething = async () => {
+  console.log("hello");
+  await showResults();
+};
+
 $(document).ready(showResults);
 $("#search-bar-container").on("click", "a", onSearch);
+$("#filter-search-button").on("click", "a", doSomething);
