@@ -79,6 +79,11 @@ const goToTMEventPage = (event) => {
   window.open(`${urlForTMEventPage}`, "_blank");
 };
 
+const doSomething = /* async */ () => {
+  console.log("hello");
+  // await showResults();
+};
+
 const renderResults = (tmData, covidData) => {
   // create container and render for covid data
   $("main").append(`
@@ -108,7 +113,7 @@ const renderResults = (tmData, covidData) => {
     </div>
   </div>
   <div class="control my-2">
-    <a class="button is-warning has-text-warning-dark has-text-weight-bold" id="filter-search-button">
+    <a class="button is-warning has-text-warning-dark has-text-weight-bold is-rounded" id="filter-search-button">
       <i class="fas fa-search"></i>
     </a>
   </div>
@@ -120,16 +125,15 @@ const renderResults = (tmData, covidData) => {
   tmData.forEach(displayEventCard);
   $(".save").click(saveToMyEvents);
   $(".event-tm-info").click(goToTMEventPage);
+  $("#filter-search-button").on("click", "a", doSomething);
 };
 
-const doSomething = /* async */ () => {
-  console.log("hello");
-  // await showResults();
+const dontGoBack = () => {
+  showResults();
 };
 
-$(document).ready(showResults);
+$(document).ready(dontGoBack);
 // search bar top of results html
 $("#search-bar-container").on("click", "a", onSearch);
 
 // event type "filter"
-$("#filter-search-button").on("click", "a", doSomething);
