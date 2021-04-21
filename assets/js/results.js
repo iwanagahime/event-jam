@@ -125,15 +125,20 @@ const renderResults = (tmData, covidData) => {
   tmData.forEach(displayEventCard);
   $(".save").click(saveToMyEvents);
   $(".event-tm-info").click(goToTMEventPage);
-  $("#filter-search-button").on("click", "a", doSomething);
+  $("#filter-search-button").on("click", fetchDataAndRender);
 };
 
 const fetchDataAndRender = async () => {
+  console.log("hello");
   const allDataObject = await showResults();
+
   renderResults(
     allDataObject.tmData,
+
     allDataObject.covidDataObject.sumLast30DaysCovidData
   );
+
+  // use data from allDataObject.covidDataObject.last30DaysCovidData to render graph
 };
 
 $(document).ready(fetchDataAndRender);

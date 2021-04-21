@@ -8,7 +8,8 @@ const validateEventType = () => {
 
 const constructUrl = (cityName, eventType) => {
   const baseUrl =
-    "file:///C:/Users/soume/coding_bootcamp/projects/event-jam/results.html?";
+    // "file:///C:/Users/soume/coding_bootcamp/projects/event-jam/results.html?";
+    "http://127.0.0.1:5500/results.html?";
   if (cityName && eventType) {
     return `${baseUrl}cityName=${cityName}&eventType=${eventType}`;
   } else {
@@ -18,6 +19,7 @@ const constructUrl = (cityName, eventType) => {
 };
 
 const goToResults = (url) => {
+  console.log(url);
   window.location.href = url;
 };
 

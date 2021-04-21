@@ -37,11 +37,16 @@ const fetchTicketmasterData = async (tmUrl) => {
 const getTicketmasterData = async (tmUrl, urlParams) => {
   let allData = await fetchTicketmasterData(tmUrl);
   const createEventInfoObject = (item) => {
+    const images = getValueFromNestedObject(item, ["images"], []);
     eventInfoObject = {
       name: item.name,
       date: item.dates.start.localDate,
-      time: item.dates.start.localTime,
-      image: item.images[1].url,
+      time: getValueFromNestedObject(
+        item,
+        ["dates", "start", "localTime"],
+        "TBC"
+      ),
+      image: (images.length > 0 && images[1].url) || "",
       venue: item._embedded.venues[0].name,
       eventUrl: item.url,
       city: urlParams.cityName,
@@ -75,6 +80,8 @@ const fetchCovidData = async (covidUrl) => {
 };
 
 const sumDailyCases = (acc, currentValue) => acc + currentValue.newCases;
+
+// or put in defualt value
 
 const getCovidData = async (covidUrl) => {
   // fetch covid data
@@ -115,3 +122,17 @@ const showResults = async () => {
   };
   return allDataObject;
 };
+
+const getValueFromNestedObject = (
+  nestedObj = {},
+  tree = [],
+  defaultValue = ""
+) =>
+  Array.isArray(tree)
+    ? tree.reduce(
+        (obj, key) => (obj && obj[key] ? obj[key] : defaultValue),
+        nestedObj
+      )
+    : {};
+// getValueFromNestedObject(allDataObject, ["covidDataObject", "sumLast30DaysCovidData"])
+// USE IT PROPERLY in fetch
