@@ -24,14 +24,14 @@ const buildTicketmasterUrl = (urlParams) => {
 
 const handleInternalError = () => {
   $("main").append(
-    `<h1 class="has-text-white"> Sorry, we're having internal issues. Please come back and search later. </h1>`
+    `<h1 class="has-text-white" style="size:40px"> Sorry, we're having internal issues. Please come back and search later. </h1>`
   )
 }
 
 const handleError = () => {
   $("main").empty()
   $("main").append(
-    `<h1 class="has-text-white"> Sorry, we couldn’t find any events or COVID-19 data in your city, please search again. </h1>`
+    `<h1 class="has-text-white" style="size:40px"> Sorry, we couldn’t find any events or COVID-19 data in your city, please search again. </h1>`
   )
 }
 
