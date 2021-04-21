@@ -36,7 +36,6 @@ const fetchTicketmasterData = async (tmUrl) => {
 
 const getTicketmasterData = async (tmUrl, urlParams) => {
   let allData = await fetchTicketmasterData(tmUrl);
-  console.log(allData);
   const createEventInfoObject = (item) => {
     eventInfoObject = {
       name: item.name,
@@ -54,10 +53,14 @@ const getTicketmasterData = async (tmUrl, urlParams) => {
 };
 
 const buildCovidUrl = (urlParams) => {
+  const baseURL = "https://api.coronavirus.data.gov.uk/v1/data?filters=";
+  const structure =
+    "&structure={%22date%22:%22date%22,%22newCases%22:%22newCasesByPublishDate%22}";
+
   if (urlParams.cityName === "London") {
-    return `https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=region;areaName=London&structure={%22date%22:%22date%22,%22newCases%22:%22newCasesByPublishDate%22}`;
+    return `${baseURL}areaType=region;areaName=London${structure}`;
   } else {
-    return `https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=ltla;areaName=${urlParams.cityName}&structure={%22date%22:%22date%22,%22newCases%22:%22newCasesByPublishDate%22}`;
+    return `${baseURL}areaType=ltla;areaName=${urlParams.cityName}${structure}`;
   }
 };
 

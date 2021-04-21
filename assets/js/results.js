@@ -122,11 +122,14 @@ const renderResults = (tmData, covidData) => {
   $(".event-tm-info").click(goToTMEventPage);
 };
 
-const doSomething = async () => {
+const doSomething = /* async */ () => {
   console.log("hello");
-  await showResults();
+  // await showResults();
 };
 
 $(document).ready(showResults);
+// search bar top of results html
 $("#search-bar-container").on("click", "a", onSearch);
+
+// event type "filter"
 $("#filter-search-button").on("click", "a", doSomething);
