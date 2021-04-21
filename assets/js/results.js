@@ -13,14 +13,20 @@ const getUrlParams = () => {
 };
 
 const buildTicketmasterUrl = (urlParams) => {
-  const baseURL =
-    "https://app.ticketmaster.com/discovery/v2/events.json?&countryCode=GB&city=";
+  const baseURL ="https://app.ticketmaster.com/discovery/v2/events.json?&countryCode=GB&city=";
   const apiKey = "RTmsu653zlIq0O4v4JzO14tOOeKbVAMK";
-
   if (urlParams.cityName && urlParams.eventType) {
     return `${baseURL}${urlParams.cityName}&classificationName=${urlParams.eventType}&size=20&page=${pageNumber}&sort=date,name,asc&apikey=${apiKey}`;
   } else {
     return `${baseURL}${urlParams.cityName}&size=20&page=${pageNumber}&sort=date,name,asc&apikey=${apiKey}`;
+  }
+};
+
+const buildCovidUrl = (urlParams) => {
+  if (urlParams.cityName === "London") {
+    return `https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=region;areaName=London&structure={%22date%22:%22date%22,%22newCases%22:%22newCasesByPublishDate%22}`;
+  } else {
+    return `https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=ltla;areaName=${urlParams.cityName}&structure={%22date%22:%22date%22,%22newCases%22:%22newCasesByPublishDate%22}`
   }
 };
 
@@ -81,14 +87,6 @@ const getTicketmasterData = async (tmUrl, urlParams) => {
   }
 };
 
-const buildCovidUrl = (urlParams) => {
-  if (urlParams.cityName === "London") {
-    return `https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=region;areaName=London&structure={%22date%22:%22date%22,%22newCases%22:%22newCasesByPublishDate%22}`;
-  } else {
-    return `https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=ltla;areaName=${urlParams.cityName}&structure={%22date%22:%22date%22,%22newCases%22:%22newCasesByPublishDate%22}`
-  }
-};
-
 const fetchCovidData = async (covidUrl) => {
   try {
     const response = await fetch(covidUrl);
@@ -145,77 +143,37 @@ const checkIfEventPreviouslySaved = (tmData) => {
   }
 }
 
-const displayEventCard = (tmData) => {
-  let saveAnchor = checkIfEventPreviouslySaved(tmData);
-  $("#card-container").append(
-    ` <div class="tile is-parent">
-        <div class="card has-text-centered">
-            <div class="card-image">
-                <figure class="image is-4by3">
-                  <img src="${tmData.image}" alt="${tmData.name} event image">
-                </figure>
-            </div>
-            <div class="card-content">
-                <div class="content">
-                  <div><h2 class="has-text-weight-semibold">${tmData.name}</h2> </div>
-                  <div class="py-1 has-text-weight-medium">Date: ${tmData.date}</div>
-                  <div class="py-1 has-text-weight-medium">Time: ${tmData.time}</div> 
-                  <div class="py-1 has-text-weight-medium">Venue: ${tmData.venue}</div>
-                  <div style="text-align:center" data-name="${tmData.name}" data-date="${tmData.date}" data-time="${tmData.time}" data-venue="${tmData.venue}" data-eventUrl="${tmData.eventUrl}" data-city="${tmData.city}" data-image="${tmData.image}">
-                    <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded event-tm-info">More info</a>
-                    <a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded ${saveAnchor[0]}">${saveAnchor[1]}</a>
-                  </div>
-                </div>
-              </div>
-        </div>
-    </div>`
-  );
-};
-
-const saveToMyEvents = (event) => {
-  // identify button container div
-  buttonContainerDiv = $(event.currentTarget).parent()
-  savedEvents=[]
-
-  if (localStorage.getItem("favoriteEvents") !== null) {
-    savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
-  }
-
-    let newEvent = {
-      name: buttonContainerDiv.attr("data-name"),
-      date: buttonContainerDiv.attr("data-date"),
-      time: buttonContainerDiv.attr("data-time"),
-      venue: buttonContainerDiv.attr("data-venue"),
-      eventUrl: buttonContainerDiv.attr("data-eventUrl"),
-      city: buttonContainerDiv.attr("data-city"),
-      image: buttonContainerDiv.attr("data-image")
-    };
-
-    savedEvents.push(newEvent);
-    let savedEventsString = JSON.stringify(savedEvents);
-    localStorage.setItem("favoriteEvents", savedEventsString);
-
-    $(event.currentTarget).text("Saved")
-    $(event.currentTarget).removeClass("save")
-}
-
 const goToTMEventPage = (event) => {
   let urlForTMEventPage = $(event.currentTarget).parent().attr("data-eventUrl")
   window.open(`${urlForTMEventPage}`, '_blank')
 }
 
-const renderMoreEvents = async () => {
-  pageNumber++;
-  const urlParams = getUrlParams()
-  // build ticketmaster url
-  const tmUrl = buildTicketmasterUrl(urlParams);
-  console.log(tmUrl)
-
-  // call ticketmaster api
-  const tmData = await getTicketmasterData(tmUrl, urlParams);
-
-  tmData.forEach(displayEventCard);
-}
+const displayEventCard = (tmData) => {
+  let saveAnchor = checkIfEventPreviouslySaved(tmData);
+  $("#card-container").append(
+    `<div class="tile is-parent">
+      <div class="card has-text-centered">
+        <div class="card-image">
+          <figure class="image is-4by3">
+            <img src="${tmData.image}" alt="${tmData.name} event image">
+          </figure>
+        </div>
+        <div class="card-content">
+            <div class="content">
+             <div><h2 class="has-text-weight-semibold">${tmData.name}</h2> </div>
+            <div class="py-1 has-text-weight-medium">Date: ${tmData.date}</div>
+            <div class="py-1 has-text-weight-medium">Time: ${tmData.time}</div> 
+            <div class="py-1 has-text-weight-medium">Venue: ${tmData.venue}</div>
+            <div style="text-align:center" data-name="${tmData.name}" data-date="${tmData.date}" data-time="${tmData.time}" data-venue="${tmData.venue}" data-eventUrl="${tmData.eventUrl}" data-city="${tmData.city}" data-image="${tmData.image}">
+              <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded event-tm-info">More info</a>
+              <a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded ${saveAnchor[0]}">${saveAnchor[1]}</a>
+            </div>
+          </div>
+        </div>
+       </div>
+    </div>`
+  );
+};
 
 const renderResults = (tmData, covidData) => {
   $("main").empty()
@@ -265,6 +223,49 @@ const renderResults = (tmData, covidData) => {
   $(".save").click(saveToMyEvents);
   $(".event-tm-info").click(goToTMEventPage);
 };
+
+const renderMoreEvents = async () => {
+  pageNumber++;
+  const urlParams = getUrlParams()
+  // build ticketmaster url
+  const tmUrl = buildTicketmasterUrl(urlParams);
+
+  // call ticketmaster api
+  const tmData = await getTicketmasterData(tmUrl, urlParams);
+
+  if (tmData === undefined) {
+    return
+  } else {
+    tmData.forEach(displayEventCard);
+  }
+}
+
+const saveToMyEvents = (event) => {
+  // identify button container div
+  buttonContainerDiv = $(event.currentTarget).parent()
+  savedEvents=[]
+
+  if (localStorage.getItem("favoriteEvents") !== null) {
+    savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
+  }
+
+  let newEvent = {
+    name: buttonContainerDiv.attr("data-name"),
+    date: buttonContainerDiv.attr("data-date"),
+    time: buttonContainerDiv.attr("data-time"),
+    venue: buttonContainerDiv.attr("data-venue"),
+    eventUrl: buttonContainerDiv.attr("data-eventUrl"),
+    city: buttonContainerDiv.attr("data-city"),
+    image: buttonContainerDiv.attr("data-image")
+  };
+
+  savedEvents.push(newEvent);
+  let savedEventsString = JSON.stringify(savedEvents);
+  localStorage.setItem("favoriteEvents", savedEventsString);
+
+  $(event.currentTarget).text("Saved")
+  $(event.currentTarget).removeClass("save")
+}
 
 const showResults = async () => {
   // get parameters
