@@ -128,11 +128,15 @@ const renderResults = (tmData, covidData) => {
   $("#filter-search-button").on("click", "a", doSomething);
 };
 
-const dontGoBack = () => {
-  showResults();
+const fetchDataAndRender = async () => {
+  const allDataObject = await showResults();
+  renderResults(
+    allDataObject.tmData,
+    allDataObject.covidDataObject.sumLast30DaysCovidData
+  );
 };
 
-$(document).ready(dontGoBack);
+$(document).ready(fetchDataAndRender);
 // search bar top of results html
 $("#search-bar-container").on("click", "a", onSearch);
 

@@ -83,7 +83,14 @@ const getCovidData = async (covidUrl) => {
   const last30DaysCovidData = covidData.data.slice(0, 30);
   const sumLast30DaysCovidData = last30DaysCovidData.reduce(sumDailyCases, 0);
   // store what we want to render and return
-  return sumLast30DaysCovidData;
+
+  const covidDataObject = {
+    last30DaysCovidData,
+    sumLast30DaysCovidData,
+  };
+
+  // to do return sumLast30DaysCovidData;
+  return covidDataObject;
 };
 
 const showResults = async () => {
@@ -97,11 +104,14 @@ const showResults = async () => {
 
   // call ticketmaster api
   const tmData = await getTicketmasterData(tmUrl, urlParams);
+
   // call covid api
 
-  const covidData = await getCovidData(covidUrl);
+  const covidDataObject = await getCovidData(covidUrl);
 
-  // separate functions to build info
-
-  renderResults(tmData, covidData);
+  const allDataObject = {
+    tmData,
+    covidDataObject,
+  };
+  return allDataObject;
 };
