@@ -1,3 +1,5 @@
+let pageNumber = 0;
+
 const getUrlParams = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const cityName = urlParams.get("cityName");
@@ -16,9 +18,9 @@ const buildTicketmasterUrl = (urlParams) => {
   const apiKey = "RTmsu653zlIq0O4v4JzO14tOOeKbVAMK";
 
   if (urlParams.cityName && urlParams.eventType) {
-    return `${baseURL}${urlParams.cityName}&classificationName=${urlParams.eventType}&sort=date,name,asc&apikey=${apiKey}`;
+    return `${baseURL}${urlParams.cityName}&classificationName=${urlParams.eventType}&size=20&page=${pageNumber}&sort=date,name,asc&apikey=${apiKey}`;
   } else {
-    return `${baseURL}${urlParams.cityName}&sort=date,name,asc&apikey=${apiKey}`;
+    return `${baseURL}${urlParams.cityName}&size=20&page=${pageNumber}&sort=date,name,asc&apikey=${apiKey}`;
   }
 };
 
@@ -202,6 +204,19 @@ const goToTMEventPage = (event) => {
   window.open(`${urlForTMEventPage}`, '_blank')
 }
 
+const renderMoreEvents = async () => {
+  pageNumber++;
+  const urlParams = getUrlParams()
+  // build ticketmaster url
+  const tmUrl = buildTicketmasterUrl(urlParams);
+  console.log(tmUrl)
+
+  // call ticketmaster api
+  const tmData = await getTicketmasterData(tmUrl, urlParams);
+
+  tmData.forEach(displayEventCard);
+}
+
 const renderResults = (tmData, covidData) => {
   $("main").empty()
   // create container and render for covid data
@@ -218,7 +233,7 @@ const renderResults = (tmData, covidData) => {
 
   // Display event heading
   $("main")
-    .append(`<div class="field has-addons has-addons-left mb-6 ml-6 is-flex-wrap-wrap is-align-items-center" id ="events-in-search"><h2 class=" is-size-3 has-text-warning has-text-weight-bold">Events in ${tmData[0].city}</h2>
+    .append(`<div class="field has-addons has-addons-left mb-6 ml-6 is-flex-wrap-wrap is-align-items-center" id ="events-in-search"><h2 class="is-size-3 has-text-warning has-text-weight-bold">Events in ${tmData[0].city}</h2>
     <div class="control mx-4 my-2">
       <div class="select ">
         <select>
@@ -242,6 +257,11 @@ const renderResults = (tmData, covidData) => {
   //create container cards
   $("main").append(`<div class="tile is-ancestor mx-4 is-flex-wrap-wrap is-align-items-center" id="card-container">`);
   tmData.forEach(displayEventCard);
+  $("main").append(`
+    <div class="mb-6 mx-5 is-flex-wrap-wrap is-align-items-center">
+      <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded" id="load-events-button">Load more</a>
+    </div>`)
+  $("#load-events-button").click(renderMoreEvents)
   $(".save").click(saveToMyEvents);
   $(".event-tm-info").click(goToTMEventPage);
 };
@@ -260,8 +280,6 @@ const showResults = async () => {
   const tmData = await getTicketmasterData(tmUrl, urlParams);
   // call covid api
   const covidData = await getCovidData(covidUrl);
-  console.log(tmData)
-  console.log(covidData)
 
   if (covidData === undefined || tmData === undefined) {
     return
