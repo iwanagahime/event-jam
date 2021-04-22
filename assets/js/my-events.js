@@ -37,10 +37,12 @@ const displayNoEventsScreen = () => {
 const removeEventObject = (event) => {
   console.log("hello");
   // retrieve array from local storage
-  let savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
+  const savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
 
   // get url of object to remove
-  let urlForObjectToRemove = $(event.currentTarget).parent().attr("data-url");
+  const urlForObjectToRemove = $(event.currentTarget)
+    .parent()
+    .attr("data-eventUrl");
 
   const removeEvent = (item) => {
     if (item.eventUrl !== urlForObjectToRemove) {
@@ -50,7 +52,7 @@ const removeEventObject = (event) => {
     }
   };
   // go through the retrieved array and remove the object
-  newSavedEventsArray = savedEvents.filter(removeEvent);
+  const newSavedEventsArray = savedEvents.filter(removeEvent);
   // empty container
   $("#card-container").empty();
   // render cards
@@ -60,7 +62,7 @@ const removeEventObject = (event) => {
 };
 
 const goToTMEventPage = (event) => {
-  let urlForTMEventPage = $(event.currentTarget).parent().attr("data-url");
+  let urlForTMEventPage = $(event.currentTarget).parent().attr("data-eventUrl");
   window.open(`${urlForTMEventPage}`, "_blank");
 };
 
@@ -156,10 +158,10 @@ const displaySavedEvents = () => {
 };
 
 function onLoad() {
-  let savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
-
+  const savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
+  console.log(savedEvents);
   // check if there are any saved events in local storage
-  if (savedEvents !== null) {
+  if (savedEvents !== null && savedEvents.length) {
     // order local storage objects in order of search recency
     eventsInAddedOrder = orderFavEvents(savedEvents);
     displaySearchBar();
