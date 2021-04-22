@@ -70,16 +70,20 @@ const displayEventCard2 = (item) => {
 };
 
 const displayCovidInfo = async (event) => {
+  const allDataObject = await showResults();
+
+  const covidData = allDataObject.covidDataObject.sumLast30DaysCovidData;
+
   const parent = $(event.currentTarget).parent();
   //get region/city name
   let cityName = $(parent).attr("data-city");
   //call covid info function
-  const covidInfo = await getCovidData();
-  console.log("covidInfo", covidInfo);
+
+  console.log("covidInfo", covidData);
   // display covid info onto page
   $(parent).empty();
   $(parent).parent()
-    .append(`<div class="py-1 has-text-weight-medium"> This is more info ${covidData} lorem impsum </div>
+    .append(`<div class="py-1 has-text-weight-medium"> Number of cases in the last 30 days: ${covidData}</div>
   `);
 };
 
@@ -110,5 +114,3 @@ function onLoad() {
 }
 
 $(document).ready(onLoad);
-
-console.log(covidDataObject);

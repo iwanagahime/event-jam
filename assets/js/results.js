@@ -143,5 +143,3 @@ const fetchDataAndRender = async () => {
 $(document).ready(fetchDataAndRender);
 // search bar top of results html
 $("#search-bar-container").on("click", "a", onSearch);
-
-console.log(covidDataObject);
