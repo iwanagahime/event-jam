@@ -1,3 +1,6 @@
+// search bar top of results html
+$("#search-bar-container").on("click", "a", onSearch);
+
 let pageNumber = 0;
 
 const checkIfEventPreviouslySaved = (tmData) => {
@@ -52,12 +55,9 @@ const displayEventCard = (tmData) => {
 
 const renderMoreEvents = async () => {
   pageNumber++;
-  const urlParams = getUrlParams();
-  // build ticketmaster url
-  const tmUrl = buildTicketmasterUrl(urlParams);
 
-  // call ticketmaster api
-  const tmData = await getTicketmasterData(tmUrl, urlParams);
+  const allDataObject = await showResults();
+  const tmData = allDataObject.tmData;
 
   if (tmData === undefined) {
     return;
@@ -130,7 +130,7 @@ const renderResults = (tmData, covidData) => {
         <span class="px-4 is-size-4">COVID info</span>
       </div>
       <div class="message-body ">
-        In ${tmData[0].city} there have been ${covidData} Covid cases in the last 30 days.
+        In ${tmData[0].city} there have been<strong> ${covidData} </strong>Covid cases in the last 30 days.
       </div>
     </article>`);
 
@@ -160,6 +160,11 @@ const renderResults = (tmData, covidData) => {
   //create container cards
   $("main").append(`<div class="tile is-ancestor" id="card-container"><div>`);
   tmData.forEach(displayEventCard);
+  $("main").append(`
+  <div class="mb-6 mx-5 is-flex-wrap-wrap is-align-items-center">
+    <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded" id="load-events-button">Load more</a>
+  </div>`);
+  $("#load-events-button").click(renderMoreEvents);
   $(".save").click(saveToMyEvents);
   $(".event-tm-info").click(goToTMEventPage);
   $("#filter-search-button").on("click", fetchDataAndRender);
@@ -178,5 +183,3 @@ const fetchDataAndRender = async () => {
 };
 
 $(document).ready(fetchDataAndRender);
-// search bar top of results html
-$("#search-bar-container").on("click", "a", onSearch);
