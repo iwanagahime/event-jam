@@ -36,7 +36,7 @@ const displayNoEventsScreen = () => {
 const removeEventObject = (event) => {
   console.log("hello");
   // retrieve array from local storage
-  let savedEvents = JSON.parse(localStorage.getItem("favouriteEvents"));
+  let savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
 
   // get url of object to remove
   let urlForObjectToRemove = $(event.currentTarget).parent().attr("data-url");
@@ -55,7 +55,7 @@ const removeEventObject = (event) => {
   // render cards
   displaySavedEvents(newSavedEventsArray);
   // save new array in local storage
-  localStorage.setItem("favouriteEvents", JSON.stringify(newSavedEventsArray));
+  localStorage.setItem("favoriteEvents", JSON.stringify(newSavedEventsArray));
 };
 
 const goToTMEventPage = (event) => {
@@ -63,30 +63,35 @@ const goToTMEventPage = (event) => {
   window.open(`${urlForTMEventPage}`, "_blank");
 };
 
-const displayEventCard = (tmData) => {
-  let saveAnchor = checkIfEventPreviouslySaved(tmData);
+const displayEventCard = (item) => {
   $("#card-container").append(
     `<div class="tile is-parent">
-      <div class="card has-text-centered">
-        <div class="card-image">
+    <div class="card has-text-centered">
+      <div class="card-image">
           <figure class="image is-4by3">
-            <img src="${tmData.image}" alt="${tmData.name} event image">
+            <img src="${item.image}" alt="${item.name} event image">
           </figure>
-        </div>
-        <div class="card-content">
-            <div class="content">
-             <div><h2 class="has-text-weight-semibold">${tmData.name}</h2> </div>
-            <div class="py-1 has-text-weight-medium">Date: ${tmData.date}</div>
-            <div class="py-1 has-text-weight-medium">Time: ${tmData.time}</div> 
-            <div class="py-1 has-text-weight-medium">Venue: ${tmData.venue}</div>
-            <div style="text-align:center" data-name="${tmData.name}" data-date="${tmData.date}" data-time="${tmData.time}" data-venue="${tmData.venue}" data-eventUrl="${tmData.eventUrl}" data-city="${tmData.city}" data-image="${tmData.image}">
-              <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded event-tm-info">More info</a>
-              <a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded ${saveAnchor[0]}">${saveAnchor[1]}</a>
-            </div>
+      </div>
+      <div class="card-content">
+        <div class="content">
+          <div><h2 class="has-text-centered ">${item.name}</h2> </div>
+          <div class="py-1 has-text-weight-medium">Date: ${item.date}</div>
+          <div class="py-1 has-text-weight-medium">Time: ${item.time}</div> 
+          <div class="py-1 has-text-weight-medium">Venue: ${item.venue}</div>
+          <div style="text-align:center" data-name="${item.name}" data-date="${item.date}" data-time="${item.time}" data-venue="${item.venue}" data-eventUrl="${item.eventUrl}" data-city="${item.city}" >
+            <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded event-tm-info">More info</a>
+            <a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded remove">Remove from My Events</a>
           </div>
         </div>
-       </div>
-    </div>`
+        <div class="covid-info-container" data-city="${item.city}">
+          <button class="button is-light has-text-black has-background-warning has-text-weight-bold is-rounded">
+            See COVID 19 info
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  `
   );
 };
 
@@ -138,7 +143,7 @@ const displaySearchBar = () => {
 };
 
 const displaySavedEvents = () => {
-  let savedEvents = JSON.parse(localStorage.getItem("favouriteEvents"));
+  let savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
   //create container
   $("main").append(
     `<div class="tile is-ancestor mx-4 is-flex-wrap-wrap is-align-items-center" id="card-container">`
@@ -150,7 +155,7 @@ const displaySavedEvents = () => {
 };
 
 function onLoad() {
-  let savedEvents = JSON.parse(localStorage.getItem("favouriteEvents"));
+  let savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
 
   // check if there are any saved events in local storage
   if (savedEvents !== null) {
