@@ -67,52 +67,30 @@ const renderMoreEvents = async () => {
 };
 
 const saveToMyEvents = (event) => {
-  // identify
+  // identify button container div
   buttonContainerDiv = $(event.currentTarget).parent();
+  savedEvents = [];
 
-  if (localStorage.getItem("favouriteEvents") !== null) {
-    previouslySavedEvents = JSON.parse(localStorage.getItem("favouriteEvents"));
-
-    // remove object with event info previously saved
-    function removeEventIfSavedBefore(item) {
-      if (item.eventUrl !== buttonContainerDiv.attr("data-eventUrl")) {
-        return true;
-      }
-      return false;
-    }
-
-    let filteredSavedEvents = previouslySavedEvents.filter(
-      removeEventIfSavedBefore
-    );
-
-    let newEvent = {
-      name: buttonContainerDiv.attr("date-name"),
-      date: buttonContainerDiv.attr("data-date"),
-      time: buttonContainerDiv.attr("data-time"),
-      venue: buttonContainerDiv.attr("data-venue"),
-      eventUrl: buttonContainerDiv.attr("data-eventUrl"),
-      city: buttonContainerDiv.attr("data-city"),
-    };
-
-    filteredSavedEvents.push(newEvent);
-    let savedEventsString = JSON.stringify(filteredSavedEvents);
-    localStorage.setItem("favouriteEvents", savedEventsString);
-  } else {
-    savedEvents = [];
-
-    let newEvent = {
-      name: buttonContainerDiv.attr("date-name"),
-      date: buttonContainerDiv.attr("data-date"),
-      time: buttonContainerDiv.attr("data-time"),
-      venue: buttonContainerDiv.attr("data-venue"),
-      eventUrl: buttonContainerDiv.attr("data-eventUrl"),
-      city: buttonContainerDiv.attr("data-city"),
-    };
-
-    savedEvents.push(newEvent);
-    let savedEventsString = JSON.stringify(savedEvents);
-    localStorage.setItem("favouriteEvents", savedEventsString);
+  if (localStorage.getItem("favoriteEvents") !== null) {
+    savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
   }
+
+  let newEvent = {
+    name: buttonContainerDiv.attr("data-name"),
+    date: buttonContainerDiv.attr("data-date"),
+    time: buttonContainerDiv.attr("data-time"),
+    venue: buttonContainerDiv.attr("data-venue"),
+    eventUrl: buttonContainerDiv.attr("data-eventUrl"),
+    city: buttonContainerDiv.attr("data-city"),
+    image: buttonContainerDiv.attr("data-image"),
+  };
+
+  savedEvents.push(newEvent);
+  let savedEventsString = JSON.stringify(savedEvents);
+  localStorage.setItem("favoriteEvents", savedEventsString);
+
+  $(event.currentTarget).text("Saved");
+  $(event.currentTarget).removeClass("save");
 };
 
 const goToTMEventPage = (event) => {
@@ -158,7 +136,9 @@ const renderResults = (tmData, covidData) => {
   `);
 
   //create container cards
-  $("main").append(`<div class="tile is-ancestor" id="card-container"><div>`);
+  $("main").append(
+    `<div class="tile is-ancestor mx-4 is-flex-wrap-wrap is-align-items-center" id="card-container">`
+  );
   tmData.forEach(displayEventCard);
   $("main").append(`
   <div class="mb-6 mx-5 is-flex-wrap-wrap is-align-items-center">
