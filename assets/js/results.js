@@ -129,7 +129,6 @@ const renderResults = (tmData, covidData) => {
 };
 
 const fetchDataAndRender = async () => {
-  console.log("hello");
   const allDataObject = await showResults();
 
   renderResults(
@@ -145,4 +144,4 @@ $(document).ready(fetchDataAndRender);
 // search bar top of results html
 $("#search-bar-container").on("click", "a", onSearch);
 
-// event type "filter"
+console.log(covidDataObject);

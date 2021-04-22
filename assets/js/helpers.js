@@ -95,7 +95,7 @@ const getCovidData = async (covidUrl) => {
     last30DaysCovidData,
     sumLast30DaysCovidData,
   };
-
+  console.log(covidDataObject);
   // to do return sumLast30DaysCovidData;
   return covidDataObject;
 };

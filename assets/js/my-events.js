@@ -69,20 +69,6 @@ const displayEventCard2 = (item) => {
   );
 };
 
-// testing git push
-
-const buildCovidUrl = (urlParams) => {
-  const baseURL = "https://api.coronavirus.data.gov.uk/v1/data?filters=";
-  const data =
-    "&structure={%22date%22:%22date%22,%22name%22:%22areaName%22,%22cases%22:{%22daily%22:%22newCasesByPublishDate%22}}";
-
-  if (urlParams.cityName === "London") {
-    return `${baseURL}areaType=region;areaName=London${data}`;
-  } else {
-    return `${baseURL}areaType=ltla;areaName=${urlParams.cityName}${data}`;
-  }
-};
-
 const displayCovidInfo = async (event) => {
   const parent = $(event.currentTarget).parent();
   //get region/city name
@@ -124,3 +110,5 @@ function onLoad() {
 }
 
 $(document).ready(onLoad);
+
+console.log(covidDataObject);
