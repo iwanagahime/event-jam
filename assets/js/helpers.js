@@ -23,15 +23,15 @@ const buildTicketmasterUrl = (urlParams) => {
   }
 };
 
-const buildCovidUrl = (urlParams) => {
+const buildCovidUrl = (cityName) => {
   const baseURL = "https://api.coronavirus.data.gov.uk/v1/data?filters=";
   const structure =
     "&structure={%22date%22:%22date%22,%22newCases%22:%22newCasesByPublishDate%22}";
 
-  if (urlParams.cityName === "London") {
+  if (cityName === "London") {
     return `${baseURL}areaType=region;areaName=London${structure}`;
   } else {
-    return `${baseURL}areaType=ltla;areaName=${urlParams.cityName}${structure}`;
+    return `${baseURL}areaType=ltla;areaName=${cityName}${structure}`;
   }
 };
 
@@ -44,7 +44,7 @@ const handleInternalError = () => {
 const handleError = () => {
   $("#error-container").empty();
   $("#error-container").append(
-    `<h1 class="has-text-white is-centered mt4" style="size:40px"> Sorry, we couldn’t find any events or COVID-19 data in your city, please search again. </h1>`
+    `<h1 class="has-text-white is-centered mt4" style="size:40px"> Sorry, we couldn’t find any information. </h1>`
   );
 };
 
@@ -143,14 +143,14 @@ const getCovidData = async (covidUrl) => {
   }
 };
 
-const showResults = async () => {
+const showResults = async (pageNumber) => {
   // get parameters
   const urlParams = getUrlParams();
   // build ticketmaster url
-  const tmUrl = buildTicketmasterUrl(urlParams);
+  const tmUrl = buildTicketmasterUrl(urlParams, pageNumber);
 
   // build covid url
-  const covidUrl = buildCovidUrl(urlParams);
+  const covidUrl = buildCovidUrl(urlParams.cityName);
 
   // call ticketmaster api
   const tmData = await getTicketmasterData(tmUrl, urlParams);

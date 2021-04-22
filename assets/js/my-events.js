@@ -1,3 +1,4 @@
+let pageNumber = 0;
 const orderFavEvents = (savedEvents) => {
   orderedEventSearchesArray = savedEvents.reverse();
   return orderedEventSearchesArray;
@@ -88,6 +89,7 @@ const displayEventCard = (item) => {
             See COVID 19 info
           </button>
         </div>
+        <div id="error-container"></div>
       </div>
     </div>
   </div>
@@ -96,20 +98,19 @@ const displayEventCard = (item) => {
 };
 
 const displayCovidInfo = async (event) => {
-  const allDataObject = await showResults();
-
-  const covidData = allDataObject.covidDataObject.sumLast30DaysCovidData;
-
   const parent = $(event.currentTarget).parent();
   //get region/city name
   let cityName = $(parent).attr("data-city");
   //call covid info function
+  const covidUrl = buildCovidUrl(cityName);
+
+  const covidData = await getCovidData(covidUrl);
 
   console.log("covidInfo", covidData);
   // display covid info onto page
   $(parent).empty();
   $(parent).parent()
-    .append(`<div class="py-1 has-text-weight-medium"> Number of cases in the last 30 days: ${covidData}</div>
+    .append(`<div class="py-1 has-text-weight-medium"> Number of cases in the last 30 days: ${covidData.sumLast30DaysCovidData}</div>
   `);
 };
 
