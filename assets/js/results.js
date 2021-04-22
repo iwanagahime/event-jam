@@ -25,7 +25,7 @@ const checkIfEventPreviouslySaved = (tmData) => {
 };
 
 const displayEventCard = (tmData) => {
-  let saveAnchor = checkIfEventPreviouslySaved(tmData);
+  const saveAnchor = checkIfEventPreviouslySaved(tmData);
   $("#card-container").append(
     `<div class="tile is-parent">
       <div class="card has-text-centered">
@@ -73,7 +73,7 @@ const saveToMyEvents = (event) => {
     savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
   }
 
-  let newEvent = {
+  const newEvent = {
     name: buttonContainerDiv.attr("data-name"),
     date: buttonContainerDiv.attr("data-date"),
     time: buttonContainerDiv.attr("data-time"),
@@ -84,7 +84,7 @@ const saveToMyEvents = (event) => {
   };
 
   savedEvents.push(newEvent);
-  let savedEventsString = JSON.stringify(savedEvents);
+  const savedEventsString = JSON.stringify(savedEvents);
   localStorage.setItem("favoriteEvents", savedEventsString);
 
   $(event.currentTarget).text("Saved");
@@ -92,7 +92,9 @@ const saveToMyEvents = (event) => {
 };
 
 const goToTMEventPage = (event) => {
-  let urlForTMEventPage = $(event.currentTarget).parent().attr("data-eventUrl");
+  const urlForTMEventPage = $(event.currentTarget)
+    .parent()
+    .attr("data-eventUrl");
   window.open(`${urlForTMEventPage}`, "_blank");
 };
 

@@ -61,7 +61,9 @@ const removeEventObject = (event) => {
 };
 
 const goToTMEventPage = (event) => {
-  let urlForTMEventPage = $(event.currentTarget).parent().attr("data-eventUrl");
+  const urlForTMEventPage = $(event.currentTarget)
+    .parent()
+    .attr("data-eventUrl");
   window.open(`${urlForTMEventPage}`, "_blank");
 };
 
@@ -101,7 +103,7 @@ const displayEventCard = (item) => {
 const displayCovidInfo = async (event) => {
   const parent = $(event.currentTarget).parent();
   //get region/city name
-  let cityName = $(parent).attr("data-city");
+  const cityName = $(parent).attr("data-city");
   //call covid info function
   const covidUrl = buildCovidUrl(cityName);
 
@@ -144,7 +146,7 @@ const displaySearchBar = () => {
 };
 
 const displaySavedEvents = () => {
-  let savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
+  const savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
   //create container
   $("main").append(
     `<div class="tile is-ancestor mx-4 is-flex-wrap-wrap is-align-items-center" id="card-container">`

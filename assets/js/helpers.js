@@ -91,7 +91,7 @@ const fetchCovidData = async (covidUrl) => {
 };
 
 const getTicketmasterData = async (tmUrl, urlParams) => {
-  let allData = await fetchTicketmasterData(tmUrl);
+  const allData = await fetchTicketmasterData(tmUrl);
 
   if (allData === undefined) {
     return;
@@ -113,7 +113,7 @@ const getTicketmasterData = async (tmUrl, urlParams) => {
       };
       return eventInfoObject;
     };
-    let eventsInfoArray = allData.map(createEventInfoObject);
+    const eventsInfoArray = allData.map(createEventInfoObject);
     return eventsInfoArray;
   }
 };

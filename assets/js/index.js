@@ -1,5 +1,5 @@
 const validateEventType = () => {
-  let eventType = $("#eventType-dropdown").val();
+  const eventType = $("#eventType-dropdown").val();
   if (eventType === "Event type") {
     eventType = null;
   }
@@ -30,9 +30,9 @@ const onSearch = () => {
       `<h1 class="has-text-white is-centered mt4" style="size:40px">Please enter a city name to search</h1>`
     );
   } else {
-    lowerCaseSearchInput = searchInput.toLowerCase();
+    const lowerCaseSearchInput = searchInput.toLowerCase();
 
-    let cityName =
+    const cityName =
       lowerCaseSearchInput.charAt(0).toUpperCase() +
       lowerCaseSearchInput.slice(1);
 
