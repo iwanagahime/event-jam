@@ -94,7 +94,7 @@ const saveToMyEvents = (event) => {
 };
 
 const goToTMEventPage = (event) => {
-  let urlForTMEventPage = $(event.currentTarget).parent().attr("data-url");
+  let urlForTMEventPage = $(event.currentTarget).parent().attr("data-eventUrl");
   window.open(`${urlForTMEventPage}`, "_blank");
 };
 
