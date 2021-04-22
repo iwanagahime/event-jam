@@ -92,25 +92,30 @@ const fetchCovidData = async (covidUrl) => {
 
 const getTicketmasterData = async (tmUrl, urlParams) => {
   let allData = await fetchTicketmasterData(tmUrl);
-  const createEventInfoObject = (item) => {
-    const images = getValueFromNestedObject(item, ["images"], []);
-    eventInfoObject = {
-      name: item.name,
-      date: item.dates.start.localDate,
-      time: getValueFromNestedObject(
-        item,
-        ["dates", "start", "localTime"],
-        "TBC"
-      ),
-      image: (images.length > 0 && images[1].url) || "",
-      venue: item._embedded.venues[0].name,
-      eventUrl: item.url,
-      city: urlParams.cityName,
+
+  if (allData === undefined) {
+    return;
+  } else {
+    const createEventInfoObject = (item) => {
+      const images = getValueFromNestedObject(item, ["images"], []);
+      eventInfoObject = {
+        name: item.name,
+        date: item.dates.start.localDate,
+        time: getValueFromNestedObject(
+          item,
+          ["dates", "start", "localTime"],
+          "TBC"
+        ),
+        image: (images.length > 0 && images[1].url) || "",
+        venue: item._embedded.venues[0].name,
+        eventUrl: item.url,
+        city: urlParams.cityName,
+      };
+      return eventInfoObject;
     };
-    return eventInfoObject;
-  };
-  let eventsInfoArray = allData.map(createEventInfoObject);
-  return eventsInfoArray;
+    let eventsInfoArray = allData.map(createEventInfoObject);
+    return eventsInfoArray;
+  }
 };
 
 const sumDailyCases = (acc, currentValue) => acc + currentValue.newCases;
@@ -120,18 +125,22 @@ const sumDailyCases = (acc, currentValue) => acc + currentValue.newCases;
 const getCovidData = async (covidUrl) => {
   // fetch covid data
   const covidData = await fetchCovidData(covidUrl);
-  // filter covid data
-  const last30DaysCovidData = covidData.data.slice(0, 30);
-  const sumLast30DaysCovidData = last30DaysCovidData.reduce(sumDailyCases, 0);
-  // store what we want to render and return
+  if (covidData === undefined) {
+    return;
+  } else {
+    // filter covid data
+    const last30DaysCovidData = covidData.data.slice(0, 30);
+    const sumLast30DaysCovidData = last30DaysCovidData.reduce(sumDailyCases, 0);
+    // store what we want to render and return
 
-  const covidDataObject = {
-    last30DaysCovidData,
-    sumLast30DaysCovidData,
-  };
+    const covidDataObject = {
+      last30DaysCovidData,
+      sumLast30DaysCovidData,
+    };
 
-  // to do return sumLast30DaysCovidData;
-  return covidDataObject;
+    // to do return sumLast30DaysCovidData;
+    return covidDataObject;
+  }
 };
 
 const showResults = async () => {

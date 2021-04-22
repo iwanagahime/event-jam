@@ -62,35 +62,30 @@ const goToTMEventPage = (event) => {
   window.open(`${urlForTMEventPage}`, "_blank");
 };
 
-const displayEventCard = (item) => {
+const displayEventCard = (tmData) => {
+  let saveAnchor = checkIfEventPreviouslySaved(tmData);
   $("#card-container").append(
-    `<div class="tile is-parent cardcontent-container">
-    <div class="card">
-      <div class="card-image">
+    `<div class="tile is-parent">
+      <div class="card has-text-centered">
+        <div class="card-image">
           <figure class="image is-4by3">
-            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+            <img src="${tmData.image}" alt="${tmData.name} event image">
           </figure>
-      </div>
-      <div class="card-content">
-        <div class="content">
-          <div><h2 class="has-text-centered ">${item.name}</h2> </div>
-          <div class="py-1 has-text-weight-medium">${item.date}</div>
-          <div class="py-1 has-text-weight-medium">${item.time}</div> 
-          <div class="py-1 has-text-weight-medium">${item.venue}</div>
-          <div style="text-align:center" data-url=">${item.eventUrl}">
-            <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded event-tm-info">More info</a>
-            <a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded remove">Remove from My Events</a>
+        </div>
+        <div class="card-content">
+            <div class="content">
+             <div><h2 class="has-text-weight-semibold">${tmData.name}</h2> </div>
+            <div class="py-1 has-text-weight-medium">Date: ${tmData.date}</div>
+            <div class="py-1 has-text-weight-medium">Time: ${tmData.time}</div> 
+            <div class="py-1 has-text-weight-medium">Venue: ${tmData.venue}</div>
+            <div style="text-align:center" data-name="${tmData.name}" data-date="${tmData.date}" data-time="${tmData.time}" data-venue="${tmData.venue}" data-eventUrl="${tmData.eventUrl}" data-city="${tmData.city}" data-image="${tmData.image}">
+              <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded event-tm-info">More info</a>
+              <a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded ${saveAnchor[0]}">${saveAnchor[1]}</a>
+            </div>
           </div>
         </div>
-        <div class="covid-info-container" data-city="${item.city}">
-          <button>
-            See COVID 19 info
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  `
+       </div>
+    </div>`
   );
 };
 

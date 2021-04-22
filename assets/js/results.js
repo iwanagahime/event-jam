@@ -99,40 +99,40 @@ const goToTMEventPage = (event) => {
 };
 
 const renderResults = (tmData, covidData) => {
-  // create container and render for covid data
   $("main").empty();
+  // create container and render for covid data
   $("main").append(`
-    <article class="message is-warning mb-6">
+    <div class="message is-warning mb-6 mx-5 is-flex-wrap-wrap is-align-items-center" id="covid-section" >
       <div class="message-header has-text-warning-dark" id="covid-info">
-      <img src="./assets/images/covid-icon.jpg"  class=" image is-64x64" id="covid-image">
+        <img src="./assets/images/covid-icon.jpg"  class=" image is-64x64" id="covid-image">
         <span class="px-4 is-size-4">COVID info</span>
       </div>
       <div class="message-body ">
-        In ${tmData[0].city} there have been<strong> ${covidData} </strong>Covid cases in the last 30 days.
+        In ${tmData[0].city} there have been <strong> ${covidData} </strong> Covid cases in the last 30 days.
       </div>
-    </article>`);
+    </div>`);
 
   // Display event heading
   $("main")
-    .append(`<div class="field has-addons has-addons-left mb-6 "><h2 class=" is-size-3 has-text-warning has-text-weight-bold">Events in ${tmData[0].city}</h2>
-  <div class="control mx-4 my-2">
-    <div class="select ">
-      <select >
-        <option >Event type</option>
-        <option>Music</option>
-          <option>Sport</option>
-          <option>Family</option>
-          <option>Theatre</option>
-          <option>Comedy</option>
-      </select>
+    .append(`<div class="field has-addons has-addons-left mb-6 ml-6 is-flex-wrap-wrap is-align-items-center" id ="events-in-search"><h2 class="is-size-3 has-text-warning has-text-weight-bold">Events in ${tmData[0].city}</h2>
+    <div class="control mx-4 my-2">
+      <div class="select ">
+        <select>
+          <option >Event type</option>
+          <option>Music</option>
+            <option>Sport</option>
+            <option>Family</option>
+            <option>Theatre</option>
+            <option>Comedy</option>
+        </select>
+      </div>
     </div>
-  </div>
-  <div class="control my-2">
-    <a class="button is-warning has-text-warning-dark has-text-weight-bold is-rounded" id="filter-search-button">
-      <i class="fas fa-search"></i>
-    </a>
-  </div>
-</div>
+    <div class="control my-2">
+      <a class="button is-warning has-text-warning-dark has-text-weight-bold" id="search-button">
+        <i class="fas fa-search"></i>
+      </a>
+    </div>
+  </div> 
   `);
 
   //create container cards
@@ -141,23 +141,28 @@ const renderResults = (tmData, covidData) => {
   );
   tmData.forEach(displayEventCard);
   $("main").append(`
-  <div class="mb-6 mx-5 is-flex-wrap-wrap is-align-items-center">
-    <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded" id="load-events-button">Load more</a>
-  </div>`);
+    <div class="mb-6 mx-5 is-flex-wrap-wrap is-align-items-center">
+      <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded" id="load-events-button">Load more</a>
+    </div>`);
   $("#load-events-button").click(renderMoreEvents);
   $(".save").click(saveToMyEvents);
   $(".event-tm-info").click(goToTMEventPage);
-  $("#filter-search-button").on("click", fetchDataAndRender);
 };
 
 const fetchDataAndRender = async () => {
   const allDataObject = await showResults();
 
-  renderResults(
-    allDataObject.tmData,
-
-    allDataObject.covidDataObject.sumLast30DaysCovidData
-  );
+  if (
+    allDataObject.tmData === undefined ||
+    allDataObject.covidDataObject === undefined
+  ) {
+    return;
+  } else {
+    renderResults(
+      allDataObject.tmData,
+      allDataObject.covidDataObject.sumLast30DaysCovidData
+    );
+  }
 
   // use data from allDataObject.covidDataObject.last30DaysCovidData to render graph
 };
