@@ -3,14 +3,12 @@ $("#search-bar-container").on("click", "a", onSearch);
 
 let pageNumber = 0;
 
+const getUrl = (item) => item.eventUrl;
+
 const checkIfEventPreviouslySaved = (tmData) => {
   if (localStorage.getItem("favoriteEvents") !== null) {
     previouslySavedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
-    previouslySavedEventsUrls = previouslySavedEvents.map(function getUrl(
-      item
-    ) {
-      return item.eventUrl;
-    });
+    previouslySavedEventsUrls = previouslySavedEvents.map(getUrl);
 
     isItemSaved = $.inArray(tmData.eventUrl, previouslySavedEventsUrls);
     if (isItemSaved == -1) {

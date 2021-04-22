@@ -155,7 +155,7 @@ const displaySavedEvents = () => {
   $(".event-tm-info").click(goToTMEventPage);
 };
 
-function onLoad() {
+const onLoad = () => {
   const savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
   // check if there are any saved events in local storage
   if (savedEvents !== null && savedEvents.length) {
@@ -168,6 +168,6 @@ function onLoad() {
   } else {
     displayNoEventsScreen();
   }
-}
+};
 
 $(document).ready(onLoad);
