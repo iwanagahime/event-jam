@@ -115,23 +115,7 @@ const renderResults = (tmData, covidData) => {
   // Display event heading
   $("main")
     .append(`<div class="field has-addons has-addons-left mb-6 ml-6 is-flex-wrap-wrap is-align-items-center" id ="events-in-search"><h2 class="is-size-3 has-text-warning has-text-weight-bold">Events in ${tmData[0].city}</h2>
-    <div class="control mx-4 my-2">
-      <div class="select ">
-        <select>
-          <option >Event type</option>
-          <option>Music</option>
-            <option>Sport</option>
-            <option>Family</option>
-            <option>Theatre</option>
-            <option>Comedy</option>
-        </select>
-      </div>
-    </div>
-    <div class="control my-2">
-      <a class="button is-warning has-text-warning-dark has-text-weight-bold" id="search-button">
-        <i class="fas fa-search"></i>
-      </a>
-    </div>
+    
   </div> 
   `);
 
