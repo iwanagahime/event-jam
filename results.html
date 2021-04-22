@@ -23,9 +23,10 @@
     />
 
     <!-- Favicon  -->
+    <link rel="icon" type="image/jpg" href="assets/images/favicon/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/favicon/favicon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="to do" />
-    <link rel="icon" type="image/png" sizes="16x16" href="to do" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon.png" />
 
     <!-- Linking Stylesheets -->
     <link
@@ -69,10 +70,7 @@
   </header>
 
   <!-- Search Form -->
-  <div class="search-bar-container mt-6 py-5 ">
-
-
-
+  <div class="search-bar-container mt-6 py-5 " id="search-bar-container">
     <div class="field has-addons has-addons-left mb-5 mx-4 columns is-mobile is-centered pt-6  is-flex-wrap-wrap is-align-items-center">
       <div class="control">
         <input class="input is-warning" type="text" placeholder="Enter city name" id="city-input">
@@ -80,8 +78,8 @@
 
       
        <div class="control mx-4">
-          <div class="select ">
-            <select >
+          <div class="select" >
+            <select id="eventType-dropdown">
               <option >Event type</option>
               <option>Music</option>
               <option>Sport</option>
@@ -96,167 +94,26 @@
             <i class="fas fa-search"></i>
           </a>
         </div>
-    </div>
-  </div>
-        <main>
-
-
-        <!-- COVID Info Section -->
-        <div class="message is-warning mb-6 mx-5 is-flex-wrap-wrap is-align-items-center" id="covid-section" >
-          <div class="message-header has-text-warning-dark" id="covid-info">
-           <img src="./assets/images/covid.jpg"  class=" image is-64x64" id="covid-image">
-            <span class="px-4 is-size-4">COVID info</span>
-            
-          </div>
-          <div class="message-body ">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et sem eget, facilisis sodales sem.
-          </div>
-        </div> 
-
-        <!-- Search Results Form -->
-        <div class="field has-addons has-addons-left mb-6 ml-6 is-flex-wrap-wrap is-align-items-center" id ="events-in-search"><h2 class=" is-size-3 has-text-warning has-text-weight-bold">Events in Birmingham</h2>
-          <div class="control mx-4 my-2">
-            <div class="select ">
-              <select >
-                <option >Event type</option>
-                <option>Music</option>
-                  <option>Sport</option>
-                  <option>Family</option>
-                  <option>Theatre</option>
-                  <option>Comedy</option>
-              </select>
-            </div>
-          </div>
-          <div class="control my-2">
-            <a class="button is-warning has-text-warning-dark has-text-weight-bold" id="search-button">
-              <i class="fas fa-search"></i>
-            </a>
-          </div>
-        </div> 
-     
-    <!--Results Cards  -->
-    <div class="tile is-ancestor mx-4 is-flex-wrap-wrap is-align-items-center">
-      <div class="tile is-parent">
-          <div class="card has-text-centered">
-              <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                  </figure>
-              </div>
-              <div class="card-content">
-                  <div class="content">
-                    <div><h2 class="has-text-weight-semibold">Craig David Life</h2> </div>
-                    <div class="py-1 has-text-weight-medium">Date: 09/05/2021</div>
-                    <div class="py-1 has-text-weight-medium">Time:19:00</div> 
-                    <div class="py-1 has-text-weight-medium">Venue:O2 Academy</div>
-                    <div style="text-align:center">
-                      <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded">Add to Favs</a><a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded">More Info</a>
-                    </div>
-                  </div>
-                </div>
-          </div>
-    </div>
-      <div class="tile is-parent">
-          <div class="card has-text-centered">
-              <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                  </figure>
-              </div>
-              <div class="card-content">
-                  <div class="content" >
-                    <div><h2 class="has-text-weight-semibold">Craig David Life</h2> </div>
-                    <div class="py-1 has-text-weight-medium">Date: 09/05/2021</div>
-                    <div class="py-1 has-text-weight-medium">Time:19:00</div> 
-                    <div class="py-1 has-text-weight-medium">Venue:O2 Academy</div>
-                  
-                    <div style="text-align:center">
-                      <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded">Add to Favs</a><a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded">More Info</a>
-                    </div>
-                  </div>
-                </div>
-          </div>
-      </div>
-      <div class="tile is-parent">
-        <div class="card has-text-centered">
-            <div class="card-image">
-                <figure class="image is-4by3">
-                  <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                </figure>
-            </div>
-            <div class="card-content">
-                <div class="content" >
-                  <div><h2 class="has-text-weight-semibold">Craig David Life</h2> </div>
-                  <div class="py-1 has-text-weight-medium">Date: 09/05/2021</div>
-                  <div class="py-1 has-text-weight-medium">Time:19:00</div> 
-                  <div class="py-1 has-text-weight-medium">Venue:O2 Academy</div>
-                
-                  <div style="text-align:center">
-                    <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded">Add to Favs</a><a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded">More Info</a>
-                  </div>
-                </div>
-              </div>
+        <div id="error-container">
         </div>
     </div>
-    <div class="tile is-parent">
-      <div class="card has-text-centered">
-          <div class="card-image">
-              <figure class="image is-4by3">
-                <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-              </figure>
-          </div>
-          <div class="card-content">
-              <div class="content" >
-                <div><h2 class="has-text-weight-semibold">Craig David Life</h2> </div>
-                <div class="py-1 has-text-weight-medium">Date: 09/05/2021</div>
-                <div class="py-1 has-text-weight-medium">Time:19:00</div> 
-                <div class="py-1 has-text-weight-medium">Venue:O2 Academy</div>
-              
-                <div style="text-align:center">
-                  <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded">Add to Favs</a><a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded">More Info</a>
-                </div>
-              </div>
-            </div>
-      </div>
   </div>
-  <div class="tile is-parent">
-    <div class="card has-text-centered">
-        <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-            </figure>
-        </div>
-        <div class="card-content">
-            <div class="content" >
-              <div><h2 class="has-text-weight-semibold">Craig David Life</h2> </div>
-              <div class="py-1 has-text-weight-medium">Date: 09/05/2021</div>
-              <div class="py-1 has-text-weight-medium">Time:19:00</div> 
-              <div class="py-1 has-text-weight-medium">Venue:O2 Academy</div>
-            
-              <div style="text-align:center">
-                <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded">Add to Favs</a><a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded">More Info</a>
-              </div>
-            </div>
-          </div>
-    </div>
-</div> -->
+  <main>
 
-        
-      </div> 
-    </main>
-   
-
-
-
-
+  </main>
       <!-- Linking JavaScript and JQuery -->
       <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
       integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
       crossorigin="anonymous"
     ></script>
+    <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/helpers.js"></script>
     <script src="./assets/js/results.js"></script>
 
   </body>
 </html>
+
+
+    
 

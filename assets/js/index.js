@@ -7,30 +7,34 @@ const validateEventType = () => {
 };
 
 const constructUrl = (cityName, eventType) => {
+  console.log(eventType);
+  const baseUrl = "http://127.0.0.1:5500/results.html?";
+  // change baseURL to deployed when done working
   if (cityName && eventType) {
-    return `https://iwanagahime.github.io/event-jam/results.html?cityName=${cityName}&eventType=${eventType}`;
+    return `${baseUrl}cityName=${cityName}&eventType=${eventType}`;
   } else {
-    return `https://iwanagahime.github.io/event-jam/results.html?cityName=${cityName}`;
+    console.log("hello");
+    return `${baseUrl}cityName=${cityName}`;
   }
 };
 
 const goToResults = (url) => {
+  console.log(url);
   window.location.href = url;
 };
 
 const onSearch = () => {
-  // get form input
-  //navigate to url
-
-  // Get searched value and trim and get option if chosen
   const searchInput = $("#city-input").val().trim();
   const eventType = validateEventType();
 
   if (searchInput === "") {
-    // append error alert
+    $("#error-container").empty();
+    $("#error-container").append(
+      `<h1 class="has-text-white is-centered mt4" style="size:40px">Please enter a city name to search</h1>`
+    );
   } else {
     lowerCaseSearchInput = searchInput.toLowerCase();
-    // capitalise first letter of city name
+
     let cityName =
       lowerCaseSearchInput.charAt(0).toUpperCase() +
       lowerCaseSearchInput.slice(1);
