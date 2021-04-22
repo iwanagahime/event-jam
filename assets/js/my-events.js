@@ -35,7 +35,6 @@ const displayNoEventsScreen = () => {
 };
 
 const removeEventObject = (event) => {
-  console.log("hello");
   // retrieve array from local storage
   const savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
 
@@ -108,7 +107,6 @@ const displayCovidInfo = async (event) => {
 
   const covidData = await getCovidData(covidUrl);
 
-  console.log("covidInfo", covidData);
   // display covid info onto page
   $(parent).empty();
   $(parent).parent()
@@ -159,7 +157,6 @@ const displaySavedEvents = () => {
 
 function onLoad() {
   const savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
-  console.log(savedEvents);
   // check if there are any saved events in local storage
   if (savedEvents !== null && savedEvents.length) {
     // order local storage objects in order of search recency

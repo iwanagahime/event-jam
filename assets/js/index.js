@@ -7,19 +7,16 @@ const validateEventType = () => {
 };
 
 const constructUrl = (cityName, eventType) => {
-  console.log(eventType);
   const baseUrl = "http://127.0.0.1:5500/results.html?";
   // change baseURL to deployed when done working
   if (cityName && eventType) {
     return `${baseUrl}cityName=${cityName}&eventType=${eventType}`;
   } else {
-    console.log("hello");
     return `${baseUrl}cityName=${cityName}`;
   }
 };
 
 const goToResults = (url) => {
-  console.log(url);
   window.location.href = url;
 };
 
@@ -40,7 +37,6 @@ const onSearch = () => {
       lowerCaseSearchInput.slice(1);
 
     const url = constructUrl(cityName, eventType);
-    console.log(url);
     goToResults(url);
   }
 };

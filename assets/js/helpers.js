@@ -163,7 +163,6 @@ const showResults = async (pageNumber) => {
     tmData,
     covidDataObject,
   };
-  console.log(allDataObject);
   return allDataObject;
 };
 
