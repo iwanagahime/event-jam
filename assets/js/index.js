@@ -7,9 +7,8 @@ const validateEventType = () => {
 };
 
 const constructUrl = (cityName, eventType) => {
-  const baseUrl =
-    // "file:///C:/Users/soume/coding_bootcamp/projects/event-jam/results.html?";
-    "http://127.0.0.1:5500/results.html?";
+  const baseUrl = "http://127.0.0.1:5500/results.html?";
+  // change baseURL to deployed when done working
   if (cityName && eventType) {
     return `${baseUrl}cityName=${cityName}&eventType=${eventType}`;
   } else {
@@ -24,15 +23,16 @@ const goToResults = (url) => {
 };
 
 const onSearch = () => {
-  // get form input
+  // get
   //navigate to url
 
-  // Get searched value and trim and get option if chosen
+  // Get form input value and trim, get event type option if chosen
   const searchInput = $("#city-input").val().trim();
   const eventType = validateEventType();
 
   if (searchInput === "") {
     // append error alert
+    // refactor change to guard clause instead of if else
   } else {
     lowerCaseSearchInput = searchInput.toLowerCase();
     // capitalise first letter of city name

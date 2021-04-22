@@ -3,6 +3,8 @@ const getUrlParams = () => {
   const cityName = urlParams.get("cityName");
   const eventType = urlParams.get("eventType");
 
+  // get event type somehow
+
   const params = {
     cityName,
     eventType,
@@ -14,23 +16,77 @@ const buildTicketmasterUrl = (urlParams) => {
   const baseURL =
     "https://app.ticketmaster.com/discovery/v2/events.json?&countryCode=GB&city=";
   const apiKey = "RTmsu653zlIq0O4v4JzO14tOOeKbVAMK";
-
   if (urlParams.cityName && urlParams.eventType) {
-    return `${baseURL}${urlParams.cityName}&classificationName=${urlParams.eventType}&sort=date,name,asc&apikey=${apiKey}`;
+    return `${baseURL}${urlParams.cityName}&classificationName=${urlParams.eventType}&size=20&page=${pageNumber}&sort=date,name,asc&apikey=${apiKey}`;
   } else {
-    return `${baseURL}${urlParams.cityName}&sort=date,name,asc&apikey=${apiKey}`;
+    return `${baseURL}${urlParams.cityName}&size=20&page=${pageNumber}&sort=date,name,asc&apikey=${apiKey}`;
   }
+};
+
+const buildCovidUrl = (urlParams) => {
+  const baseURL = "https://api.coronavirus.data.gov.uk/v1/data?filters=";
+  const structure =
+    "&structure={%22date%22:%22date%22,%22newCases%22:%22newCasesByPublishDate%22}";
+
+  if (urlParams.cityName === "London") {
+    return `${baseURL}areaType=region;areaName=London${structure}`;
+  } else {
+    return `${baseURL}areaType=ltla;areaName=${urlParams.cityName}${structure}`;
+  }
+};
+
+const handleInternalError = () => {
+  $("main").append(
+    `<h1 class="has-text-white" style="size:40px"> Sorry, we're having internal issues. Please come back and search later. </h1>`
+  );
+};
+
+const handleError = () => {
+  $("#error-container").empty();
+  $("#error-container").append(
+    `<h1 class="has-text-white is-centered mt4" style="size:40px"> Sorry, we couldn’t find any events or COVID-19 data in your city, please search again. </h1>`
+  );
 };
 
 const fetchTicketmasterData = async (tmUrl) => {
   try {
     const response = await fetch(tmUrl);
-    const data = await response.json();
-    const eventsData = data._embedded.events;
+    if (response.status > 499 && response.status < 600) {
+      throw new Error("internal");
+    } else if (response.status < 200 || response.status > 299) {
+      throw new Error("error");
+    } else {
+      const data = await response.json();
+      const eventsData = data._embedded.events;
 
-    return eventsData;
+      return eventsData;
+    }
   } catch (error) {
-    //function to handle error
+    if (error == "internal") {
+      handleInternalError();
+    } else {
+      handleError();
+    }
+  }
+};
+
+const fetchCovidData = async (covidUrl) => {
+  try {
+    const response = await fetch(covidUrl);
+    if (response.status > 499 && response.status < 600) {
+      throw new Error("internal");
+    } else if (response.status < 200 || response.status > 299) {
+      throw new Error("error");
+    } else {
+      const allData = await response.json();
+      return allData;
+    }
+  } catch (error) {
+    if (error == "internal") {
+      handleInternalError();
+    } else {
+      handleError();
+    }
   }
 };
 
@@ -55,28 +111,6 @@ const getTicketmasterData = async (tmUrl, urlParams) => {
   };
   let eventsInfoArray = allData.map(createEventInfoObject);
   return eventsInfoArray;
-};
-
-const buildCovidUrl = (urlParams) => {
-  const baseURL = "https://api.coronavirus.data.gov.uk/v1/data?filters=";
-  const structure =
-    "&structure={%22date%22:%22date%22,%22newCases%22:%22newCasesByPublishDate%22}";
-
-  if (urlParams.cityName === "London") {
-    return `${baseURL}areaType=region;areaName=London${structure}`;
-  } else {
-    return `${baseURL}areaType=ltla;areaName=${urlParams.cityName}${structure}`;
-  }
-};
-
-const fetchCovidData = async (covidUrl) => {
-  try {
-    const response = await fetch(covidUrl);
-    const allData = await response.json();
-    return allData;
-  } catch (error) {
-    console.log(error);
-  }
 };
 
 const sumDailyCases = (acc, currentValue) => acc + currentValue.newCases;

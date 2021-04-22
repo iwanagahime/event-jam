@@ -1,28 +1,69 @@
+let pageNumber = 0;
+
+const checkIfEventPreviouslySaved = (tmData) => {
+  if (localStorage.getItem("favoriteEvents") !== null) {
+    previouslySavedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
+    previouslySavedEventsUrls = previouslySavedEvents.map(function getUrl(
+      item
+    ) {
+      return item.eventUrl;
+    });
+
+    isItemSaved = $.inArray(tmData.eventUrl, previouslySavedEventsUrls);
+    if (isItemSaved == -1) {
+      saveAnchor = ["save", "Save Event"];
+      return saveAnchor;
+    } else {
+      saveAnchor = ["", "Saved"];
+      return saveAnchor;
+    }
+  } else {
+    saveAnchor = ["save", "Save Event"];
+    return saveAnchor;
+  }
+};
+
 const displayEventCard = (tmData) => {
+  let saveAnchor = checkIfEventPreviouslySaved(tmData);
   $("#card-container").append(
-    `<div class="tile is-parent cardcontent-container">
-    <div class="card">
-      <div class="card-image">
+    `<div class="tile is-parent">
+      <div class="card has-text-centered">
+        <div class="card-image">
           <figure class="image is-4by3">
             <img src="${tmData.image}" alt="${tmData.name} event image">
           </figure>
-      </div>
-      <div class="card-content">
-        <div class="content">
-          <div><h2 class="has-text-centered ">${tmData.name}</h2> </div>
-          <div class="py-1 has-text-weight-medium">${tmData.date}</div>
-          <div class="py-1 has-text-weight-medium">${tmData.time}</div> 
-          <div class="py-1 has-text-weight-medium">${tmData.venue}</div>
-          <div style="text-align:center" data-name="${tmData.name}" data-date="${tmData.date}" data-time="${tmData.time}" data-venue="${tmData.venue}" data-eventUrl="${tmData.eventUrl}" data-city="${tmData.city}" >
-            <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded event-tm-info">More info</a>
-            <a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded save">Save Event</a>
+        </div>
+        <div class="card-content">
+            <div class="content">
+             <div><h2 class="has-text-weight-semibold">${tmData.name}</h2> </div>
+            <div class="py-1 has-text-weight-medium">Date: ${tmData.date}</div>
+            <div class="py-1 has-text-weight-medium">Time: ${tmData.time}</div> 
+            <div class="py-1 has-text-weight-medium">Venue: ${tmData.venue}</div>
+            <div style="text-align:center" data-name="${tmData.name}" data-date="${tmData.date}" data-time="${tmData.time}" data-venue="${tmData.venue}" data-eventUrl="${tmData.eventUrl}" data-city="${tmData.city}" data-image="${tmData.image}">
+              <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded event-tm-info">More info</a>
+              <a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded ${saveAnchor[0]}">${saveAnchor[1]}</a>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-  `
+       </div>
+    </div>`
   );
+};
+
+const renderMoreEvents = async () => {
+  pageNumber++;
+  const urlParams = getUrlParams();
+  // build ticketmaster url
+  const tmUrl = buildTicketmasterUrl(urlParams);
+
+  // call ticketmaster api
+  const tmData = await getTicketmasterData(tmUrl, urlParams);
+
+  if (tmData === undefined) {
+    return;
+  } else {
+    tmData.forEach(displayEventCard);
+  }
 };
 
 const saveToMyEvents = (event) => {
@@ -79,13 +120,9 @@ const goToTMEventPage = (event) => {
   window.open(`${urlForTMEventPage}`, "_blank");
 };
 
-const doSomething = /* async */ () => {
-  console.log("hello");
-  // await showResults();
-};
-
 const renderResults = (tmData, covidData) => {
   // create container and render for covid data
+  $("main").empty();
   $("main").append(`
     <article class="message is-warning mb-6">
       <div class="message-header has-text-warning-dark" id="covid-info">
