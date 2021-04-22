@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Event Jam Navbar</title>
+
+    <title>My Events</title>
+
   
     <!-- Viewport, Title and Description -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,9 +25,10 @@
     />
 
     <!-- Favicon  -->
+    <link rel="icon" type="image/jpg" href="assets/images/favicon/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/favicon/favicon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="to do" />
-    <link rel="icon" type="image/png" sizes="16x16" href="to do" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon.png" />
 
     <!-- Linking Stylesheets -->
     <link
@@ -35,19 +39,19 @@
     rel="stylesheet"
     href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-    crossorigin="anonymous"
-  />
+    crossorigin="anonymous">
+
+
     <link rel="stylesheet" href="./assets/css/style.css"/>
+
   </head>
 
 
 
   <body>
 
-
-
     <header class="header mt-2 has-text-right pb-6">
-
+        <!-- Navbar with Logo -->
         <nav class="navbar navbar-background-colour-override" role="navigation" aria-label="main navigation">
           <div class="navbar-brand">
             <a class="navbar-item" href="./index.html">
@@ -62,46 +66,50 @@
         </nav>
         
     </header>
-
-    <div class="container " id="search-bar-container">
-
-
-
-      <div class="field has-addons has-addons-left mb-5">
-        <div class="control">
-          <input class="input is-warning" type="text" placeholder="Enter city name" id="city-input">
-        </div>
-
-        
-         <div class="control mx-4">
-            <div class="select ">
-              <select >
-                <option >Event type</option>
-                <option>Music</option>
-                <option>Sport</option>
-                <option>Family</option>
-                <option>Theatre</option>
-                <option>Comedy</option>
-              </select>
-            </div>
-          </div>
-          <div class="control">
-            <a class="button is-warning has-text-warning-dark has-text-weight-bold"id="search-button">
-              <i class="fas fa-search"></i>
-            </a>
-          </div>
+    <!-- Search Form -->
+  <div class="search-bar-container mt-6 py-5" id="search-bar-container">
+    <div class="field has-addons has-addons-left mb-5 mx-4 columns is-mobile is-centered pt-6  is-flex-wrap-wrap is-align-items-center">
+      <div class="control">
+        <input class="input is-warning" type="text" placeholder="Enter city name" id="city-input">
       </div>
+
+      
+       <div class="control mx-4">
+          <div class="select ">
+            <select >
+              <option >Event type</option>
+              <option>Music</option>
+              <option>Sport</option>
+              <option>Family</option>
+              <option>Theatre</option>
+              <option>Comedy</option>
+            </select>
+          </div>
+        </div>
+        <div class="control">
+          <a class="button is-warning has-text-warning-dark has-text-weight-bold"id="search-button">
+            <i class="fas fa-search"></i>
+          </a>
+        </div>
+        <div id="error-container">
+        </div>
     </div>
+  </div>
+    <main>
+
+    </main>
 
     <script
     src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
     integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-    crossorigin="anonymous"
-  ></script>
-  <script src="./assets/js/index.js"></script>
+    crossorigin="anonymous">
+    </script>
+    <script src="./assets/js/index.js"></script>
     <script src="./assets/js/helpers.js"></script>
-  <script src="./assets/js/my-events.js"></script>
-</body>
+    <script src="./assets/js/my-events.js"></script>
+  </body>
 </html>
+
+
 
   

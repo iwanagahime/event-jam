@@ -3,7 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Event Jam Navbar</title>
+
+    <title>Event Jam Home Page</title>
+
   
     <!-- Viewport, Title and Description -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,9 +24,10 @@
     />
 
     <!-- Favicon  -->
+    <link rel="icon" type="image/jpg" href="assets/images/favicon/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/favicon/favicon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="to do" />
-    <link rel="icon" type="image/png" sizes="16x16" href="to do" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon.png" />
 
     <!-- Linking Stylesheets -->
     <link
@@ -37,19 +40,18 @@
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
     crossorigin="anonymous"
   />
+
+    <link rel="stylesheet" href="./style.css"/>
+
     <link rel="stylesheet" href="./assets/css/style.css"/>
+
   </head>
 
 
 
   <body>
-
-
-
     <header class="header mt-2 has-text-right pb-6">
-
-
-
+        <!-- Navbar with  Logo and Link to My Events Page -->
         <nav class="navbar navbar-background-colour-override" role="navigation" aria-label="main navigation">
           <div class="navbar-brand">
             <a class="navbar-item" href="./index.html">
@@ -59,120 +61,95 @@
             <div class="navbar-end">
               <div class="navbar-item">
                 <div class="buttons">
-                  <a class="button is-light has-text-warning-dark has-background-warning has-text-weight-bold is-rounded" href="my-events.html">
+                  <a class="button is-light has-background-warning has-text-weight-bold is-rounded" href="my-events.html">
                     My Events
                   </a>
                 </div>
               </div>
             </div>
           </div>
-        </nav>
-        
+        </nav>  
     </header>
 
-
-
-    <div class="search-bar-container mt-6 py-5" id="search-bar-container">
-      <div class="is-size-3 has-text-centered has-text-weight-bold has-text-warning pb-6">Where would you like me to take you today?</div>
-
-
-      <div class="field has-addons has-addons-left mb-5 columns is-mobile is-centered pt-6">
+    <main>
+    <!-- Search Form -->
+    <div class="search-bar-container mt-6 py-5 " id="search-bar-container">
+      <div class="is-size-3 has-text-centered has-text-weight-bold has-text-warning pb-6 is-flex-wrap-wrap is-align-items-center ">UK events and COVID-19 information <br> at your fingertips!</div>
+      <div class="field has-addons has-addons-left mb-5 columns is-mobile is-centered pt-6  is-flex-wrap-wrap is-align-items-center">
         <div class="control ">
           <input class="input is-warning" type="text" placeholder="Enter city name" id="city-input">
         </div>
-
-        
-         <div class="control mx-4">
-            <div class="select ">
-              <select id="eventType-dropdown" >
-                <option >Event type</option>
-                <option>Music</option>
-                <option>Sport</option>
-                <option>Family</option>
-                <option>Theatre</option>
-                <option>Comedy</option>
+        <div class="control mx-4">
+          <div class="select ">
+            <select >
+              <option >Event type</option>
+              <option>Music</option>
+              <option>Sport</option>
+              <option>Family</option>
+              <option>Theatre</option>
+              <option>Comedy</option>
               </select>
-            </div>
           </div>
-          <div class="control">
-            <a class="button is-warning has-text-warning-dark has-text-weight-bold"id="search-button">
-              <i class="fas fa-search"></i>
-            </a>
-          </div>
+        </div>
+        <div class="control">
+          <a class="button is-warning has-text-weight-bold"id="search-button">
+            <i class="fas fa-search"></i>
+          </a>
+        </div>
       </div>
+      <div id="error-container">
+      </div>
+    </div>
 
+    <!-- How It Works Section -->
+    <div class="how-it-works-section py-6 mt-6 ">
+      <h1 class="is-size-3 has-text-centered has-text-weight-bold has-text-warning pt-8">How it works </h1>
 
-
-
-      <div class="how-it-works-section py-6 mt-6">
-        <h1 class="is-size-3 has-text-centered has-text-weight-bold has-text-warning pt-8">How it works </h1>
-
-
-
-        <div class="numbers-section-container py-6">
-        
-          <div class="how-it-works-number-container pt-8 pb-5">
-            <div class="how-it-works-number has-background-warning-light">
-              <h1 class="has-text-weight-bold has-text-centered is-size-2 has-text-warning-dark">1</h1>
-            </div>
+      <div class="numbers-section-container py-6">
+        <div class="how-it-works-number-container pt-8 pb-5">
+          <div class="how-it-works-number has-background-warning">
+            <h1 class="has-text-weight-bold has-text-centered is-size-2">1</h1>
           </div>
-
-
-          
-
-
-          <div class="how-it-works-number-container pt-8 pb-5">
-            <div class="how-it-works-number has-background-warning-light">
-              <h1 class="has-text-weight-bold has-text-centered is-size-2 has-text-warning-dark">2</h1>
-            </div>
-          </div>
-
-
-          
-
-
-          <div class="how-it-works-number-container pt-8 pb-5">
-            <div class="how-it-works-number has-background-warning-light">
-              <h1 class="has-text-weight-bold has-text-centered is-size-2 has-text-warning-dark">3</h1>
-            </div>
-          </div>
-
-
-          
         </div>
 
+        <div class="how-it-works-number-container pt-8 pb-5">
+          <div class="how-it-works-number has-background-warning">
+            <h1 class="has-text-weight-bold has-text-centered is-size-2">2</h1>
+          </div>
+        </div>
 
+        <div class="how-it-works-number-container pt-8 pb-5">
+          <div class="how-it-works-number has-background-warning">
+            <h1 class="has-text-weight-bold has-text-centered is-size-2">3</h1>
+          </div>
+        </div>
+ 
+    </div>
 
-        <div class="message-section-container">
+      <div class="message-section-container">
 
           <div class="how-it-works-message-container">
             <div class="how-it-works-message">
-              <p class ="has-text-weight-semibold has-text-centered has-text-warning is-size-5">Select your city and event type</p>
+              <p class ="has-text-weight-semibold has-text-centered has-text-warning is-size-5">Enter your city and event type</p>
             </div>
           </div>
-
 
           <div class="how-it-works-message-container">
             <div class="how-it-works-message">
-              <p class ="has-text-weight-semibold has-text-centered has-text-warning is-size-5">Get the latest COVID-19 info</p>
+              <p class ="has-text-weight-semibold has-text-centered has-text-warning is-size-5">Select your favourite event</p>
             </div>
           </div>
-
 
           <div class="how-it-works-message-container">
             <div class="how-it-works-message ">
-              <p class ="has-text-weight-semibold has-text-centered has-text-warning is-size-5">Have a blast at your event!</p>
+              <p class ="has-text-weight-semibold has-text-centered has-text-warning is-size-5">Book your tickets and have a blast!</p>
             </div>
           </div>
-
-
-
         </div>
-       
-
-
       </div>
+    </main>
     
+      <!-- Linking JavaScript and JQuery -->
       <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
       integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
