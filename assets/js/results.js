@@ -66,7 +66,7 @@ const renderMoreEvents = async () => {
 
 const saveToMyEvents = (event) => {
   // identify button container div
-  buttonContainerDiv = $(event.currentTarget).parent();
+  const buttonContainerDiv = $(event.currentTarget).parent();
   savedEvents = [];
 
   if (localStorage.getItem("favoriteEvents") !== null) {
