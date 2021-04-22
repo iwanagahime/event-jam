@@ -7,6 +7,7 @@ const validateEventType = () => {
 };
 
 const constructUrl = (cityName, eventType) => {
+  console.log(eventType);
   const baseUrl = "http://127.0.0.1:5500/results.html?";
   // change baseURL to deployed when done working
   if (cityName && eventType) {

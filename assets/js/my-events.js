@@ -13,8 +13,8 @@ const displayNoEventsScreen = () => {
     </div>
     
      <div class="control mx-4">
-        <div class="select ">
-          <select >
+        <div class="select">
+          <select id="eventType-dropdown">
             <option >Event type</option>
             <option>Music</option>
             <option>Sport</option>
@@ -25,11 +25,12 @@ const displayNoEventsScreen = () => {
         </div>
       </div>
       <div class="control">
-        <a class="button is-warning has-text-warning-dark has-text-weight-bold"id="search-button">
+        <a class="button is-warning has-text-warning-dark has-text-weight-bold" id="search-button">
           <i class="fas fa-search"></i>
         </a>
       </div>
   </div>`);
+  $("#search-bar-container").on("click", "a", onSearch);
 };
 
 const removeEventObject = (event) => {
@@ -107,6 +108,35 @@ const displayCovidInfo = async (event) => {
   `);
 };
 
+const displaySearchBar = () => {
+  $("main").append(`
+  <div class="container" id="search-bar-container">
+  <div class="field has-addons has-addons-left mb-5">
+    <div class="control">
+      <input class="input is-warning" type="text" placeholder="Enter city name" id="city-input">
+    </div>
+     <div class="control mx-4">
+        <div class="select" >
+        <select id="eventType-dropdown">
+            <option >Event type</option>
+            <option>Music</option>
+            <option>Sport</option>
+            <option>Family</option>
+            <option>Theatre</option>
+            <option>Comedy</option>
+          </select>
+        </div>
+      </div>
+      <div class="control">
+        <a class="button is-warning has-text-warning-dark has-text-weight-bold" id="search-button">
+          <i class="fas fa-search"></i>
+        </a>
+      </div>
+  </div>
+</div>`);
+  $("#search-bar-container").on("click", "a", onSearch);
+};
+
 const displaySavedEvents = () => {
   let savedEvents = JSON.parse(localStorage.getItem("favouriteEvents"));
   //create container
@@ -126,9 +156,9 @@ function onLoad() {
   if (savedEvents !== null) {
     // order local storage objects in order of search recency
     eventsInAddedOrder = orderFavEvents(savedEvents);
-
+    displaySearchBar();
     // for each saved event, render a card
-    displaySavedEvents(savedEvents);
+    displaySavedEvents(eventsInAddedOrder);
     //$(eventsInAddedOrder).each(displaySavedEvents);
   } else {
     displayNoEventsScreen();
