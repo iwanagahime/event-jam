@@ -23,24 +23,23 @@ const goToResults = (url) => {
 };
 
 const onSearch = () => {
-  // get
-  //navigate to url
-
-  // Get form input value and trim, get event type option if chosen
   const searchInput = $("#city-input").val().trim();
   const eventType = validateEventType();
 
   if (searchInput === "") {
-    // append error alert
-    // refactor change to guard clause instead of if else
+    $("#error-container").empty();
+    $("#error-container").append(
+      `<h1 class="has-text-white is-centered mt4" style="size:40px">Please enter a city name to search</h1>`
+    );
   } else {
     lowerCaseSearchInput = searchInput.toLowerCase();
-    // capitalise first letter of city name
+
     let cityName =
       lowerCaseSearchInput.charAt(0).toUpperCase() +
       lowerCaseSearchInput.slice(1);
 
     const url = constructUrl(cityName, eventType);
+    console.log(url);
     goToResults(url);
   }
 };
