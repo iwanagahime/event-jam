@@ -127,7 +127,7 @@ const renderResults = (tmData, covidData) => {
         In ${tmData[0].city} there have been <strong> ${covidData} </strong> Covid cases in the last 30 days.
       </div>
       <div class="covid-chart-container">
-          <button class="button is-light has-text-black has-background-warning has-text-weight-bold is-rounded" data-render="show">
+          <button class="button is-light has-text-black has-background-warning has-text-weight-bold is-rounded" id="chart-button">
             See COVID 19 chart
           </button>
         </div>
@@ -167,6 +167,12 @@ const renderResults = (tmData, covidData) => {
 
 const buildingChart = (allDataObject) => {
   const covidDataArray = allDataObject.covidDataObject.last30DaysCovidData;
+  console.log(covidDataArray);
+
+  // reverse all data here then put in to chart
+  // if you cant destroy chart get rid of button
+  // .covid-chart-container empty it
+  // const reversedData = covidDataArray.newCases.reverse();
 
   const getEachDateCases = (each) => {
     // console.log(each);
@@ -202,6 +208,7 @@ const buildingChart = (allDataObject) => {
     };
 
     const myChart = new Chart($("#myChart"), config);
+    document.getElementById("chart-button").disabled = true;
   };
   $(".covid-chart-container").on("click", "button", displayCovidChart);
 };
