@@ -61,11 +61,12 @@ const removeEventObject = (event) => {
   // empty the cards container
   $("#card-container").empty();
 
-  // render the cards for the updated list of saved events
-  displaySavedEvents(newSavedEventsArray);
+  // render the cards for the updated list of saved events 
+  const reversedSavedEvents = newSavedEventsArray.reverse()
+  displaySavedEvents(reversedSavedEvents);
 
-  // save updated list of events in local storage
-  localStorage.setItem("favoriteEvents", JSON.stringify(newSavedEventsArray));
+  // save updated list of events in local storage, reverse the array back to return to original order in local storage
+  localStorage.setItem("favoriteEvents", JSON.stringify(reversedSavedEvents.reverse()));
 };
 
 const goToTMEventPage = (event) => {
