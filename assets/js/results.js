@@ -168,6 +168,7 @@ const renderResults = (tmData, covidData) => {
 const buildingChart = (allDataObject) => {
   const covidDataArray = allDataObject.covidDataObject.last30DaysCovidData;
   console.log(covidDataArray);
+  const reversedData = covidDataArray.reverse();
 
   // reverse all data here then put in to chart
   // if you cant destroy chart get rid of button
@@ -180,17 +181,23 @@ const buildingChart = (allDataObject) => {
     return data;
   };
 
-  const mapData = covidDataArray.map(getEachDateCases);
-  console.log(mapData);
+  const getEachDateLabels = (each) => {
+    // console.log(each);
+    const data = each.date;
+    return data;
+  };
+
+  const mapData = reversedData.map(getEachDateCases);
+  const mapLabels = reversedData.map(getEachDateLabels);
   const displayCovidChart = () => {
     $(".chart-container").append(
       `<canvas id="myChart" height="50" width="100"></canvas>`
     );
 
     // <block:setup:1>
-    const labels = ["January", "February", "March", "April", "May", "June"];
+    // const labels = ["January", "February", "March", "April", "May", "June"];
     const data = {
-      labels: labels,
+      labels: mapLabels,
       datasets: [
         {
           label: "Cases Last 30 Days",
