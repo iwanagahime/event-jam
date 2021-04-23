@@ -127,7 +127,7 @@ const renderResults = (tmData, covidData) => {
         In ${tmData[0].city} there have been <strong> ${covidData} </strong> Covid cases in the last 30 days.
       </div>
       <div class="covid-chart-container">
-          <button class="button is-light has-text-black has-background-warning has-text-weight-bold is-rounded">
+          <button class="button is-light has-text-black has-background-warning has-text-weight-bold is-rounded" data-render="show">
             See COVID 19 chart
           </button>
         </div>
@@ -167,7 +167,15 @@ const renderResults = (tmData, covidData) => {
 
 const buildingChart = (allDataObject) => {
   const covidDataArray = allDataObject.covidDataObject.last30DaysCovidData;
-  console.log(covidDataArray);
+
+  const getEachDateCases = (each) => {
+    // console.log(each);
+    const data = each.newCases;
+    return data;
+  };
+
+  const mapData = covidDataArray.map(getEachDateCases);
+  console.log(mapData);
   const displayCovidChart = () => {
     $(".chart-container").append(
       `<canvas id="myChart" height="50" width="100"></canvas>`
@@ -182,7 +190,7 @@ const buildingChart = (allDataObject) => {
           label: "Cases Last 30 Days",
           backgroundColor: "hsl(48, 100%, 67%)",
           borderColor: "hsl(48, 100%, 67%)",
-          data: [0, 10, 5, 2, 20, 30, 45],
+          data: mapData,
         },
       ],
     };
