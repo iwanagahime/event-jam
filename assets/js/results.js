@@ -12,7 +12,7 @@ const checkIfEventPreviouslySaved = (tmData) => {
     // create an array of event urls (unique identifiers) of past events
     previouslySavedEventsUrls = previouslySavedEvents.map(getUrl);
 
-    // set the class ([0]) and text ([1]) based on if the current event has a url that's equal to that of a saved event 
+    // set the class ([0]) and text ([1]) based on if the current event has a url that's equal to that of a saved event
     isItemSaved = $.inArray(tmData.eventUrl, previouslySavedEventsUrls);
     if (isItemSaved == -1) {
       saveButtonProperties = ["save", "Save Event"];
@@ -29,8 +29,7 @@ const checkIfEventPreviouslySaved = (tmData) => {
 
 const displayEventCard = (tmData) => {
   const saveButtonProperties = checkIfEventPreviouslySaved(tmData);
-  const cardElement = 
-  `<div class="tile is-parent">
+  const cardElement = `<div class="tile is-parent">
   <div class="card has-text-centered">
     <div class="card-image">
       <figure class="image is-4by3">
@@ -50,7 +49,7 @@ const displayEventCard = (tmData) => {
       </div>
     </div>
    </div>
-</div>`
+</div>`;
 
   $("#card-container").append(cardElement);
 };
@@ -64,24 +63,24 @@ const renderMoreEvents = async () => {
   const tmData = allDataObject.tmData;
 
   if (tmData === undefined) {
-    const noMoreEventsErrorElement = `<p class="has-text-white">Sorry, we couldn't find any more events.</p>`
+    const noMoreEventsErrorElement = `<p class="has-text-white">Sorry, we couldn't find any more events.</p>`;
     $("#error-container").empty();
     $("#load-events-button-container").empty();
-    $("#load-events-button-container").append(noMoreEventsErrorElement)
+    $("#load-events-button-container").append(noMoreEventsErrorElement);
     return;
   } else {
     // render new event cards and add event listeners to their buttons
     tmData.forEach(displayEventCard);
-    addEventListeners()
+    addEventListeners();
   }
 };
 
 const saveToMyEvents = (event) => {
-  $(event.currentTarget).off("click", saveToMyEvents)
+  $(event.currentTarget).off("click", saveToMyEvents);
   // identify button container div
   const buttonContainerDiv = $(event.currentTarget).parent();
   let savedEvents = [];
-  const eventsInLocalStorage = localStorage.getItem("favoriteEvents")
+  const eventsInLocalStorage = localStorage.getItem("favoriteEvents");
 
   if (eventsInLocalStorage !== null) {
     savedEvents = JSON.parse(eventsInLocalStorage);
@@ -116,11 +115,10 @@ const addEventListeners = () => {
   $("#load-events-button").click(renderMoreEvents);
   $(".save").on("click", saveToMyEvents);
   $(".event-tm-info").click(goToTMEventPage);
-}
+};
 
 const renderResults = (tmData, covidData) => {
-  const covidInformationElement = 
-    `<div class="message is-warning mb-6 mx-5 is-flex-wrap-wrap is-align-items-center" id="covid-section" >
+  const covidInformationElement = `<div class="message is-warning mb-6 mx-5 is-flex-wrap-wrap is-align-items-center" id="covid-section" >
       <div class="message-header has-text-warning-dark" id="covid-info">
         <img src="./assets/images/covid-icon.jpg"  class=" image is-64x64" id="covid-image">
         <span class="px-4 is-size-4">COVID info</span>
@@ -128,20 +126,26 @@ const renderResults = (tmData, covidData) => {
       <div class="message-body ">
         In ${tmData[0].city} there have been <strong> ${covidData} </strong> Covid cases in the last 30 days.
       </div>
-    </div>`
+      <div class="covid-chart-container">
+          <button class="button is-light has-text-black has-background-warning has-text-weight-bold is-rounded">
+            See COVID 19 chart
+          </button>
+        </div>
+        <div class="chart-container size">
+        
+      </div>
+    </div>`;
 
-  const searchHeadingElement =
-    `<div class="field has-addons has-addons-left mb-6 ml-6 is-flex-wrap-wrap is-align-items-center" id ="events-in-search">
+  const searchHeadingElement = `<div class="field has-addons has-addons-left mb-6 ml-6 is-flex-wrap-wrap is-align-items-center" id ="events-in-search">
       <h2 class="is-size-3 has-text-warning has-text-weight-bold">Events in ${tmData[0].city}</h2>
-    </div>` 
-  
-  const cardContainer = `<div class="tile is-ancestor mx-4 is-flex-wrap-wrap is-align-items-center" id="card-container">`
+    </div>`;
 
-  const loadMoreEventsElement = 
-    `<div class="mb-6 mx-5 is-flex-wrap-wrap is-align-items-center">
+  const cardContainer = `<div class="tile is-ancestor mx-4 is-flex-wrap-wrap is-align-items-center" id="card-container">`;
+
+  const loadMoreEventsElement = `<div class="mb-6 mx-5 is-flex-wrap-wrap is-align-items-center">
       <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded" id="load-events-button">Load more</a>
-    </div>`
-  
+    </div>`;
+
   $("main").empty();
 
   // create container and render for COVID-19 data
@@ -158,7 +162,39 @@ const renderResults = (tmData, covidData) => {
   $("main").append(loadMoreEventsElement);
 
   // add event listeners to created html elements
-  addEventListeners()
+  addEventListeners();
+};
+
+const buildingChart = (allDataObject) => {
+  console.log(allDataObject.covidDataObject);
+  const displayCovidChart = () => {
+    $(".chart-container").append(
+      `<canvas id="myChart" height="200" width="400"></canvas>`
+    );
+
+    // <block:setup:1>
+    const labels = ["January", "February", "March", "April", "May", "June"];
+    const data = {
+      labels: labels,
+      datasets: [
+        {
+          label: "My First dataset",
+          backgroundColor: "rgb(255, 99, 132)",
+          borderColor: "rgb(255, 99, 132)",
+          data: [0, 10, 5, 2, 20, 30, 45],
+        },
+      ],
+    };
+
+    const config = {
+      type: "line",
+      data,
+      options: {},
+    };
+
+    const myChart = new Chart($("#myChart"), config);
+  };
+  $(".covid-chart-container").on("click", "button", displayCovidChart);
 };
 
 const fetchDataAndRender = async () => {
@@ -177,6 +213,7 @@ const fetchDataAndRender = async () => {
     );
   }
 
+  buildingChart(allDataObject);
   // use data from allDataObject.covidDataObject.last30DaysCovidData to render graph
 };
 
