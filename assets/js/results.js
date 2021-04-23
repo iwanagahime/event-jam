@@ -64,9 +64,10 @@ const renderMoreEvents = async () => {
   const tmData = allDataObject.tmData;
 
   if (tmData === undefined) {
+    const noMoreEventsErrorElement = `<p class="has-text-white">Sorry, we couldn't find any more events.</p>`
     $("#error-container").empty();
     $("#load-events-button-container").empty();
-    $("#load-events-button-container").append(`<p class="has-text-white">Sorry, we couldn't find any more events.</p>`)
+    $("#load-events-button-container").append(noMoreEventsErrorElement)
     return;
   } else {
     // render new event cards and add event listeners to their buttons
