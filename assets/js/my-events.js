@@ -31,7 +31,10 @@ const displayNoEventsScreen = () => {
           <i class="fas fa-search"></i>
         </a>
       </div>
-  </div>`
+  </div>
+  <div class="mb-5 mx-4 columns is-mobile is-centered pt-6 is-flex-wrap-wrap is-align-items-center">
+  <div id="error-container"></div>
+</div>`
 
   $("main").append(noEventsSearchScreenElement);
   $("#search-bar-container").on("click", "a", onSearch);
@@ -95,9 +98,11 @@ const displaySavedEventCard = (item) => {
           See COVID 19 info
         </button>
       </div>
-      <div id="error-container"></div>
     </div>
   </div>
+</div>
+<div class="mb-5 mx-4 columns is-mobile is-centered pt-6 is-flex-wrap-wrap is-align-items-center">
+<div id="error-container"></div>
 </div>`
 
   $("#card-container").append(savedEventCard);
@@ -116,8 +121,7 @@ const displayCovidInfo = async (event) => {
   const covidInfoElement = `<div class="py-1 has-text-weight-medium"> Number of cases in the last 30 days: ${covidData.sumLast30DaysCovidData}</div>`
 
   $(parent).empty();
-  $(parent).parent()
-    .append(covidInfoElement);
+  $(parent).parent().append(covidInfoElement);
 };
 
 const displaySearchBar = () => {
@@ -145,7 +149,10 @@ const displaySearchBar = () => {
         </a>
       </div>
   </div>
-  </div>`
+  </div>
+  <div class="mb-5 mx-4 columns is-mobile is-centered pt-6 is-flex-wrap-wrap is-align-items-center">
+  <div id="error-container"></div>
+</div>`
 
   $("main").append(myEventsSearchBarElement);
   $("#search-bar-container").on("click", "a", onSearch);;

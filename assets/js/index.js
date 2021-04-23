@@ -23,12 +23,11 @@ const goToResults = (url) => {
 const onSearch = () => {
   const searchInput = $("#city-input").val().trim();
   const eventType = validateEventType();
+  const emptyInputErrorMessage = `<h1 class="has-text-white is-centered mt4" style="size:40px">Please enter a city name to search</h1>`
 
   if (searchInput === "") {
     $("#error-container").empty();
-    $("#error-container").append(
-      `<h1 class="has-text-white is-centered mt4" style="size:40px">Please enter a city name to search</h1>`
-    );
+    $("#error-container").append(emptyInputErrorMessage)
   } else {
     const lowerCaseSearchInput = searchInput.toLowerCase();
 
