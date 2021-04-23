@@ -166,10 +166,11 @@ const renderResults = (tmData, covidData) => {
 };
 
 const buildingChart = (allDataObject) => {
-  console.log(allDataObject.covidDataObject);
+  const covidDataArray = allDataObject.covidDataObject.last30DaysCovidData;
+  console.log(covidDataArray);
   const displayCovidChart = () => {
     $(".chart-container").append(
-      `<canvas id="myChart" height="200" width="400"></canvas>`
+      `<canvas id="myChart" height="50" width="100"></canvas>`
     );
 
     // <block:setup:1>
@@ -178,9 +179,9 @@ const buildingChart = (allDataObject) => {
       labels: labels,
       datasets: [
         {
-          label: "My First dataset",
-          backgroundColor: "rgb(255, 99, 132)",
-          borderColor: "rgb(255, 99, 132)",
+          label: "Cases Last 30 Days",
+          backgroundColor: "hsl(48, 100%, 67%)",
+          borderColor: "hsl(48, 100%, 67%)",
           data: [0, 10, 5, 2, 20, 30, 45],
         },
       ],
