@@ -36,7 +36,7 @@ const buildCovidUrl = (cityName) => {
 };
 
 const handleInternalError = () => {
-  $("main").append(
+  $("#error-container").append(
     `<h1 class="has-text-white" style="size:40px"> Sorry, we're having internal issues. Please come back and search later. </h1>`
   );
 };
@@ -91,7 +91,7 @@ const fetchCovidData = async (covidUrl) => {
 };
 
 const getTicketmasterData = async (tmUrl, urlParams) => {
-  let allData = await fetchTicketmasterData(tmUrl);
+  const allData = await fetchTicketmasterData(tmUrl);
 
   if (allData === undefined) {
     return;
@@ -113,7 +113,7 @@ const getTicketmasterData = async (tmUrl, urlParams) => {
       };
       return eventInfoObject;
     };
-    let eventsInfoArray = allData.map(createEventInfoObject);
+    const eventsInfoArray = allData.map(createEventInfoObject);
     return eventsInfoArray;
   }
 };
@@ -163,7 +163,6 @@ const showResults = async (pageNumber) => {
     tmData,
     covidDataObject,
   };
-  console.log(allDataObject);
   return allDataObject;
 };
 

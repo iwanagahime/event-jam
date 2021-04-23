@@ -1,12 +1,13 @@
 let pageNumber = 0;
+
 const orderFavEvents = (savedEvents) => {
   orderedEventSearchesArray = savedEvents.reverse();
   return orderedEventSearchesArray;
 };
 
 const displayNoEventsScreen = () => {
-  $("main").append(`
-  <div class="search-bar-container mt-6 py-5" id="search-bar-container">
+  const noEventsSearchScreenElement = 
+  `<div class="search-bar-container mt-6 py-5" id="search-bar-container">
   <div class="is-size-3 has-text-centered has-text-weight-bold has-text-warning pb-6">You have no saved events. Search to find your next event!</div>
   <div class="field has-addons has-addons-left mb-5 columns is-mobile is-centered pt-6">
     <div class="control ">
@@ -30,19 +31,21 @@ const displayNoEventsScreen = () => {
           <i class="fas fa-search"></i>
         </a>
       </div>
-  </div>`);
+  </div>
+  <div class="mb-5 mx-4 columns is-mobile is-centered pt-6 is-flex-wrap-wrap is-align-items-center">
+  <div id="error-container"></div>
+</div>`
+
+  $("main").append(noEventsSearchScreenElement);
   $("#search-bar-container").on("click", "a", onSearch);
 };
 
 const removeEventObject = (event) => {
-  console.log("hello");
   // retrieve array from local storage
   const savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
 
   // get url of object to remove
-  const urlForObjectToRemove = $(event.currentTarget)
-    .parent()
-    .attr("data-eventUrl");
+  const urlForObjectToRemove = $(event.currentTarget).parent().attr("data-eventUrl");
 
   const removeEvent = (item) => {
     if (item.eventUrl !== urlForObjectToRemove) {
@@ -51,75 +54,80 @@ const removeEventObject = (event) => {
       return false;
     }
   };
+
   // go through the retrieved array and remove the object
   const newSavedEventsArray = savedEvents.filter(removeEvent);
-  // empty container
+
+  // empty the cards container
   $("#card-container").empty();
-  // render cards
+
+  // render the cards for the updated list of saved events
   displaySavedEvents(newSavedEventsArray);
-  // save new array in local storage
+
+  // save updated list of events in local storage
   localStorage.setItem("favoriteEvents", JSON.stringify(newSavedEventsArray));
 };
 
 const goToTMEventPage = (event) => {
-  let urlForTMEventPage = $(event.currentTarget).parent().attr("data-eventUrl");
+  const urlForTMEventPage = $(event.currentTarget).parent().attr("data-eventUrl");
   window.open(`${urlForTMEventPage}`, "_blank");
 };
 
-const displayEventCard = (item) => {
-  $("#card-container").append(
-    `<div class="tile is-parent">
-    <div class="card has-text-centered">
-      <div class="card-image">
-          <figure class="image is-4by3">
-            <img src="${item.image}" alt="${item.name} event image">
-          </figure>
+const displaySavedEventCard = (item) => {
+  const savedEventCard = 
+  `<div class="tile is-parent">
+  <div class="card has-text-centered">
+    <div class="card-image">
+        <figure class="image is-4by3">
+          <img src="${item.image}" alt="${item.name} event image">
+        </figure>
+    </div>
+    <div class="card-content">
+      <div class="content">
+        <div><h2 class="has-text-centered ">${item.name}</h2> </div>
+        <div class="py-1 has-text-weight-medium">Date: ${item.date}</div>
+        <div class="py-1 has-text-weight-medium">Time: ${item.time}</div> 
+        <div class="py-1 has-text-weight-medium">Venue: ${item.venue}</div>
+        <div style="text-align:center" data-name="${item.name}" data-date="${item.date}" data-time="${item.time}" data-venue="${item.venue}" data-eventUrl="${item.eventUrl}" data-city="${item.city}" >
+          <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded event-tm-info">More info</a>
+          <a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded remove">Remove from My Events</a>
+        </div>
       </div>
-      <div class="card-content">
-        <div class="content">
-          <div><h2 class="has-text-centered ">${item.name}</h2> </div>
-          <div class="py-1 has-text-weight-medium">Date: ${item.date}</div>
-          <div class="py-1 has-text-weight-medium">Time: ${item.time}</div> 
-          <div class="py-1 has-text-weight-medium">Venue: ${item.venue}</div>
-          <div style="text-align:center" data-name="${item.name}" data-date="${item.date}" data-time="${item.time}" data-venue="${item.venue}" data-eventUrl="${item.eventUrl}" data-city="${item.city}" >
-            <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded event-tm-info">More info</a>
-            <a class="button mx-5 my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded remove">Remove from My Events</a>
-          </div>
-        </div>
-        <div class="covid-info-container" data-city="${item.city}">
-          <button class="button is-light has-text-black has-background-warning has-text-weight-bold is-rounded">
-            See COVID 19 info
-          </button>
-        </div>
-        <div id="error-container"></div>
+      <div class="covid-info-container" data-city="${item.city}">
+        <button class="button is-light has-text-black has-background-warning has-text-weight-bold is-rounded covid-info">
+          See COVID 19 info
+        </button>
       </div>
     </div>
   </div>
-  `
-  );
+</div>
+<div class="mb-5 mx-4 columns is-mobile is-centered pt-6 is-flex-wrap-wrap is-align-items-center">
+<div id="error-container"></div>
+</div>`
+
+  $("#card-container").append(savedEventCard);
 };
 
 const displayCovidInfo = async (event) => {
   const parent = $(event.currentTarget).parent();
-  //get region/city name
-  let cityName = $(parent).attr("data-city");
-  //call covid info function
+  //get city name
+  const cityName = $(parent).attr("data-city");
+  
+  //get COVID-19 information
   const covidUrl = buildCovidUrl(cityName);
-
   const covidData = await getCovidData(covidUrl);
 
-  console.log("covidInfo", covidData);
   // display covid info onto page
+  const covidInfoElement = `<div class="py-1 has-text-weight-medium"> Number of cases in the last 30 days: ${covidData.sumLast30DaysCovidData}</div>`
+
   $(parent).empty();
-  $(parent).parent()
-    .append(`<div class="py-1 has-text-weight-medium"> Number of cases in the last 30 days: ${covidData.sumLast30DaysCovidData}</div>
-  `);
+  $(parent).parent().append(covidInfoElement);
 };
 
 const displaySearchBar = () => {
-  $("main").append(`
-  <div class="container" id="search-bar-container">
-  <div class="field has-addons has-addons-left mb-5">
+  const myEventsSearchBarElement = 
+  `<div class="search-bar-container mt-6 py-5" id="search-bar-container">
+  <div class="field has-addons has-addons-left mb-5 mx-4 columns is-mobile is-centered pt-6 is-flex-wrap-wrap is-align-items-center">
     <div class="control">
       <input class="input is-warning" type="text" placeholder="Enter city name" id="city-input">
     </div>
@@ -141,36 +149,38 @@ const displaySearchBar = () => {
         </a>
       </div>
   </div>
-</div>`);
-  $("#search-bar-container").on("click", "a", onSearch);
+  </div>
+  <div class="mb-5 mx-4 columns is-mobile is-centered pt-6 is-flex-wrap-wrap is-align-items-center">
+  <div id="error-container"></div>
+</div>`
+
+  $("main").append(myEventsSearchBarElement);
+  $("#search-bar-container").on("click", "a", onSearch);;
 };
 
-const displaySavedEvents = () => {
-  let savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
+const displaySavedEvents = (eventsArray) => {
+  savedCardsContainer = `<div class="tile is-ancestor mx-4 is-flex-wrap-wrap is-align-items-center" id="card-container">`
   //create container
-  $("main").append(
-    `<div class="tile is-ancestor mx-4 is-flex-wrap-wrap is-align-items-center" id="card-container">`
-  );
-  savedEvents.forEach(displayEventCard);
+  $("main").append(savedCardsContainer);
+  eventsArray.forEach(displaySavedEventCard);
   $(".covid-info-container").on("click", "button", displayCovidInfo);
   $(".remove").click(removeEventObject);
-  $(".event-tm-info").click(goToTMEventPage);
+  $(".event-tm-info").click(goToTMEventPage)
 };
 
-function onLoad() {
+const onLoad = () => {
   const savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
-  console.log(savedEvents);
   // check if there are any saved events in local storage
   if (savedEvents !== null && savedEvents.length) {
-    // order local storage objects in order of search recency
+    // order local storage objects for added recenecy
     eventsInAddedOrder = orderFavEvents(savedEvents);
     displaySearchBar();
-    // for each saved event, render a card
+    //for each saved event, render a card
     displaySavedEvents(eventsInAddedOrder);
-    //$(eventsInAddedOrder).each(displaySavedEvents);
   } else {
+    // if local storage is empty display the screen for no saved events
     displayNoEventsScreen();
   }
-}
+};
 
 $(document).ready(onLoad);
