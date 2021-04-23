@@ -167,13 +167,8 @@ const renderResults = (tmData, covidData) => {
 
 const buildingChart = (allDataObject) => {
   const covidDataArray = allDataObject.covidDataObject.last30DaysCovidData;
-  console.log(covidDataArray);
-  const reversedData = covidDataArray.reverse();
 
-  // reverse all data here then put in to chart
-  // if you cant destroy chart get rid of button
-  // .covid-chart-container empty it
-  // const reversedData = covidDataArray.newCases.reverse();
+  const reversedData = covidDataArray.reverse();
 
   const getEachDateCases = (each) => {
     // console.log(each);
