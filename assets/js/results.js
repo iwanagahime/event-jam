@@ -61,10 +61,12 @@ const renderMoreEvents = async () => {
     return;
   } else {
     tmData.forEach(displayEventCard);
+    addEventListeners()
   }
 };
 
 const saveToMyEvents = (event) => {
+  $(event.currentTarget).off("click", saveToMyEvents)
   // identify button container div
   const buttonContainerDiv = $(event.currentTarget).parent();
   savedEvents = [];
@@ -98,6 +100,12 @@ const goToTMEventPage = (event) => {
   window.open(`${urlForTMEventPage}`, "_blank");
 };
 
+const addEventListeners = () => {
+  $("#load-events-button").click(renderMoreEvents);
+  $(".save").on("click", saveToMyEvents);
+  $(".event-tm-info").click(goToTMEventPage);
+}
+
 const renderResults = (tmData, covidData) => {
   $("main").empty();
   // create container and render for covid data
@@ -128,9 +136,7 @@ const renderResults = (tmData, covidData) => {
     <div class="mb-6 mx-5 is-flex-wrap-wrap is-align-items-center">
       <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded" id="load-events-button">Load more</a>
     </div>`);
-  $("#load-events-button").click(renderMoreEvents);
-  $(".save").click(saveToMyEvents);
-  $(".event-tm-info").click(goToTMEventPage);
+  addEventListeners()
 };
 
 const fetchDataAndRender = async () => {

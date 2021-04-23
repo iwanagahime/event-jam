@@ -55,8 +55,7 @@ const removeEventObject = (event) => {
   // empty container
   $("#card-container").empty();
 
-  // newSavedEventsArray.forEach(displayEventCard);
-  // // render cards
+  // render cards
   displaySavedEvents(newSavedEventsArray);
   // save new array in local storage
   localStorage.setItem("favoriteEvents", JSON.stringify(newSavedEventsArray));
