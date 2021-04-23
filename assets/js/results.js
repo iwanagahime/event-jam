@@ -58,7 +58,8 @@ const renderMoreEvents = async () => {
   const tmData = allDataObject.tmData;
 
   if (tmData === undefined) {
-    $("#load-events-button-container").empty()
+    $("#error-container").empty();
+    $("#load-events-button-container").empty();
     $("#load-events-button-container").append(`<p class="has-text-white">Sorry, we couldn't find any more events.</p>`)
     return;
   } else {
