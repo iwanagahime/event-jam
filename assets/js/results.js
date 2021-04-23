@@ -6,8 +6,9 @@ let pageNumber = 0;
 const getUrl = (item) => item.eventUrl;
 
 const checkIfEventPreviouslySaved = (tmData) => {
-  if (localStorage.getItem("favoriteEvents") !== null) {
-    previouslySavedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
+  const savedEventsInLocalStorage = localStorage.getItem("favoriteEvents");
+  if (savedEventsInLocalStorage !== null) {
+    previouslySavedEvents = JSON.parse(savedEventsInLocalStorage);
     // create an array of event urls (unique identifiers) of past events
     previouslySavedEventsUrls = previouslySavedEvents.map(getUrl);
 
@@ -78,10 +79,11 @@ const saveToMyEvents = (event) => {
   $(event.currentTarget).off("click", saveToMyEvents)
   // identify button container div
   const buttonContainerDiv = $(event.currentTarget).parent();
-  savedEvents = [];
+  let savedEvents = [];
+  const eventsInLocalStorage = localStorage.getItem("favoriteEvents")
 
-  if (localStorage.getItem("favoriteEvents") !== null) {
-    savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
+  if (eventsInLocalStorage !== null) {
+    savedEvents = JSON.parse(eventsInLocalStorage);
   }
 
   const newEvent = {
