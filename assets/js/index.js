@@ -1,5 +1,5 @@
 const validateEventType = () => {
-  const eventType = $("#eventType-dropdown").val();
+  let eventType = $("#eventType-dropdown").val();
   if (eventType === "Event type") {
     eventType = null;
   }
@@ -7,7 +7,7 @@ const validateEventType = () => {
 };
 
 const constructUrl = (cityName, eventType) => {
-  const baseUrl = "http://127.0.0.1:5500/results.html?";
+  const baseUrl = "file:///Users/dominikapietrzak/coding_bootcamp/project1/event-jam/results.html?";
   // change baseURL to deployed when done working
   if (cityName && eventType) {
     return `${baseUrl}cityName=${cityName}&eventType=${eventType}`;

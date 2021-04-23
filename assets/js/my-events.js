@@ -37,7 +37,7 @@ const displayNoEventsScreen = () => {
 const removeEventObject = (event) => {
   // retrieve array from local storage
   const savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
-
+  console.log("hello")
   // get url of object to remove
   const urlForObjectToRemove = $(event.currentTarget)
     .parent()
@@ -54,7 +54,9 @@ const removeEventObject = (event) => {
   const newSavedEventsArray = savedEvents.filter(removeEvent);
   // empty container
   $("#card-container").empty();
-  // render cards
+
+  // newSavedEventsArray.forEach(displayEventCard);
+  // // render cards
   displaySavedEvents(newSavedEventsArray);
   // save new array in local storage
   localStorage.setItem("favoriteEvents", JSON.stringify(newSavedEventsArray));
@@ -88,7 +90,7 @@ const displayEventCard = (item) => {
           </div>
         </div>
         <div class="covid-info-container" data-city="${item.city}">
-          <button class="button is-light has-text-black has-background-warning has-text-weight-bold is-rounded">
+          <button class="button is-light has-text-black has-background-warning has-text-weight-bold is-rounded covid-info">
             See COVID 19 info
           </button>
         </div>
@@ -142,19 +144,18 @@ const displaySearchBar = () => {
       </div>
   </div>
 </div>`);
-  $("#search-bar-container").on("click", "a", onSearch);
+  $("#search-bar-container").on("click", "a", onSearch);;
 };
 
-const displaySavedEvents = () => {
-  const savedEvents = JSON.parse(localStorage.getItem("favoriteEvents"));
+const displaySavedEvents = (eventsArray) => {
   //create container
   $("main").append(
     `<div class="tile is-ancestor mx-4 is-flex-wrap-wrap is-align-items-center" id="card-container">`
   );
-  savedEvents.forEach(displayEventCard);
+  eventsArray.forEach(displayEventCard);
   $(".covid-info-container").on("click", "button", displayCovidInfo);
   $(".remove").click(removeEventObject);
-  $(".event-tm-info").click(goToTMEventPage);
+  $(".event-tm-info").click(goToTMEventPage)
 };
 
 const onLoad = () => {
