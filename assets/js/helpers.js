@@ -36,7 +36,7 @@ const buildCovidUrl = (cityName) => {
 };
 
 const handleInternalError = () => {
-  $("main").append(
+  $("#error-container").append(
     `<h1 class="has-text-white" style="size:40px"> Sorry, we're having internal issues. Please come back and search later. </h1>`
   );
 };

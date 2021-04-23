@@ -58,6 +58,8 @@ const renderMoreEvents = async () => {
   const tmData = allDataObject.tmData;
 
   if (tmData === undefined) {
+    $("#load-events-button-container").empty()
+    $("#load-events-button-container").append(`<p class="has-text-white">Sorry, we couldn't find any more events.</p>`)
     return;
   } else {
     tmData.forEach(displayEventCard);
@@ -133,7 +135,7 @@ const renderResults = (tmData, covidData) => {
   );
   tmData.forEach(displayEventCard);
   $("main").append(`
-    <div class="mb-6 mx-5 is-flex-wrap-wrap is-align-items-center">
+    <div class="mb-6 mx-5 is-flex-wrap-wrap is-align-items-center" id="load-events-button-container">
       <a class="button my-3 has-background-warning has-text-warning-dark has-text-weight-bold is-rounded" id="load-events-button">Load more</a>
     </div>`);
   addEventListeners()
