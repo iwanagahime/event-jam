@@ -75,7 +75,7 @@ code .
 
 ### Results Page
 
-![Deployed application ](src=./../assets/images/screenshots/results.png)
+![Deployed application ](src=./../assets/images/screenshots/rendering-results.png)
 
 ### Results Page with Displayed Covid-19 Info
 
