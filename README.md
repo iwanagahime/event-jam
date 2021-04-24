@@ -9,6 +9,12 @@
   - [What Was Done](#what-was-done)
   - [Getting started](#getting-started)
   - [Screenshots](#screenshots)
+    - [Homepage](#homepage)
+    - [Results Page](#results-page)
+    - [Results Page with Displayed Covid-19 Info](#results-page-with-displayed-covid-19-info)
+    - [My Events Page](#my-events-page)
+    - [My Events Page No Events Saved](#my-events-page-no-events-saved)
+    - [No Events Matching Criteria Found](#no-events-matching-criteria-found)
 
 ## Github Pages URL
 
@@ -63,16 +69,26 @@ code .
 
 ## Screenshots
 
-###
+### Homepage
 
-![Deployed application  ](src=)
+![Deployed application  ](src=./../assets/images/screenshots/home-page.png)
 
-###
+### Results Page
 
-![Deployed application ](src=)
+![Deployed application ](src=./../assets/images/screenshots/results.png)
 
-###
+### Results Page with Displayed Covid-19 Info
 
-![Deployed application ](src=)
+![Deployed application Results Page](src=./../assets/images/screenshots/results-covid-info.png)
 
-![Deployed application ](src=)
+### My Events Page
+
+![Deployed application My Events Page](src=./../assets/images/screenshots/my-events.png)
+
+### My Events Page No Events Saved
+
+![Deployed application No Events Saved](src=./../assets/images/screenshots/no-events-no-events-saved.png)
+
+### No Events Matching Criteria Found
+
+![Deployed application No Events Matching Criteria Found ](src=./../assets/images/screenshots/prompting-user.png)
