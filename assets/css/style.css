@@ -7,6 +7,10 @@ html {
   background-size: cover;
 }
 
+.chart-container {
+  width: 80%;
+}
+
 .navbar-background-colour-override {
   background-color: transparent;
 }
@@ -174,4 +178,3 @@ html {
     text-align: center;
   }
 }
-
