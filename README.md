@@ -133,6 +133,7 @@ THEN I am presented with a message prompting me to make a search as there are no
 
 - Created wire frames to plan design before using Adobe XD to finalize page design.
 - We used a CSS framework (Bulma) to style our application.
+- We formatted our code formatted using lint (prettier).
 - We created an uncluttered landing page that includes a search bar allowing the user to search for events by city and event type.
 - We made sure that the user was able to easily find the search bar and search on every page of the application.
   - Search bar has an optional Event type dropdown with selections such as Music, Family etc.
@@ -141,20 +142,17 @@ THEN I am presented with a message prompting me to make a search as there are no
 ### Functionality
 
 - Created flow charts to map out functionality based on wire frames before coding.
+- Once a user searches from the Landing page we use the Results page URL parameters when fetching data from our chosen APIs.
 - We used jQuery to dynamically create the event cards with buttons such as
   - More info which leads to the Ticketmaster site where the user can see more information and make a purchase.
   - Save Event which saves the event for the user in the MyEvents page
     - In MyEvents button becomes Remove from My Events, and also a See COVID 19 info button is rendered. So the user can see up to date Covid-19 information days later.
-- We used a helper file to keep our code non-repetitive and clean. To make sure it was easy to debug, maintain and scale.
-- On the Results page the URL parameter where used when fetching data from our chosen APIs.
 - We used asynchronous loading when rendering event cards to keep page loading time and page impact low.
 - Covid-19 case numbers were displayed as both a 30 day summation and as a chart for each city searched.
 - We used Chart JS to render the Covid-19 data in a chart showing the case numbers for the last 30 days.
 - We used local storage to save events that will be rendered on the MyEvents page.
-
   - Covid-19 data (from API) was always rendered so that up to date information was displayed in for cards being rendered from local storage.
-
-- We formatted our code formatted using lint (prettier).
+- We used a helper file to keep our code non-repetitive and clean. To make sure it was easy to debug, maintain and scale.
 
 ### Planning
 
@@ -164,14 +162,17 @@ This allowed us to not only see the entire application in action but also identi
 
 ### Development
 
-to do idk say
-something about team work, github issues thing, useful for delegating
+The overall development of the team and application was aided by the ability to work successfully as a team. Assigning tasks to each member via Github issues enabled the delegation of tasks and allowed for a smoother completion of our project, despite the limited time in which we had to transition from our initial ideas to a finalized, deployed application.
 
 #### Successes
 
 Building the application was a big process with many triumphs and challenges it was a great growing experience for us all.
 
-- to do list like 3 successful stuff we produced - async, chart, helper file
+Some of the accomplishments that we felt were most rewarding were -
+
+- Making our code as non-repetitive and easily maintainable by using a helper JS file.
+- Developing our skills when using documentation such as those for our APIs and Chart JS.
+- Considering user experience, page loading time, and page impact by using asynchronous loading.
 
 #### Challenges
 
