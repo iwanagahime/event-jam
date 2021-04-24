@@ -131,7 +131,7 @@ const renderResults = (tmData, covidData) => {
             See COVID 19 chart
           </button>
         </div>
-        <div class="chart-container size">
+        <div class="chart-container">
         
       </div>
     </div>`;
