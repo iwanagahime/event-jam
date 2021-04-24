@@ -8,12 +8,26 @@
   - [Table of Contents](#table-of-contents)
   - [Deployed Github Page](#deployed-github-page)
   - [Contributors](#contributors)
-  - [Getting started](#getting-started)
+  - [Getting Started](#getting-started)
   - [Project Overview](#project-overview)
     - [Motivation](#motivation)
     - [Description](#description)
+    - [Tech Used](#tech-used)
+      - [APIs](#apis)
+        - [Ticketmaster](#ticketmaster)
+        - [UK CoronaVirus Dashboard](#uk-coronavirus-dashboard)
+      - [Frameworks](#frameworks)
+        - [Bulma](#bulma)
+        - [jQuery](#jquery)
+        - [Chart JS](#chart-js)
+      - [Key Features](#key-features)
     - [User Story](#user-story)
   - [What Was Done](#what-was-done)
+    - [Planning](#planning)
+    - [Development](#development)
+    - [Successes](#successes)
+    - [Challenges](#challenges)
+    - [Future Development](#future-development)
   - [Screenshots](#screenshots)
     - [Homepage](#homepage)
     - [Results Page](#results-page)
@@ -36,7 +50,7 @@ Soumeya Hassan: [here](https://github.com/SoumeyaH), [LinkedIn](https://www.link
 Eliza Krucon: [here](https://github.com/iwanagahime), [LinkedIn](https://www.linkedin.com/in/eliza-krucon-a84426204/)
 Adam Arthur: [here](https://github.com/KingArthur0877), [LinkedIn](https://www.linkedin.com/in/adam-arthur-315b39156/)
 
-## Getting started
+## Getting Started
 
 - Clone the GitHub project onto your local machine
 - Navigate into the project
@@ -58,7 +72,35 @@ However, we know how quickly the situation can change and how constant alteratio
 
 ### Description
 
-Event Jam is a dynamic online application that offer users the ability to search for events in any city in the UK and get relevant, reliable and up to date covid-19 information for that area. By using our dynamic application that utilizes two different server-side API's to get you all the information you could need to safely and easily plan a day out.
+Event Jam is a dynamic online application that offer users the ability to search for events in any city in the UK and get relevant, reliable and up to date covid-19 information for that area. By using our dynamic application that utilizes two different server-side APIs to get you all the information you could need to safely and easily plan a day out.
+
+### Tech Used
+
+#### APIs
+
+##### [Ticketmaster](https://developer.ticketmaster.com/)
+
+Ticketmaster provides real time and up to date listings for events throughout the UK. It provides all the information you could need from event details, images to pagination.
+
+##### [UK CoronaVirus Dashboard](https://coronavirus.data.gov.uk/)
+
+We used the UK Governments' Covid-19 API to ensure we got reliable and up to date data for our users. We choose to display case numbers, rather than other data such as death rates or vaccinations, as that seemed most relevant to our users.
+
+#### Frameworks
+
+##### [Bulma](https://bulma.io/)
+
+We decided to use the Bulma CSS framework as it had many great and responsive components tat helped our designs come to life quickly. It provided us with plenty of room to implement our adjustments with out detriment.
+
+##### [jQuery](https://jquery.com/)
+
+With great documentation and community jQuery was a logical choice as it makes DOM manipulation straightforward. Whilst helping to keep code easy to read, maintain and scale.
+
+##### [Chart JS](https://www.chartjs.org/)
+
+We displayed our Covid-19 data in a chart showing cases for the last 30 days, so our users could see trends easily. Chart JS was a great choice to do this as it has clear documentation, and the charts are fully responsive out the box.
+
+#### Key Features
 
 ### User Story
 
@@ -81,6 +123,16 @@ THEN I am presented with a message prompting me to make a search as there are no
 ```
 
 ## What Was Done
+
+### Planning
+
+### Development
+
+### Successes
+
+### Challenges
+
+### Future Development
 
 - We created a landing page that includes a search bar allowing the user to search for events by city and event type
 - Our search inputs are displayed on each of the application pages
