@@ -1,47 +1,46 @@
 ![Title: Event Jam and Logo ](./assets/images/logo.png)
 
-# Event Jam
-
 ## Table of Contents
 
-- [Event Jam](#event-jam)
-  - [Table of Contents](#table-of-contents)
-  - [Deployed Github Page](#deployed-github-page)
-  - [Contributors](#contributors)
-  - [Getting Started](#getting-started)
-  - [Project Overview](#project-overview)
-    - [Motivation](#motivation)
-    - [Description](#description)
-    - [Tech Used](#tech-used)
-      - [APIs](#apis)
-        - [Ticketmaster](#ticketmaster)
-        - [UK CoronaVirus Dashboard](#uk-coronavirus-dashboard)
-      - [Frameworks](#frameworks)
-        - [Bulma](#bulma)
-        - [jQuery](#jquery)
-        - [Chart JS](#chart-js)
-    - [User Story](#user-story)
-  - [What Was Done](#what-was-done)
-    - [Planning](#planning)
-    - [Development](#development)
-      - [Key Features](#key-features)
-        - [Covid Data](#covid-data)
-        - [Search from Anywhere](#search-from-anywhere)
-        - [Asynchronous Loading](#asynchronous-loading)
-        - [Local Storage](#local-storage)
+- [Table of Contents](#table-of-contents)
+- [Deployed Github Page](#deployed-github-page)
+- [Contributors](#contributors)
+- [Getting Started](#getting-started)
+- [Project Overview](#project-overview)
+  - [Motivation](#motivation)
+  - [Description](#description)
+  - [Tech Used](#tech-used)
+    - [APIs](#apis)
+      - [Ticketmaster](#ticketmaster)
+      - [UK CoronaVirus Dashboard](#uk-coronavirus-dashboard)
+    - [Frameworks](#frameworks)
+      - [Bulma](#bulma)
+      - [jQuery](#jquery)
+      - [Chart JS](#chart-js)
+  - [User Story](#user-story)
+- [What Was Done](#what-was-done)
+  - [Design](#design)
+  - [Functionality](#functionality)
+  - [Planning](#planning)
+  - [Development](#development)
     - [Successes](#successes)
     - [Challenges](#challenges)
-    - [Future Development](#future-development)
-      - [Style](#style)
-      - [Functionality](#functionality)
-      - [Features](#features)
-  - [Screenshots](#screenshots)
-    - [Homepage](#homepage)
-    - [Results Page](#results-page)
-    - [Results Page with Displayed Covid-19 Info](#results-page-with-displayed-covid-19-info)
-    - [My Events Page](#my-events-page)
-    - [My Events Page No Events Saved](#my-events-page-no-events-saved)
-    - [No Events Matching Criteria Found](#no-events-matching-criteria-found)
+    - [Key Features](#key-features)
+      - [Covid Data](#covid-data)
+      - [Search from Anywhere](#search-from-anywhere)
+      - [Asynchronous Loading](#asynchronous-loading)
+      - [Local Storage](#local-storage)
+  - [Future Development](#future-development)
+    - [Style](#style)
+    - [Functionality](#functionality-1)
+    - [Features](#features)
+- [Screenshots](#screenshots)
+  - [Homepage](#homepage)
+  - [Results Page](#results-page)
+  - [Results Page with Displayed Covid-19 Info](#results-page-with-displayed-covid-19-info)
+  - [My Events Page](#my-events-page)
+  - [My Events Page No Events Saved](#my-events-page-no-events-saved)
+  - [No Events Matching Criteria Found](#no-events-matching-criteria-found)
 
 ## Deployed Github Page
 
@@ -130,19 +129,28 @@ THEN I am presented with a message prompting me to make a search as there are no
 
 ## What Was Done
 
-- We created a landing page that includes a search bar allowing the user to search for events by city and event type
-- Our search inputs are displayed on each of the application pages
-- We dynamically created an event card containing such data as event image, event name, date, time and venue
-- Our events cards contain navigation buttons
-- We used a CSS framework (Bulma) to style our application
-- We used Adobe xd to create page design
-- We used the [TicketMaster](https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/) to retrieve events data
-- We used the [UK Coronavirus Dashboard] (https://coronavirus.data.gov.uk/details/developers-guide) to retrieve Covid-19 data
-- We formatted our code using prettier
+### Design
+
+- to do flow charts and wire frames
+- We used Adobe xd to create page design.
+- We used a CSS framework (Bulma) to style our application.
+- We created an uncluttered landing page that includes a search bar allowing the user to search for events by city and event type.
+- We made sure that our search inputs are displayed on every of the application pages.
+- to do card design Our events cards contain navigation buttons
+
+### Functionality
+
+- We dynamically created an event card containing such data as event image, event name, date, time and venue using jQuery.
+- We used a helper file to keep our code non-repetitive and clean. To make sure it was easy to debug, maintain and scale.
+- to do ticketmaster
+- to do covid
+- pagination
+- local storage
+- We formatted our code formatted using lint (prettier).
 
 ### Planning
 
-Before we wrote a single line of code we created flowcharts, wireframes, to do Adobe xd for each of our pages and scenarios.
+Before we wrote a single line of code we created flowcharts, wireframes, and Adobe XD templates for each of our pages and scenarios.
 
 This allowed us to not only see the entire application in action but also identify where things may go wrong and where there are opportunities to reuse our functions.
 
@@ -151,19 +159,33 @@ This allowed us to not only see the entire application in action but also identi
 to do idk say
 something about team work, github issues thing, useful for delegating
 
+#### Successes
+
+#### Challenges
+
+Git branching was new to us all and getting familiar with how the branching and merging processes work was a great learning experience for us all.
+
+Towards the end of our development schedule the Covid-19 API threw a status 500 response error which took precious time for us to figure out.
+
 #### Key Features
+
+User experience was key in all our choices when designing our application.
 
 ##### Covid Data
 
+To ensure we display relevant, reliable, and up to date information we used the UK Goverments' Covid Dashboard. From this we show a summation of cases for last 30 days as daily cases fluctuate greatly and can be misleading. The data was placed in a chart so that users can easily see hw case numbers are trending and make informed choices.
+
 ##### Search from Anywhere
+
+We included the ability to search from any page for events to keep the user experience as smooth and accessible as possible.
 
 ##### Asynchronous Loading
 
+To ensure page loading time and page impact low where as low as possible, we only render 20 event cards at a time. Using the page and size parameters to request the nex 20 events every time a user clicks load more.
+
 ##### Local Storage
 
-### Successes
-
-### Challenges
+We utilized the persistent memory of local storage to store events saved to MyEvents by the user. We did not however store the covid data rendered on the card along with the card but rather fetch the data once again. To ensure the data is as up to date as possible.
 
 ### Future Development
 
