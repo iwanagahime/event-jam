@@ -51,11 +51,11 @@ Click [here](https://iwanagahime.github.io/event-jam/) to view project on GitHub
 Dominika Pietrzak: [Github](https://github.com/dominikacookies),
 [LinkedIn](https://www.linkedin.com/in/dominika-pietrzak-183755137/)
 
-Soumeya Hassan: [here](https://github.com/SoumeyaH), [LinkedIn](https://www.linkedin.com/in/soumeya-hassan-0a12a5203/)
+Soumeya Hassan: [Github](https://github.com/SoumeyaH), [LinkedIn](https://www.linkedin.com/in/soumeya-hassan-0a12a5203/)
 
-Eliza Krucon: [here](https://github.com/iwanagahime), [LinkedIn](https://www.linkedin.com/in/eliza-krucon-a84426204/)
+Eliza Krucon: [Github](https://github.com/iwanagahime), [LinkedIn](https://www.linkedin.com/in/eliza-krucon-a84426204/)
 
-Adam Arthur: [here](https://github.com/KingArthur0877), [LinkedIn](https://www.linkedin.com/in/adam-arthur-315b39156/)
+Adam Arthur: [Github](https://github.com/KingArthur0877), [LinkedIn](https://www.linkedin.com/in/adam-arthur-315b39156/)
 
 ## Getting Started
 
@@ -105,7 +105,7 @@ With great documentation and community jQuery was a logical choice as it makes D
 
 ##### [Chart JS](https://www.chartjs.org/)
 
-We displayed our Covid-19 data in a chart showing cases for the last 30 days, so our users could see trends easily. Chart JS was a great choice to do this as it has clear documentation, and the charts are fully responsive out the box.
+We displayed our Covid-19 data in a chart showing cases for the last 30 days, so our users could see trends easily. Chart JS was a great choice for rendering our data as it has clear documentation, and the charts are fully responsive out the box.
 
 ### User Story
 
@@ -131,21 +131,29 @@ THEN I am presented with a message prompting me to make a search as there are no
 
 ### Design
 
-- to do flow charts and wire frames
-- We used Adobe xd to create page design.
+- Created wire frames to plan design before using Adobe XD to finalize page design.
 - We used a CSS framework (Bulma) to style our application.
 - We created an uncluttered landing page that includes a search bar allowing the user to search for events by city and event type.
-- We made sure that our search inputs are displayed on every of the application pages.
-- to do card design Our events cards contain navigation buttons
+- We made sure that the user was able to easily find the search bar and search on every page of the application.
+  - Search bar has an optional Event type dropdown with selections such as Music, Family etc.
+- Our events cards are all styled and contain the same data: event image, event name, date, time, and venue.
 
 ### Functionality
 
-- We dynamically created an event card containing such data as event image, event name, date, time and venue using jQuery.
+- Created flow charts to map out functionality based on wire frames before coding.
+- We used jQuery to dynamically create the event cards with buttons such as
+  - More info which leads to the Ticketmaster site where the user can see more information and make a purchase.
+  - Save Event which saves the event for the user in the MyEvents page
+    - In MyEvents button becomes Remove from My Events, and also a See COVID 19 info button is rendered. So the user can see up to date Covid-19 information days later.
 - We used a helper file to keep our code non-repetitive and clean. To make sure it was easy to debug, maintain and scale.
-- to do ticketmaster
-- to do covid
-- pagination
-- local storage
+- On the Results page the URL parameter where used when fetching data from our chosen APIs.
+- We used asynchronous loading when rendering event cards to keep page loading time and page impact low.
+- Covid-19 case numbers were displayed as both a 30 day summation and as a chart for each city searched.
+- We used Chart JS to render the Covid-19 data in a chart showing the case numbers for the last 30 days.
+- We used local storage to save events that will be rendered on the MyEvents page.
+
+  - Covid-19 data (from API) was always rendered so that up to date information was displayed in for cards being rendered from local storage.
+
 - We formatted our code formatted using lint (prettier).
 
 ### Planning
@@ -160,6 +168,10 @@ to do idk say
 something about team work, github issues thing, useful for delegating
 
 #### Successes
+
+Building the application was a big process with many triumphs and challenges it was a great growing experience for us all.
+
+- to do list like 3 successful stuff we produced - async, chart, helper file
 
 #### Challenges
 
