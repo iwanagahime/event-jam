@@ -1,11 +1,17 @@
+![Title: Event Jam and Logo ](./assets/images/logo.png)
+
 # Event Jam
 
 ## Table of Contents
 
 - [Event Jam](#event-jam)
   - [Table of Contents](#table-of-contents)
-  - [Github Pages URL](#github-pages-url)
-  - [Description](#description)
+  - [Deployed Github Page](#deployed-github-page)
+  - [Contributors](#contributors)
+  - [Project Overview](#project-overview)
+    - [Motivation](#motivation)
+    - [Description](#description)
+    - [User Story](#user-story)
   - [What Was Done](#what-was-done)
   - [Getting started](#getting-started)
   - [Screenshots](#screenshots)
@@ -16,16 +22,35 @@
     - [My Events Page No Events Saved](#my-events-page-no-events-saved)
     - [No Events Matching Criteria Found](#no-events-matching-criteria-found)
 
-## Github Pages URL
+## Deployed Github Page
 
 Click [here](https://iwanagahime.github.io/event-jam/) to view project on GitHub pages.
 
-## Description
+## Contributors
 
-We were asked to build an interactive application based on our own innovative idea that uses at least two server-side APIs.
+Dominika Pietrzak: [Github](https://github.com/dominikacookies),
+[LinkedIn](https://www.linkedin.com/in/dominika-pietrzak-183755137/)
 
-User Story
-As a user I want to search for events in a given location and at the same time stay up to date with the current COVID-19 info for that location so that I can book my tickets accordingly. As a user I want to be able to search for events from any page in my application and not being limited to using only Homepage to do my searches.
+Soumeya Hassan: [here](https://github.com/SoumeyaH), [LinkedIn](https://www.linkedin.com/in/soumeya-hassan-0a12a5203/)
+
+Eliza Krucon: [here](https://github.com/iwanagahime), [LinkedIn](https://www.linkedin.com/in/eliza-krucon-a84426204/)
+Adam Arthur: [here](https://github.com/KingArthur0877), [LinkedIn](https://www.linkedin.com/in/adam-arthur-315b39156/)
+
+## Project Overview
+
+### Motivation
+
+With the successful vaccine roll out and summer coming the past year of lock-downs and restrictions will start to seem a distant memory, as people look to start seeing friends and family again offline.
+
+However, we know how quickly the situation can change and how constant alterations to restrictions rules and COVID-19 hotspots can make it difficult to plan a safe time. So at Event Jam were here to help.
+
+### Description
+
+Event Jam is a dynamic online application that offer users the ability to search for events in any city in the UK and get relevant, reliable and up to date covid-19 information for that area. By using our dynamic application that utilizes two different server-side API's to get you all the information you could need to safely and easily plan a day out.
+
+### User Story
+
+As a user I want to search for events in any city in the UK, and at the same time receive up to date COVID-19 information for that location. So that I can make an informed decision when booking my tickets accordingly.
 
 ```
 GIVEN an EventJam Homepage with search inputs
