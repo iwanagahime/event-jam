@@ -8,12 +8,12 @@
   - [Table of Contents](#table-of-contents)
   - [Deployed Github Page](#deployed-github-page)
   - [Contributors](#contributors)
+  - [Getting started](#getting-started)
   - [Project Overview](#project-overview)
     - [Motivation](#motivation)
     - [Description](#description)
     - [User Story](#user-story)
   - [What Was Done](#what-was-done)
-  - [Getting started](#getting-started)
   - [Screenshots](#screenshots)
     - [Homepage](#homepage)
     - [Results Page](#results-page)
@@ -35,6 +35,18 @@ Soumeya Hassan: [here](https://github.com/SoumeyaH), [LinkedIn](https://www.link
 
 Eliza Krucon: [here](https://github.com/iwanagahime), [LinkedIn](https://www.linkedin.com/in/eliza-krucon-a84426204/)
 Adam Arthur: [here](https://github.com/KingArthur0877), [LinkedIn](https://www.linkedin.com/in/adam-arthur-315b39156/)
+
+## Getting started
+
+- Clone the GitHub project onto your local machine
+- Navigate into the project
+- Open the project in VSCode
+- Open the `script.js` file in your default browser
+
+```
+git clone https://iwanagahime.github.io/event-jam/.
+code .
+```
 
 ## Project Overview
 
@@ -79,18 +91,6 @@ THEN I am presented with a message prompting me to make a search as there are no
 - We used the [TicketMaster](https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/) to retrieve events data
 - We used the [UK Coronavirus Dashboard] (https://coronavirus.data.gov.uk/details/developers-guide) to retrieve Covid-19 data
 - We formatted our code using prettier
-
-## Getting started
-
-- Clone the GitHub project onto your local machine
-- Navigate into the project
-- Open the project in VSCode
-- Open the `script.js` file in your default browser
-
-```
-git clone https://iwanagahime.github.io/event-jam/.
-code .
-```
 
 ## Screenshots
 
