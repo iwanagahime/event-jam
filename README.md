@@ -20,14 +20,21 @@
         - [Bulma](#bulma)
         - [jQuery](#jquery)
         - [Chart JS](#chart-js)
-      - [Key Features](#key-features)
     - [User Story](#user-story)
   - [What Was Done](#what-was-done)
     - [Planning](#planning)
     - [Development](#development)
+      - [Key Features](#key-features)
+        - [Covid Data](#covid-data)
+        - [Search from Anywhere](#search-from-anywhere)
+        - [Asynchronous Loading](#asynchronous-loading)
+        - [Local Storage](#local-storage)
     - [Successes](#successes)
     - [Challenges](#challenges)
     - [Future Development](#future-development)
+      - [Style](#style)
+      - [Functionality](#functionality)
+      - [Features](#features)
   - [Screenshots](#screenshots)
     - [Homepage](#homepage)
     - [Results Page](#results-page)
@@ -100,8 +107,6 @@ With great documentation and community jQuery was a logical choice as it makes D
 
 We displayed our Covid-19 data in a chart showing cases for the last 30 days, so our users could see trends easily. Chart JS was a great choice to do this as it has clear documentation, and the charts are fully responsive out the box.
 
-#### Key Features
-
 ### User Story
 
 As a user I want to search for events in any city in the UK, and at the same time receive up to date COVID-19 information for that location. So that I can make an informed decision when booking my tickets accordingly.
@@ -124,16 +129,6 @@ THEN I am presented with a message prompting me to make a search as there are no
 
 ## What Was Done
 
-### Planning
-
-### Development
-
-### Successes
-
-### Challenges
-
-### Future Development
-
 - We created a landing page that includes a search bar allowing the user to search for events by city and event type
 - Our search inputs are displayed on each of the application pages
 - We dynamically created an event card containing such data as event image, event name, date, time and venue
@@ -143,6 +138,53 @@ THEN I am presented with a message prompting me to make a search as there are no
 - We used the [TicketMaster](https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/) to retrieve events data
 - We used the [UK Coronavirus Dashboard] (https://coronavirus.data.gov.uk/details/developers-guide) to retrieve Covid-19 data
 - We formatted our code using prettier
+
+### Planning
+
+Before we wrote a single line of code we created flowcharts, wireframes, to do Adobe xd for each of our pages and scenarios.
+
+This allowed us to not only see the entire application in action but also identify where things may go wrong and where there are opportunities to reuse our functions.
+
+### Development
+
+to do idk say
+something about team work, github issues thing, useful for delegating
+
+#### Key Features
+
+##### Covid Data
+
+##### Search from Anywhere
+
+##### Asynchronous Loading
+
+##### Local Storage
+
+### Successes
+
+### Challenges
+
+### Future Development
+
+#### Style
+
+We would ensure that results cards rendered are more uniform, giving a more pleasant user experience. We would also try to edit the card title lengths.
+
+#### Functionality
+
+The ability of users to get the relevant information as quickly as possible is of upmost importance to us. As such we would include more ways for users to filter their searches such as
+
+- by event date
+- distance from user location
+
+#### Features
+
+In the MyEvents page where users can store their favorite events so as come back later to book.
+
+- We would alert users when user when date approaching saved event, so they don’t miss out.
+- Remove events for which the date has passed
+
+In regards to the coronavirus information we would like to add a section on current government policy for the area searched as we know how confusing the tiered system was.
 
 ## Screenshots
 
